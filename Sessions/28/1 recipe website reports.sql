@@ -100,5 +100,5 @@ For user dashboard page:
     
     OPTIONAL CHALLENGE QUESTION
     c) Show a list of cuisines and the count of recipes the user has per cuisine, 0 if none
-        Hint: For the number of recipes, use count of records that have a staffid or CTE.
+        Hint: Start by writing a CTE to give you cuisines for which the user does have recipes. 
 */
