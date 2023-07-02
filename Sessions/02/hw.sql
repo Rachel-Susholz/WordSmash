@@ -1,7 +1,8 @@
 -- SM Excellent! 80% See comments, fix and resubmit.
 --1 show me all medals won in the summer season by Greek or Spanish medalists, sorted by sport and then year
 -- SM Formatting tip: Each clause should be on new line
-select * from Medalist m 
+select * 
+from Medalist m 
 where m.Season = 'summer' 
 and m.Country in ('Greece', 'Spain') 
 order by m.Sport, m.OlympicYear
@@ -10,7 +11,8 @@ The Swiss government has requested a list of medalists from their country since 
 Include only First name, last name, age when they won the medal sorted by sport and sport category.
 */
 -- SM Formatting tip: Each clause should be on new line
-select m.FirstName, m.LastName, AgeWhenWonMedal = m.OlympicYear - m.YearBorn from Medalist m 
+select m.FirstName, m.LastName, AgeWhenWonMedal = m.OlympicYear - m.YearBorn 
+from Medalist m 
 where m.Country = 'Switzerland'
 and m.OlympicYear > 1928
 and m.OlympicYear - m.YearBorn > 24
@@ -21,9 +23,10 @@ Sort by year and sport.
 */
 -- SM Formatting tip: Each clause should be on new line
 -- You have a typo in your like statement so it doesn't return anything
-select m.FirstName, m.LastName, m.OlympicLocation, m.Sport, m.OlympicYear from Medalist m 
+select m.FirstName, m.LastName, m.OlympicLocation, m.Sport, m.OlympicYear 
+from Medalist m 
 where m.Medal = 'gold'
-and m.Sport like '%skating&'
+and m.Sport like '%skating%'
 order by m.OlympicYear, m.Sport
 /*4
 There is some suspicion on certain medalists. 
@@ -32,7 +35,8 @@ Provide the a list of medalists that match that clue, exclude the MedalistId, Co
 Sort by age high to low, medal, last name
 */
 -- SM Formatting tip: Each clause should be on new line
-select AgeWhenWonMedal = m.OlympicYear - m.YearBorn, m.Country, m.FirstName, m.LastName, m.Medal, m.OlympicLocation, m.OlympicYear, m.Season, m.Sport, m.SportSubcategory from medalist m 
+select AgeWhenWonMedal = m.OlympicYear - m.YearBorn, m.Country, m.FirstName, m.LastName, m.Medal, m.OlympicLocation, m.OlympicYear, m.Season, m.Sport, m.SportSubcategory 
+from medalist m 
 where m.Medal in ('silver','gold')
 and m.OlympicYear - m.YearBorn < 30
 and m.LastName like '%st%e%'
@@ -45,5 +49,6 @@ We may get some that are not related, like if has "wart", that is fine, we will 
 */
 -- SM Formatting tip: Each clause should be on new line
 -- This doesn't return anything.
-select * from invention i 
-where i.InventionDesc like 'war%'
+select * 
+from invention i 
+where i.InventionDesc like '% war%'
