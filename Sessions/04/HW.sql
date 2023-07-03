@@ -25,3 +25,7 @@ and m.LastName not like '% % %'
 In invention delete all records where it is impossible that this inventor created this invention (based on year born or died). 
 In select statement show columns in this order Invention Name, Inventor Last Name, Year Invented, Year Born, Year Died, Age at time of invention
 */
+select i.InventionName, i.InventorLastName, i.YearInvented, i.YearBorn, i.YearDied, AgeAtTimeOfInvention = i.YearInvented - i.YearBorn 
+from invention i 
+where i.YearBorn > i.YearInvented
+or i.YearDied < i.YearInvented
