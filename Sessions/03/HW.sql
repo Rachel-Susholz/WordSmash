@@ -1,3 +1,4 @@
+--AS Amazing job! 100% Please see one comment, no need to resubmit.
 --Medalist
 
 /* 1
@@ -32,7 +33,10 @@ select m.OlympicYear, m.Country, m.Season
 from Medalist m
 where
 (
+--AS Norway and Sweden should be on both parts of the where clause instead of repeating it twice. The data is showing norway vs sweden so you can
+-- include sweden in the result set.
     (m.Country in ('Norway', 'Sweden') and m.OlympicYear between 1965 and 1975) 
+--AS The claim should only be until 2000, ie: 1913 - 2000
     or (m.Country = 'Norway' and m.Season = 'summer'and m.OlympicYear > 1913)
 )
 order by m.OlympicYear, m.Country, m.Season
@@ -98,6 +102,7 @@ where m.SportSubcategory like '%s'''
 -- 2)
 select *
 from medalist m 
+--AS Add an _ after the '' since we only want those that contain a possesive s in the middle of their name, not at the end.
 where m.SportSubcategory like '%s''%'
 
 
