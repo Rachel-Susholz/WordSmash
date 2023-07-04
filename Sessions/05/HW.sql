@@ -1,3 +1,4 @@
+-- SM Excellent! 78% See comments, fix and resubmit.
 --use long hand unless otherwise specified, do as select showing before and after, and then convert to update, after each question reinsert the original data
 
 /*1
@@ -5,6 +6,7 @@
 	Mess up the medalist data
 	Set the age of all medalists to be 1 years old and set their Last Name to be their First Name, and set their First Name to be their Sport, and set Country to be Hackersland
 */
+-- SM -100% There's no column age in table. You need to set other columns that the age should become 1
 update m
 set Age = 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
 --select Age = m.OlympicYear - m.YearBorn, m.FirstName, m.LastName, m.Sport, m.Country, Age = 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
@@ -15,6 +17,7 @@ from medalist m
 /*2
 	The Winter Olympics were too hot in France and Italy, change the Season to Fall when Olympic Location is in those countries.
 */
+-- SM -50% Country column is where the olympians come from. It was too hot "in" specified locations
 Update m
 set Season = 'Fall'
 --select m.Country, m.Season, Season = 'Fall'
@@ -29,6 +32,7 @@ and m.Season = 'Winter'
 	The World Bird Union complained about the use of Featherweight for boxing. Change that subcategory to "Not Heavyweight".
 	The Union of Bronze Miners claims that the Olympics are unfairly depressing the price of Bronze. Change the "Bronze" medal to "Tin"
 */
+-- SM Tip: "Fist" not "First"
 update m
 set Sport = 'First Combat'
 --select m.Sport, Sport = 'First Combat' 
@@ -61,6 +65,7 @@ where m.Sport = 'Trampoline'
 		all Figure Skaters recorded as from Great Britain in 1924 and 1976 were actually Grenadian
 	Grenada has been robbed of its glory. Correct the records.
 */
+-- SM Excellent formatting.
 update m
 set Country = 'Grenada'
 --select m.Sport, m.Country, m.OlympicYear, Country = 'Grenada'
