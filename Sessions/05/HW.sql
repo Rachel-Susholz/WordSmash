@@ -8,8 +8,8 @@
 */
 -- SM -100% There's no column age in table. You need to set other columns that the age should become 1
 update m
-set Age = 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
---select Age = m.OlympicYear - m.YearBorn, m.FirstName, m.LastName, m.Sport, m.Country, Age = 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
+set YearBorn = m.OlympicYear - 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
+--select Age = m.OlympicYear - m.YearBorn, m.FirstName, m.LastName, m.Sport, m.Country, YearBorn = m.OlympicYear - 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
 from medalist m 
 
 
@@ -20,10 +20,15 @@ from medalist m
 -- SM -50% Country column is where the olympians come from. It was too hot "in" specified locations
 Update m
 set Season = 'Fall'
---select m.Country, m.Season, Season = 'Fall'
+--select m.Season, m.OlympicLocation, Season = 'Fall'
 from Medalist m 
-where m.Country in ('France', 'Italy')
+where 
+(
+	m.OlympicLocation like '%France%'
+	or m.OlympicLocation like '%Italy%'
+)
 and m.Season = 'Winter'
+
 
 /*3 
 	Several complaints were filed with the Olympics Association, and they are making an effort to be politically correct. 
