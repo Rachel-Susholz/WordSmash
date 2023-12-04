@@ -1,4 +1,4 @@
--- SM Excellent! 78% See comments, fix and resubmit.
+-- SM Excellent! 100% See comment, no need to resubmit.
 --use long hand unless otherwise specified, do as select showing before and after, and then convert to update, after each question reinsert the original data
 
 /*1
@@ -6,7 +6,6 @@
 	Mess up the medalist data
 	Set the age of all medalists to be 1 years old and set their Last Name to be their First Name, and set their First Name to be their Sport, and set Country to be Hackersland
 */
--- SM -100% There's no column age in table. You need to set other columns that the age should become 1
 update m
 set YearBorn = m.OlympicYear - 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
 --select Age = m.OlympicYear - m.YearBorn, m.FirstName, m.LastName, m.Sport, m.Country, YearBorn = m.OlympicYear - 1, LastName = m.FirstName, FirstName = m.Sport, Country = 'Hackersland'
@@ -17,7 +16,6 @@ from medalist m
 /*2
 	The Winter Olympics were too hot in France and Italy, change the Season to Fall when Olympic Location is in those countries.
 */
--- SM -50% Country column is where the olympians come from. It was too hot "in" specified locations
 Update m
 set Season = 'Fall'
 --select m.Season, m.OlympicLocation, Season = 'Fall'
