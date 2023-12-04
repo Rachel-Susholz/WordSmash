@@ -20,11 +20,29 @@ union select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Women
       Add in the gold, silver and bronze medalists for it. 
       The good news is that it's the same exact winners as the Field High Jump! 
 */
+insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
+select 2000, 'Summer', 'Athens, Greece', 'Swimming', 'Men''s 200 Metres Freestyle', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn  
+from Medalist m
+where m.OlympicYear = 2000 
+and m.Season = 'Summer'
+and m.Sport = 'Field'
+and m.SportSubcategory = 'High Jump'
+
+--I got help with this question. However, I still don't understand it completely. Can you put notes as to why this question is answered with this code.
 
 /*4. 
      Add a new sport with new bronze, silver, and gold medalists for 2008. 
      Show two ways to do it. One with the values clause and one with the select statement.
 */
+insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
+Values (2008, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Bronze', 'Rachel', 'Susholz', 'New York', 1990),
+       (2008, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Gold', 'Sara', 'Smith', 'New York', 1991),
+       (2008, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Silver', 'Rebecca', 'Brown', 'New York', 1992)
+
+insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
+select 2000, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Bronze', 'Rachel', 'Susholz', 'New York', 1990
+union select 2000, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Gold', 'Sara', 'Smith', 'New York', 1991
+union select 2000, 'Summer', 'Athens, Greece', 'Alpine Sliding', 'Freestyle Sliding', 'Silver', 'Rebecca', 'Brown', 'New York', 1992 
 
 
 /*5
@@ -32,4 +50,9 @@ union select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Women
       It's the same sports and winners as the 2008 Summer Olympic in Beijing. 
       Add the records.
 */
-
+insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
+select 2023, 'Summer', 'New York, United States', m.Sport, m.SportSubcategory, m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn 
+from Medalist m 
+where m.OlympicYear = 2008
+and m.OlympicLocation = 'Beijing, People''s Republic of China' 
+and m.Season = 'Summer'
