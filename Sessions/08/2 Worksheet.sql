@@ -1,7 +1,7 @@
 -- For the WorldRecord Table
 
 --1. Someone just broke the record for 'Highest Jump out of a moving airplane'! Unfortunately, we don't know his name, but please insert his record regardless.
-
+ 
 --2. Please insert two more records without Amounts to the Speed Category
 
 /*
