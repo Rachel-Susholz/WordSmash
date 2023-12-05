@@ -3,9 +3,9 @@
 -- SM Tip: Party name should be Democrat. Update data file.
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 45, 'Donald John', 'Trump', 'Republican', 1946, null, 2017, 2021
-union select 46, 'Joseph Robinette', 'Biden', 'Democratic', 1942, null, 2021, null 
+union select 46, 'Joseph Robinette', 'Biden', 'Democrat', 1942, null, 2021, null 
 --1b Copy the insert statement from the above question to the bottom of "president 2 data.sql" so that you will have the missing data when data is reinserted.
-
+select * from president p
 --2 Correct the historical record, give president 44 his middle name.
 Update p
 set FirstName = p.FirstName + ' Hussein'
@@ -38,6 +38,6 @@ set Party = 'Whig Freedom'
 --select * 
 from president p 
 where p.Party = 'Whig' 
-and p.TermStart >= 1845
+and p.TermEnd >= 1845
 
 

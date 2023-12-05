@@ -20,29 +20,31 @@ set p.FirstName = p.FirstName + ' "Short Term"'
 from president p 
 where p.TermEnd - p.TermStart < 4 
 and p.TermStart > 1900
+and p.Party = 'Republican'
 --3 Breaking News: Robert Wilson really won the last election. End the term of the current president and enter Robert Wilson as the next president.
 -- SM -20% How do you know the number of current president (and you don't even have the right one)? Use value that will "always" return serving president.
 update p 
 set p.TermEnd = 2023
---select *
+--select p.Num, *
 from president p 
-where p.Num = 44
+where p.Num = 46
+-- RS -Can you tell me how to use value that will "always" return serving president? Thank you for all your tips!
 
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
-select 45, 'Robert', 'wilson', 'Republican', 1976, null, 2023, null
+select 47, 'Robert', 'Wilson', 'Republican', 1976, null, 2023, null
 --4 Zoom to the future! Add grandchildren for each of the past presidents. They all have the same last name, and first name + Jr. Add to president number and all 'Years' and 'Terms' columns so that all data is (or at least could be) correct.
 -- SM Tip: num should be +46. And add more years it should be able to be true.
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
-select p.Num + 45, p.FirstName + ' Jr.', p.LastName, p.Party, p.YearBorn + 65, p.YearDied + 65, p.TermStart + 65, p.TermEnd + 65 
+select p.Num + 46, p.FirstName + ' Jr.', p.LastName, p.Party, p.YearBorn + 250, p.YearDied + 250, p.TermStart + 250, p.TermEnd + 250 
 from president p
 
 --5 Congratulations! You were elected for the next term. Add this record to the president table. Choose your party name and set 5 existing presidents to your party. 
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
-select 46, 'Rachel', 'Susholz', 'Right Wing', 2003, null, 2023, null
+select 47, 'Rachel', 'Susholz', 'Right Wing', 2003, null, 2023, null
 
 -- SM -10% This updates 7. And even if you don't count yourself it updates 6.
 update p
 set p.Party = 'Right Wing'
 --select * 
 from president p 
-where p.Num > 40
+where p.Num > 42
