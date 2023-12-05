@@ -1,3 +1,4 @@
+-- SM Excellent work! 100% See comment.
 --The US Gov needs the following reports, please write the SQL that produces these reports.
 
 --1 Show one result set including all presidents with a blank row on top. Only show columns Num, FirstName, LastName, Party; sort them by president number.
@@ -41,6 +42,7 @@ from president p
 where p.YearDied - p.YearBorn < 60 
 order by p.Party, YearsServed
 --9 Show all Democratic presidents who took office between the ages of 30 and 50, and Republican presidents who served more than one term, sorted by their parties.
+-- SM Excellent! You should remember the way you did TermsServed for future sessions.
 select AgeAtTermStart = p.TermStart - p.YearBorn, TermsServed = (p.TermEnd - p.TermStart) / 4 , *
 from president p 
 where 

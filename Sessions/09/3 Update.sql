@@ -1,4 +1,6 @@
+-- SM Excellent! 97% See comments, fix and resubmit.
 --1 Bring the president table up to date, insert all missing presidents and information. (yeah, this is an "insert" on the "update" sheet)
+-- SM Tip: Party name should be Democrat. Update data file.
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 45, 'Donald John', 'Trump', 'Republican', 1946, null, 2017, 2021
 union select 46, 'Joseph Robinette', 'Biden', 'Democratic', 1942, null, 2021, null 
@@ -23,12 +25,14 @@ set Party = 'blue'
 from president p 
 where p.Party = 'Democrat'
 --4 The current president has been impeached. End his term in the current year.
+-- SM -20% How do you know the number of current president? Use value that will "always" return serving president.
 update p
 set TermEnd = 2023 
 --select * 
 from president p 
 where p.Num = 46
 --5 In 1845, the Whig party changed its name to the 'Whig Freedom' Party. Fix any presidents' data that has been affected by this change.
+-- SM Tip: Use TermEnd to include serving president at the time of change.
 update p
 set Party = 'Whig Freedom'
 --select * 
