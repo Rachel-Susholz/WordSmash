@@ -30,7 +30,8 @@ where m.Country = 'Kenya'
 -- SM -40% Display age for all "American" medalist, excluding those that don't have a year born. You should use different way to get only those that have a year born.
 select Age = m.OlympicYear - m.YearBorn, *
 from medalist m
-where m.YearBorn like '%'
+where m.Country = 'United States' 
+and m.YearBorn > 0 
 order by m.YearBorn
 /*  
 	5. The Olympic committee has just made a new rule: Any medalist without a country is invalid and will have their medal revoked.
