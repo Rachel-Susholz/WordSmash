@@ -10,14 +10,18 @@ When getting data from a source table always use the "source" data when you can,
       Please add him in to correct this mistake. 
 */
 -- SM -50% Take all data possible from table.
-insert medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
-select 2002, 'winter', 'Athens, Greece', 'Skiing', 'Mens Moguls Freestyle', 'bronze', 'Jack', 'Lahtela', 'Austria', 1980
+insert Medalist (OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn) 
+select m.OlympicYear, m.Season, m.OlympicLocation, m.Sport, m.SportSubcategory, 'Bronze', 'Jack', m.LastName, m.Country, m.YearBorn 
+from Medalist m 
+where m.lastname = 'lahtela'
 --2. For the year 2008; create a new sport, award medals for your new sport to the same medalists that won the 2008 Women's Trampoline sport.
--- SM -50% Same here.
-insert medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
-select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Womens', 'gold', 'Ekaterina', 'Khilko', 'Uzbekistan', 1982
-union select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Womens', 'Silver', 'He', 'Wenna', 'China', 1989
-union select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Womens', 'gold', 'Karen', 'Cockburn', 'Canada', 1980
+-- SM -50% Same here. 
+insert Medalist (OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
+select m.OlympicYear, m.Season, m.OlympicLocation, 'Alpine Sliding', 'Womens', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn 
+from Medalist m 
+where m.OlympicYear = 2008 
+and m.Sport = 'Trampoline' 
+and m.SportSubcategory = 'Women''s'
 /*3. 
       The Men's 200 Metres Swimming records were mistakenly left out of the 2000 Summer Olympic Games. 
       Add in the gold, silver and bronze medalists for it. 
@@ -25,11 +29,11 @@ union select 2008, 'Winter', 'St. Moritz, Switzerland', 'Alpine Sliding', 'Women
 */
 -- SM Tip: Take the year, season, and location from the table. You only need to use literal values for sport and subcategory.
 insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
-select 2000, 'Summer', 'Athens, Greece', 'Swimming', 'Men''s 200 Metres Freestyle', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn  
+select m.OlympicYear, m.Season, m.OlympicLocation, 'Swimming' 'Men''s 200 Metres Freestyle', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn  
 from Medalist m
 where m.OlympicYear = 2000 
 and m.Season = 'Summer'
-and m.Sport = 'Field'
+and m.Sport = 'Field' 
 and m.SportSubcategory = 'High Jump'
 
 --I got help with this question. However, I still don't understand it completely. Can you put notes as to why this question is answered with this code.
