@@ -41,4 +41,3 @@ set p.Party = 'Right Wing'
 --select * 
 from president p 
 where p.Num > 40
-

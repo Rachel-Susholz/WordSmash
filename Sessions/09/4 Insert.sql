@@ -19,4 +19,3 @@ insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart
 select 50, m.FirstName, m.LastName, 'Republican', m.YearBorn, null, 2023, null 
 from Medalist m 
 where m.OlympicYear between 2001 and 2023
-
