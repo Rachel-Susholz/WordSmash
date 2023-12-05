@@ -1,4 +1,4 @@
--- SM Excellent! 84% See comments, fix and resubmit.
+-- SM Excellent! 100% See comment, no need to resubmit.
 /*
 For all Questions use select insert unless otherwise specified.
 When getting data from a source table always use the "source" data when you can, otherwise use literal values
@@ -9,13 +9,12 @@ When getting data from a source table always use the "source" data when you can,
       Janne's gold medal was entered into the database, but Jack's bronze medal was not. 
       Please add him in to correct this mistake. 
 */
--- SM -50% Take all data possible from table.
+-- SM Tip: Make sure to check on year, season and sport (and maybe also on medal)
 insert Medalist (OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn) 
 select m.OlympicYear, m.Season, m.OlympicLocation, m.Sport, m.SportSubcategory, 'Bronze', 'Jack', m.LastName, m.Country, m.YearBorn 
 from Medalist m 
 where m.lastname = 'lahtela'
 --2. For the year 2008; create a new sport, award medals for your new sport to the same medalists that won the 2008 Women's Trampoline sport.
--- SM -50% Same here. 
 insert Medalist (OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
 select m.OlympicYear, m.Season, m.OlympicLocation, 'Alpine Sliding', 'Womens', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn 
 from Medalist m 
@@ -27,7 +26,6 @@ and m.SportSubcategory = 'Women''s'
       Add in the gold, silver and bronze medalists for it. 
       The good news is that it's the same exact winners as the Field High Jump! 
 */
--- SM Tip: Take the year, season, and location from the table. You only need to use literal values for sport and subcategory.
 insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
 select m.OlympicYear, m.Season, m.OlympicLocation, 'Swimming' 'Men''s 200 Metres Freestyle', m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn  
 from Medalist m
@@ -36,11 +34,6 @@ and m.Season = 'Summer'
 and m.Sport = 'Field' 
 and m.SportSubcategory = 'High Jump'
 
---I got help with this question. However, I still don't understand it completely. Can you put notes as to why this question is answered with this code.
--- SM I assume you mean previous question. If yes, this makes me understand the problem with the first 2 questions.
--- The reason why this code works is, you select all data from table based on the info you get from question and you insert it to the table
--- The only things that you update is the columns that you don't select from table. You can insert as many rows you want. You just need to select that many rows.
--- You can either get the number of rows using a union select with literal values or you can get it by running a select statement and get back a results set with this number of rows.
 /*4. 
      Add a new sport with new bronze, silver, and gold medalists for 2008. 
      Show two ways to do it. One with the values clause and one with the select statement.
