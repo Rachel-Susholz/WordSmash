@@ -1,4 +1,4 @@
--- SM Excellent work! 90% See comments, fix and resubmit.
+-- SM Excellent! 92% See comment, fix and resubmit.
 -- Use the Medalist Table
 
 /*
@@ -6,7 +6,6 @@
 	   Therefore, we don't know their country or the year that they were born in.
 	   Please insert them regardless.
 */
--- SM Tip: No need for union "all". You have different data.
 insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn)
 select 2008, 'Summer', 'Athens, Greece', 'Swimming', 'Wommens Competitions', 'Gold', 'Sara', 'Smith', null, null
 union select 2008, 'Summer', 'Athens, Greece', 'Swimming', 'Wommens Competitions', 'Silver', 'Jaqueline', 'Green', null, null
@@ -28,7 +27,7 @@ set m.Country = null
 from Medalist m
 where m.Country = 'Kenya'
 --4. Display the age for all American medalists when they won, order by YearBorn, excluding all medalists that don't have a Year Born recorded.
--- SM -50% Just display no delete. Display age for all "American" medalist, excluding those that don't have a year born.
+-- SM -40% Display age for all "American" medalist, excluding those that don't have a year born. You should use different way to get only those that have a year born.
 select Age = m.OlympicYear - m.YearBorn, *
 from medalist m
 where m.YearBorn like '%'
