@@ -6,7 +6,8 @@
 	The Olympic Committee has decided to give a special award to all gold medalists whose last name 
 	begins with a 'P'. Show a list of these medalists and label them all as Category P
 */
-select Category = 'P', m.Medal, m.LastName, * from Medalist m 
+select Category = 'P', m.Medal, m.LastName, * 
+from Medalist m 
 where m.Medal = 'gold'
 and m.LastName like 'p%' 
 
@@ -18,10 +19,14 @@ and m.LastName like 'p%'
 	 show in one result set, leaving the MedalistId, medalist information and Code blank.
 */
 --AS -5 olympiclocation = '%norway' will set it to be that literal value. Rather give it its full value.
-select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Jumping', SportSubcategory = 'Female Leauge', Medal = 'Silver', FirstName = '', LastName = '', Country = '', YearBorn = 0 , Code = '' from medalist m 
-union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Sliding', SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' from medalist m 
-union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Speed Surfing' , SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' from medalist m 
-union select m.MedalistId, m.OlympicYear, m.Season, m.OlympicLocation, m.Sport, m.SportSubcategory, m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn, m.Code from medalist m 
+select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Jumping', SportSubcategory = 'Female Leauge', Medal = 'Silver', FirstName = '', LastName = '', Country = '', YearBorn = 0 , Code = '' 
+from medalist m 
+union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Sliding', SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' 
+from medalist m 
+union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Speed Surfing' , SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' 
+from medalist m 
+union select m.MedalistId, m.OlympicYear, m.Season, m.OlympicLocation, m.Sport, m.SportSubcategory, m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn, m.Code 
+from medalist m 
 where m.OlympicLocation like '%Norway'
 and m.Season = 'winter'
 /*3.
@@ -43,7 +48,8 @@ where m.Sport = 'swimming'
 */
 
 select RecordType = 'Medalist', Record = m.sport + ' - ' + m.Medal, m.FirstName, m.LastName, m.YearBorn from Medalist m
-union select RecordType = 'Invention', Record = i.InventionName, FirstName = i.InventorFirstName, LastName = i.InventorLastName, i.YearBorn from invention i
+union select RecordType = 'Invention', Record = i.InventionName, FirstName = i.InventorFirstName, LastName = i.InventorLastName, i.YearBorn 
+from invention i
 where YearBorn < 1900
 order by RecordType, YearBorn
 
@@ -56,10 +62,12 @@ order by RecordType, YearBorn
 
 */
 --AS -1 The question doesn't ask for age column.
-select mDescription = m.FirstName + ' ' + m.LastName + ' ' + m.Country, m.Code, mSequence = 1, m.Medal, Age = m.OlympicYear - m.YearBorn from medalist m
+select mDescription = m.FirstName + ' ' + m.LastName + ' ' + m.Country, m.Code, mSequence = 1, m.Medal 
+from medalist m
 where m.Medal = 'Silver'
 and m.OlympicYear - m.YearBorn < 25
-union select Medal = m.Sport + ' ' + m.Medal + ' ' + m.Country, m.Code, mSequence = 2, m.Medal, Age = m.OlympicYear - m.YearBorn from medalist m
+union select Medal = m.Sport + ' ' + m.Medal + ' ' + m.Country, m.Code, mSequence = 2, m.Medal 
+from medalist m
 where m.Medal = 'Silver'
 and m.OlympicYear - m.YearBorn < 25
 order by m.Code, mSequence
