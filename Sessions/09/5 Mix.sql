@@ -26,10 +26,11 @@ update p
 set p.TermEnd = 2023
 --select p.Num, *
 from president p 
-where p.Num = 46
+where p.TermEnd = null
 -- RS -Can you tell me how to use value that will "always" return serving president? Thank you for all your tips!
 -- SM What is the differents in the data between the serving president and the other presidents? There's only one column that has a different value.
 -- Check on that value.
+-- RS - Thank you so much!
 
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 47, 'Robert', 'Wilson', 'Republican', 1976, null, 2023, null

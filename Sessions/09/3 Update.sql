@@ -30,7 +30,7 @@ update p
 set TermEnd = 2023 
 --select * 
 from president p 
-where p.Num = 46
+where p.TermEnd = null
 --5 In 1845, the Whig party changed its name to the 'Whig Freedom' Party. Fix any presidents' data that has been affected by this change.
 update p
 set Party = 'Whig Freedom'
