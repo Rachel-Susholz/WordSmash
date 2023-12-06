@@ -1,4 +1,3 @@
--- SM See comment.
 use RecordKeeperDB
 go
 delete president
@@ -51,5 +50,4 @@ union select 43,'George W.', 'Bush',1946,null,'Republican', 2001,2009
 union select 44,'Barack', 'Obama',1961,null,'Democrat',2009,2017
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 45, 'Donald John', 'Trump', 'Republican', 1946, null, 2017, 2021
--- SM Tip: Party name should be Democrat
 union select 46, 'Joseph Robinette', 'Biden', 'Democrat', 1942, null, 2021, null 

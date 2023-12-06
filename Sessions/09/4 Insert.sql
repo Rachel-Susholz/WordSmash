@@ -1,4 +1,4 @@
--- SM Excellent! 75% See comment, fix and resubmit.
+-- SM Excellent! 100%
 /*
     1. The current presidential term is undergoing serious political challenges. 
        Two presidents were already impeached and the third is now beginning his term. 
@@ -16,7 +16,6 @@ union select 49, 'Nick', 'Wonder', 'Republican', 1995, null, 2023, null
        Elections were held and all United States Olympic medalists from any 21st century Olympics were elected for the current term. 
        They are all Republicans. Please add them to the table.
 */
--- SM -50% Only US medalists.
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 50, m.FirstName, m.LastName, 'Republican', m.YearBorn, null, 2023, null 
 from Medalist m 
