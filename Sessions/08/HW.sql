@@ -1,4 +1,4 @@
--- SM Excellent! 92% See comment, fix and resubmit.
+-- SM Excellent! Final mark is 96% See comment, no need to resubmit.
 -- Use the Medalist Table
 
 /*
@@ -27,7 +27,7 @@ set m.Country = null
 from Medalist m
 where m.Country = 'Kenya'
 --4. Display the age for all American medalists when they won, order by YearBorn, excluding all medalists that don't have a Year Born recorded.
--- SM -40% Display age for all "American" medalist, excluding those that don't have a year born. You should use different way to get only those that have a year born.
+-- SM For year born you should check if it's not null.
 select Age = m.OlympicYear - m.YearBorn, *
 from medalist m
 where m.Country = 'United States' 

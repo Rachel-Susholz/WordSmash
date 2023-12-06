@@ -1,7 +1,9 @@
+-- SM Excellent! 100% See comments, no need to resubmit.
 -- medalist
 --For all updates do select first to check your work
 --reinsert the data between questions if necessary
 -- 1. Show list of medalist with score of how much their last name sounds like yours. Sort with the most similar at the top
+-- SM Should be sorted by most similar on "top".
 select m.LastName, SoundsLikeSusholz = difference(m.LastName, 'Susholz'), * 
 from medalist m
 order by SoundsLikeSusholz
@@ -9,6 +11,7 @@ order by SoundsLikeSusholz
    2. Insert a new Winter Olympic Competition for the current year, all data based on the 2004 (note: use 2002 instead) Winter Olympics. 
       Reverse all the first and last names and replace all the 'a's' in the first names with 'w's'
 */
+-- SM You should insert "all" data not just those that have an "a". Just replace the "a"s with w.
 insert Medalist(OlympicYear, Season, OlympicLocation, Sport, SportSubcategory, Medal, FirstName, LastName, Country, YearBorn) 
 select 2023, m.Season, m.OlympicLocation, 'Kick Boxing', 'Muscle Building', m.Medal, reverse(replace(m.FirstName,'a', 'w')), reverse(m.LastName), m.Country, m.YearBorn
 from medalist m 
@@ -32,6 +35,7 @@ Also prepare a decryption statement, so that when ransom is paid we can fix the 
          4) In Sport replace all letters, "a" with "*", "o" with "@"
 */
 --encrypt 
+-- SM Tip: Use concat(substring(),substring()).
 update m 
 set m.FirstName = substring(upper(m.LastName), 1, 1) + substring(lower(m.FirstName), 2, 100),
     m.LastName = substring(upper(m.FirstName), 1, 1) + substring(lower(m.LastName), 2, 100),
@@ -66,3 +70,6 @@ select * from medalist m
 
 --You are a Medalist Enthusiast and would like to have a seperate column that includes the first three letters of the medalists' lastnames for easy reference.
 --Create the column and label it "Reference". Order by Reference.
+select Reference = left(m.LastName,3), *
+from Medalist m
+order by Reference
