@@ -1,4 +1,4 @@
--- SM Excellent! 97% See comments, fix and resubmit.
+-- SM Excellent! 100%
 --1 Bring the president table up to date, insert all missing presidents and information. (yeah, this is an "insert" on the "update" sheet)
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 45, 'Donald John', 'Trump', 'Republican', 1946, null, 2017, 2021
@@ -24,8 +24,6 @@ set Party = 'blue'
 from president p 
 where p.Party = 'Democrat'
 --4 The current president has been impeached. End his term in the current year.
--- SM -20% How do you know the number of current president? Use value that will "always" return serving president.
--- SM See my comment in mix file.
 update p
 set TermEnd = 2023 
 --select * 

@@ -1,4 +1,4 @@
--- SM Excellent! 97% See comments, fix and resubmit.
+-- SM Excellent! 100%
 --re run the data before doing each question
 
 --1 John F Kennedy was a hoax, delete him from the table and reduce the number for all subsequent presidents (requires two statements)
@@ -21,16 +21,11 @@ where p.TermEnd - p.TermStart < 4
 and p.TermStart > 1900
 and p.Party = 'Republican'
 --3 Breaking News: Robert Wilson really won the last election. End the term of the current president and enter Robert Wilson as the next president.
--- SM -20% How do you know the number of current president? Use value that will "always" return serving president.
 update p 
 set p.TermEnd = 2023
 --select p.Num, *
 from president p 
 where p.TermEnd = null
--- RS -Can you tell me how to use value that will "always" return serving president? Thank you for all your tips!
--- SM What is the differents in the data between the serving president and the other presidents? There's only one column that has a different value.
--- Check on that value.
--- RS - Thank you so much!
 
 insert president (Num, FirstName, LastName, Party, YearBorn, YearDied, TermStart, TermEnd)
 select 47, 'Robert', 'Wilson', 'Republican', 1976, null, 2023, null
