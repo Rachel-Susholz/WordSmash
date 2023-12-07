@@ -1,7 +1,6 @@
---AS Great job! 92% Please see comments and resubmit.
+--AS Great job! 95% Please see comments and resubmit.
 -- All Columns should have Column Names unless otherwise specified
 
---AS -1 General Formatting: From clause she be on its own line, move wherever necessary.
 /*1. 
 	The Olympic Committee has decided to give a special award to all gold medalists whose last name 
 	begins with a 'P'. Show a list of these medalists and label them all as Category P
@@ -18,7 +17,7 @@ and m.LastName like 'p%'
 	 Three new sports are being added into this year's Winter Olympic Competitions in Norway. Create 3 new sports from literal values,
 	 show in one result set, leaving the MedalistId, medalist information and Code blank.
 */
---AS -5 olympiclocation = '%norway' will set it to be that literal value. Rather give it its full value.
+--AS -5 olympiclocation = '%norway' will set it to be that literal value %norway instead of what you want. Rather give it its full value: Oslo, Norway.
 select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Jumping', SportSubcategory = 'Female Leauge', Medal = 'Silver', FirstName = '', LastName = '', Country = '', YearBorn = 0 , Code = '' 
 from medalist m 
 union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Sliding', SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' 
@@ -61,7 +60,6 @@ order by RecordType, YearBorn
 	Keep rows for each medal together
 
 */
---AS -1 The question doesn't ask for age column.
 select mDescription = m.FirstName + ' ' + m.LastName + ' ' + m.Country, m.Code, mSequence = 1, m.Medal 
 from medalist m
 where m.Medal = 'Silver'
