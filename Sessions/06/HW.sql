@@ -26,7 +26,7 @@ union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocat
 from medalist m 
 union select m.MedalistId, m.OlympicYear, m.Season, m.OlympicLocation, m.Sport, m.SportSubcategory, m.Medal, m.FirstName, m.LastName, m.Country, m.YearBorn, m.Code 
 from medalist m 
-where m.OlympicLocation like '%Norway'
+where m.OlympicLocation like 'Oslo, Norway'
 and m.Season = 'winter'
 /*3.
 	A New Swimming Competition is being added into the upcoming Olympics. Specify the location and year.
