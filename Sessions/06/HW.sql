@@ -18,6 +18,7 @@ and m.LastName like 'p%'
 	 show in one result set, leaving the MedalistId, medalist information and Code blank.
 */
 --AS -5 olympiclocation = '%norway' will set it to be that literal value %norway instead of what you want. Rather give it its full value: Oslo, Norway.
+--AS The comment above is regarding norway in the select statement not in the where clause. In the where clause it's fine to do norway, however in the select statement you are setting your olympic location to the literal value: %norway with a percent sign.
 select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Jumping', SportSubcategory = 'Female Leauge', Medal = 'Silver', FirstName = '', LastName = '', Country = '', YearBorn = 0 , Code = '' 
 from medalist m 
 union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = '%Norway', Sport = 'Alpine Sliding', SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' 
