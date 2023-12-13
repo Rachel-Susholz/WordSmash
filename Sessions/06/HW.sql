@@ -1,4 +1,4 @@
---AS Great job! 95% Please see comments and resubmit.
+--AS Great job! 98% 
 -- All Columns should have Column Names unless otherwise specified
 
 /*1. 
@@ -17,8 +17,6 @@ and m.LastName like 'p%'
 	 Three new sports are being added into this year's Winter Olympic Competitions in Norway. Create 3 new sports from literal values,
 	 show in one result set, leaving the MedalistId, medalist information and Code blank.
 */
---AS -5 olympiclocation = '%norway' will set it to be that literal value %norway instead of what you want. Rather give it its full value: Oslo, Norway.
---AS The comment above is regarding norway in the select statement not in the where clause. In the where clause it's fine to do norway, however in the select statement you are setting your olympic location to the literal value: %norway with a percent sign.
 select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = 'Oslo, Norway', Sport = 'Alpine Jumping', SportSubcategory = 'Female Leauge', Medal = 'Silver', FirstName = '', LastName = '', Country = '', YearBorn = 0 , Code = '' 
 from medalist m 
 union select MedalistId = 0, OlympicYear = 2023, Season = 'winter', OlympicLocation = 'Oslo, Norway', Sport = 'Alpine Sliding', SportSubcategory = 'Female Leauge', Medal = 'Bronze', FirstName = '', LastName = '', Country = '', YearBorn = 0, Code = '' 
