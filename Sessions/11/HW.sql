@@ -1,14 +1,19 @@
+-- SM Excellent! 93% See comments, fix and resubmit.
 -- lookup how to get the current date and time stamp and use it for the following questions:
 
 --1) show the current date and time
 select DateAndTime = GETDATE()
 
 --2) in one result set show current day, month, year,second and millisecond
+-- SM -80% This should be in separate columns.
 select DateAndTime = getdate()
 --or
+-- SM Tip: No need for this. And this returns an error. See syntax
 select DateAndTime = current_timestamp()
 
 --3) in separate columns show how many milliseconds, seconds, minutes, hours, days ago you were born
+-- SM Tip: Only use datediff_big() for those needed. It uses more memory.
+-- Formatting tip: As this is a long statement, all should be on new line indented.
 select MillisecondsAgo = datediff_big(ms,'9/03/2003', current_timestamp), SecondsAgo = datediff_big(ss, '9/03/2003', current_timestamp),
  MinutesAgo = datediff_big(mi, '9/03/2003', current_timestamp), HoursAgo = datediff(hh, '9/03/2003', current_timestamp), DaysAgo = datediff(dd, '9/03/2003', current_timestamp)   
 
@@ -41,6 +46,7 @@ and p.DateDied is not null
           of text for his first name. Show how you would find the bad data and correct it.
 */
 --1.
+-- SM Tip: Use year()
 update p 
 set p.FirstName = datepart(year,p.DateBorn)
 --select * 
@@ -60,6 +66,7 @@ where isdate(p.FirstName) = 1
      From 1896 - 1950, Winter Olympics began on January 10 and Summer Olympics on June 20.
      From 1950 - Current, Winter Olympics began on February 9 and Summer Olympics on July 23.
 */
+-- SM Tip: between is inclusive so only use 1950 in one set.
 select OlympicDate = datefromparts(m.OlympicYear, 01, 10), * 
 from Medalist m 
 where m.OlympicYear between 1869 and 1950
@@ -81,6 +88,7 @@ where m.OlympicYear between 1950 and 2023
 and m.Season = 'summer'
 
 --8 Include the insert statement that was done to bring the president table up to date in the source code data, run the insert so that you have the latest
+-- SM -10% Add this to data file.
 insert president(Num, FirstName, LastName, Party, DateBorn, DateDied, TermStart, TermEnd)
       select 45, 'Donald John', 'Trump', 'Republican', '1946-06-14', null, 2017, 2021
 union select 46, 'Joseph Robinette', 'Biden', 'Democratic', '1942-11-20', null, 2021, null
