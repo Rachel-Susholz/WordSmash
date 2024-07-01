@@ -6,16 +6,16 @@ select DateAndTime = GETDATE()
 
 --2) in one result set show current day, month, year,second and millisecond
 -- SM -80% This should be in separate columns.
-select DateAndTime = getdate()
+select CurrentDay = day(GETDATE()), CurrentMonth = month(GETDATE()), CurrentYear = year(GETDATE()), CurrentSecond = DATEPART(second, GETDATE()), CurrentMillisecond = DATEPART(millisecond, GETDATE())
 --or
 -- SM Tip: No need for this. And this returns an error. See syntax
-select DateAndTime = current_timestamp()
+
 
 --3) in separate columns show how many milliseconds, seconds, minutes, hours, days ago you were born
 -- SM Tip: Only use datediff_big() for those needed. It uses more memory.
 -- Formatting tip: As this is a long statement, all should be on new line indented.
 select MillisecondsAgo = datediff_big(ms,'9/03/2003', current_timestamp), SecondsAgo = datediff_big(ss, '9/03/2003', current_timestamp),
- MinutesAgo = datediff_big(mi, '9/03/2003', current_timestamp), HoursAgo = datediff(hh, '9/03/2003', current_timestamp), DaysAgo = datediff(dd, '9/03/2003', current_timestamp)   
+ MinutesAgo = datediff(mi, '9/03/2003', current_timestamp), HoursAgo = datediff(hh, '9/03/2003', current_timestamp), DaysAgo = datediff(dd, '9/03/2003', current_timestamp)   
 
 --4) add 1000 hours to now to see what date and time it will be
 SELECT OneThousandHoursFromNow = dateadd(hour, 1000, current_timestamp) 
@@ -48,7 +48,7 @@ and p.DateDied is not null
 --1.
 -- SM Tip: Use year()
 update p 
-set p.FirstName = datepart(year,p.DateBorn)
+set p.FirstName = year(p.DateBorn)
 --select * 
 from president p
 where p.FirstName = 'Ronald Wilson' and p.LastName = 'Reagan'
@@ -69,12 +69,12 @@ where isdate(p.FirstName) = 1
 -- SM Tip: between is inclusive so only use 1950 in one set.
 select OlympicDate = datefromparts(m.OlympicYear, 01, 10), * 
 from Medalist m 
-where m.OlympicYear between 1869 and 1950
+where m.OlympicYear between 1869 and 1949
 and m.Season = 'winter'
 
 select OlympicDate = datefromparts(m.OlympicYear, 06, 20), * 
 from Medalist m 
-where m.OlympicYear between 1869 and 1950
+where m.OlympicYear between 1869 and 1949
 and m.Season = 'summer'
 
 select OlympicDate = datefromparts(m.OlympicYear, 02, 09), * 
