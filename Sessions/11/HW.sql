@@ -1,18 +1,15 @@
--- SM Excellent! 93% See comments, fix and resubmit.
+-- AS Good job, 100%
 -- lookup how to get the current date and time stamp and use it for the following questions:
 
 --1) show the current date and time
 select DateAndTime = GETDATE()
 
 --2) in one result set show current day, month, year,second and millisecond
--- SM -80% This should be in separate columns.
 select CurrentDay = day(GETDATE()), CurrentMonth = month(GETDATE()), CurrentYear = year(GETDATE()), CurrentSecond = DATEPART(second, GETDATE()), CurrentMillisecond = DATEPART(millisecond, GETDATE())
 --or
--- SM Tip: No need for this. And this returns an error. See syntax
 
 
 --3) in separate columns show how many milliseconds, seconds, minutes, hours, days ago you were born
--- SM Tip: Only use datediff_big() for those needed. It uses more memory.
 -- Formatting tip: As this is a long statement, all should be on new line indented.
 select MillisecondsAgo = datediff_big(ms,'9/03/2003', current_timestamp), SecondsAgo = datediff_big(ss, '9/03/2003', current_timestamp),
  MinutesAgo = datediff(mi, '9/03/2003', current_timestamp), HoursAgo = datediff(hh, '9/03/2003', current_timestamp), DaysAgo = datediff(dd, '9/03/2003', current_timestamp)   
@@ -46,7 +43,6 @@ and p.DateDied is not null
           of text for his first name. Show how you would find the bad data and correct it.
 */
 --1.
--- SM Tip: Use year()
 update p 
 set p.FirstName = year(p.DateBorn)
 --select * 
@@ -66,7 +62,6 @@ where isdate(p.FirstName) = 1
      From 1896 - 1950, Winter Olympics began on January 10 and Summer Olympics on June 20.
      From 1950 - Current, Winter Olympics began on February 9 and Summer Olympics on July 23.
 */
--- SM Tip: between is inclusive so only use 1950 in one set.
 select OlympicDate = datefromparts(m.OlympicYear, 01, 10), * 
 from Medalist m 
 where m.OlympicYear between 1869 and 1949
