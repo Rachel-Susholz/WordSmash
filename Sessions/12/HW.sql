@@ -1,3 +1,4 @@
+--AS Nice work! 100% See one tip, no need to resubmit.
 select * from states s
 /*
 1. We need to analyze current US state population based on the century that each state was admitted to the union.
@@ -23,6 +24,7 @@ c) Same as (b) but only show those with an average life span of less than 70
 */
 select * from president p
 --a)
+--AS Improvement: Use the datediff function which is specifically for finding the difference in 2 dates ie: datediff(year, dateborn, datedied)
 select AvgLifeSpan = avg(year(p.DateDied)- year(p.DateBorn)), p.Party 
 from president p
 where p.DateDied is not null
