@@ -83,6 +83,7 @@ group by b.Department, b.Millions
 --RS I worked on this question for a long time. I knew I wanted to use a max for the year column and therefore needed a group by clause.
 --However, I dont really understand the logic of what I was doing with the group by, like I dont get why when I tried just grouping it according 
 --to just department it wasnt enough. Can you explain it to me?
+--And I know that I didnt really need the max since I happen to know that the latest year is 2021. but still I want to understand
 
 
 
