@@ -58,7 +58,9 @@ from president p
 where p.Party <> 'republican'
 --AS -2 Only one that served 2 terms
 --AS -2 The question said 1960
-and p.TermStart > 1968
+--RS I thought the question meant that he began serving two terms after 1960 which would be 8 years after because each term is four years
+and p.TermStart > 1960
+and p.TermEnd - p.TermStart = 8
 --c Reverse the last names of 7 presidents that lived before 1900
 update top (7) p 
 set LastName = reverse(p.lastname)
