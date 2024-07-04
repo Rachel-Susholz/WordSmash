@@ -1,4 +1,4 @@
---AS Amazing job! 96% Please see comments and resubmit.
+--AS Amazing job! 100%
 -- Medalist
 /*1
 The Olympic website is showcasing the history of Olympic games.
@@ -56,9 +56,6 @@ where p.Party = 'republican'
 delete top (1) p 
 from president p 
 where p.Party <> 'republican'
---AS -2 Only one that served 2 terms
---AS -2 The question said 1960
---RS I thought the question meant that he began serving two terms after 1960 which would be 8 years after because each term is four years
 and p.TermStart > 1960
 and p.TermEnd - p.TermStart = 8
 --c Reverse the last names of 7 presidents that lived before 1900
