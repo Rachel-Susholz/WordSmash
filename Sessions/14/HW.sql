@@ -3,11 +3,11 @@
 
 -- 1. Show a new column called Stars. For gold medalists show five stars, for silver show four stars and for bronze show three stars.
 select *, Stars =
-    case m.Medal 
+case m.Medal 
     when 'gold' then '*****'
     when 'silver' then '****'
     when 'bronze' then '***'
-    end
+end
 from medalist m
 /* 2. The Olympic Committee has decided to assign certain medalists a color, which is decided based on a few specifications:
     If the Olympic location was France and the sport was Athletics or Figure Skating the color is red.
@@ -17,13 +17,13 @@ from medalist m
     All other medalists will be green.
 */
 select Color = 
-    case
+case
     when m.OlympicLocation like '%France' and m.sport in ('Athletics', 'Figure Skating') then 'red'
     when m.OlympicLocation like '%Italy' and m.sport in ('Athletics', 'Canoeing') then 'orange'
     when m.OlympicLocation like '%Japan' and m.sport = 'Cross-Country Skiing' and m.Season = 'Winter' then 'yellow'
     when m.OlympicLocation like '%Greece' and m.sport = 'cycling' and m.Season = 'Summer' then 'blue'
     else 'green'
-    end
+end
 ,*
 from medalist m
 --order by Color
@@ -34,14 +34,13 @@ from medalist m
 
 --LB: It would be more concise to use the case statement directly in the ORDER BY clause, without adding the MedalRef column. For example, you can use: ORDER BY CASE WHEN m.medal...
 
-select  MedalRef = 
-    case 
+select * , m.Medal, m.LastName 
+from Medalist m
+order by case 
     when m.Medal in ('Gold', 'Silver') then 0
     when m.Medal = 'Bronze' then 1
-    end
-, m.Medal, m.LastName 
-from Medalist m
-order by MedalRef, m.LastName
+end
+, m.LastName
 --RS In a case like this, where I'm only working on one column in the case, how do I i use 'case medal when...' if I have 2 conditions in one column for one branch?
 --LB: You would need to have two separate case statements for each medal.
 
@@ -54,13 +53,13 @@ order by MedalRef, m.LastName
 update m
 set m.Medal =
 --select RevisedMedals = 
-    case 
+case 
     when m.country = 'United States' and m.OlympicYear - m.YearBorn < 25 then 'Gold'
     when m.country = 'Italy' and m.OlympicYear - m.YearBorn > 30 then 'silver'
     when m.country = 'Frsance' and m.OlympicYear - m.YearBorn > 35 and m.Season = 'Summer' then 'bronze'
     when m.country = 'Denmark' and m.LastName like '%s%' then 'gold'
     else m.Medal
-    end
+end
 from medalist m
 /* 5. 
     Create a new budget for next year, base it on the latest year in the budget table. Adjust the new budget as follows:
@@ -74,17 +73,16 @@ from medalist m
 insert budget(Department, BudgetYear, Millions)
 select 
     b.department,
-    max(b.BudgetYear) + 1, 
-    case
+    b.BudgetYear + 4, 
+case
     when b.department = 'Department of Education'  then b.Millions * 1.9 
     when b.department = 'Department of Health and Human services'  then b.Millions * 3
     when b.department = 'Environmental Protection Agency' then b.Millions / 2
     when b.department = 'Department of the Teasury' then 10000000
     else b.Millions * 1.2 
-    end
+end
 from budget b
-where b.BudgetYear = 2021
-group by b.Department, b.Millions 
+where b.BudgetYear = 2021 
 --RS I worked on this question for a long time. I knew I wanted to use a max for the year column and therefore needed a group by clause.
 --However, I dont really understand the logic of what I was doing with the group by, like I dont get why when I tried just grouping it according 
 --to just department it wasnt enough. Can you explain it to me?
