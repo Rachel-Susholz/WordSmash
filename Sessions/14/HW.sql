@@ -1,5 +1,4 @@
 -- medalist 
---LB: Formatting tip: All WHEN statements should be indented. 
 
 -- 1. Show a new column called Stars. For gold medalists show five stars, for silver show four stars and for bronze show three stars.
 select *, Stars =
@@ -32,7 +31,6 @@ from medalist m
       and all bronze should show below them sorted by last name.
 */
 
---LB: It would be more concise to use the case statement directly in the ORDER BY clause, without adding the MedalRef column. For example, you can use: ORDER BY CASE WHEN m.medal...
 
 select * , m.Medal, m.LastName 
 from Medalist m
@@ -41,8 +39,6 @@ order by case
     when m.Medal = 'Bronze' then 1
 end
 , m.LastName
---RS In a case like this, where I'm only working on one column in the case, how do I i use 'case medal when...' if I have 2 conditions in one column for one branch?
---LB: You would need to have two separate case statements for each medal.
 
 /* 4. Someone mistakenly put bad data into the Medalist table, which we must fix now.
       All American medalists under the age of 25 - their medals must be changed to Gold.
@@ -69,7 +65,6 @@ from medalist m
     Department of the Treasury = 10 million
     All else increase by 20%
 */
---LB: Instructions is to create a new budget for next year - 2025. Please fix the BudgetYear column and remove the group by.
 insert budget(Department, BudgetYear, Millions)
 select 
     b.department,
