@@ -18,6 +18,7 @@ go
 drop table if exists Toy
 go 
 create table dbo.Toy(
+    ToyID int not null identity primary key,
     Toy varchar (50),
     ItemNum varchar (5),
     PurchasePrice decimal (6,2),
