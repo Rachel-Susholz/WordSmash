@@ -89,6 +89,7 @@ set t.toy = 'Baseball'
 --select *
 from toy t
 where t.toy = 'Basketball'
+and t.DatePurchased = '02-09-2021'
 --AS -2 The mistake was make on feb, 9, 2021, add that into the where clause
 --2)
 delete t 
