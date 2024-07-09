@@ -1,4 +1,4 @@
---AS Great job! 98% Please see 1 comment and resubmit.
+--AS Great job! 100%
 /*
     You buy toys wholesale from China and sell to local toy stores. 
     You are trying to organize your inventory, and create a system to track how much you are spending and earning.
@@ -90,7 +90,6 @@ set t.toy = 'Baseball'
 from toy t
 where t.toy = 'Basketball'
 and t.DatePurchased = '02-09-2021'
---AS -2 The mistake was make on feb, 9, 2021, add that into the where clause
 --2)
 delete t 
 from toy t 
