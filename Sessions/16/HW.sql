@@ -161,7 +161,7 @@ drop table if exists president
 go
 		create table dbo.president(
 --AS What is the (1000, 1) for? Take it out
-		PresidentId int not null identity (1000,1) primary key,
+		PresidentId int not null identity primary key,
 		Num int not null constraint u_President_num_must_be_unique unique
             constraint ck_President_num_must_be_greater_than_zero check(Num > 0), 
 		FirstName varchar(100) not null constraint ck_President_first_name_cannot_be_blank check(FirstName <> ''), 
