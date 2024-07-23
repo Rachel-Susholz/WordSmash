@@ -11,12 +11,23 @@ Select
 from patient p
 where p.DischargeDate is not null
 order by p.DischargeConditionNum
+
 --2)
 --For facility admin: show list of patients whose condition deteriorated under our care, include condition descriptions.
-select p.patientFirstName, p.patientLastName, p.DateOfBirth, p.SSN, p.AdmitConditionNum, p.AdmitConditionDesc, p.DischargeConditionNum, p.DischargeConditionDesc, * 
+select 
+    p.patientFirstName, 
+    p.patientLastName, 
+    p.DateOfBirth, 
+    p.SSN, 
+    p.AdmitConditionNum, 
+    p.AdmitConditionDesc, 
+    p.DischargeConditionNum, 
+    p.DischargeConditionDesc, 
+    * 
 from patient p
 where p.AdmitConditionNum < p.DischargeConditionNum
 and p.DischargeDate is not null
+
 --3)
 --Show me the average days patients stayed at our facility, per condition at admit. For patients that are not discharged yet calculate average days from the current date.
 select AverageDaysAtFacility = avg(Datediff(year, p.AdmitDate, p.DischargeDate)), p.AdmitConditionNum
@@ -28,6 +39,7 @@ select AverageDaysAtFacility = avg(Datediff(year, p.AdmitDate, getdate())), p.Ad
 from patient p
 where p.DischargeDate is null 
 group by p.AdmitConditionNum
+
 --4)
 --Show me the numeric change of condition from admit to discharge and the number of patients with that change.
 select NumChangeInCondition = p.AdmitConditionNum - p.DischargeConditionNum, PatientCount = count(p.patientFirstName)
