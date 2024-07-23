@@ -37,7 +37,7 @@ alter table Medalist add MedalistAddress varchar (50) not null constraint d_Meda
 alter table President drop column if exists AgeAtDeath
 go 
 --AS Tip: Use datediff function
-alter table President add AgeAtDeath as year(Datedied) - year(dateborn) persisted 
+alter table President add AgeAtDeath as datediff(year, DateBorn, DateDied) persisted 
 
 -- 6. Add a column called YearsServed for each president
 alter table President drop column if exists YearsServed
@@ -48,6 +48,6 @@ alter table President add YearsServed as TermEnd - TermStart persisted
 alter table President drop column if exists TermsServed
 go 
 --AS -2 No need for the case statement, if it's less than 4 will show 0 with just (termend - termstart)/4 since it is only showing whole numbers.
-alter table President add TermsServed as (case when (TermEnd - Termstart) / 4 < 1 then 0 else (TermEnd - Termstart) / 4 end) persisted
+alter table President add TermsServed as (TermEnd - Termstart) / 4  persisted
 -- RS How do I make sure that it only displays full terms and not let's say 1.5 for a president that served for 6 years?
 --AS It's automatically show whole numbers.
