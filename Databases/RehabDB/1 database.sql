@@ -1,3 +1,4 @@
+--AS 100%
 use master
 go 
 drop database if exists RehabDB
