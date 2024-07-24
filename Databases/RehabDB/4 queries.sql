@@ -32,7 +32,7 @@ and p.DischargeDate is not null
 --3)
 --Show me the average days patients stayed at our facility, per condition at admit. For patients that are not discharged yet calculate average days from the current date.
 --AS -4 This should be done in one select statement using an isnull
-select AverageDaysAtFacility = avg(Datediff(year, p.AdmitDate, p.DischargeDate)), p.AdmitConditionNum
+select AverageDaysAtFacility = avg(Datediff(year, p.AdmitDate, isnull (p.DischargeDate, getdate()))), p.AdmitConditionNum
 from patient p
 where p.DischargeDate is not null
 group by p.AdmitConditionNum

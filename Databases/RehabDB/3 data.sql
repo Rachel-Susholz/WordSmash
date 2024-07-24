@@ -1,5 +1,7 @@
 --AS Amazing job! 98% Please seee comments and resubmit.
 --AS Add in use RehabDB
+use RehabDB
+go 
 delete Patient
 go
 
@@ -43,10 +45,11 @@ select
 -- DischargeDate   
     case 
 --AS -2 All cases have the same exact results, therefore, you can just have one when then statement separated by or's.
-        when p.Party not in ('Democrat', 'Republican') then datefromparts(p.TermStart + 10, 01, 07)
-        when p.AgeAtDeath between 50 and 58 then datefromparts(p.TermStart + 10, 01, 07)
-        when p.AgeAtDeath between 70 and 73 then datefromparts(p.TermStart + 10, 01, 07)
-        when p.AgeAtDeath between 75 and 77 then datefromparts(p.TermStart + 10, 01, 07)
+        when p.Party not in ('Democrat', 'Republican') 
+        or p.AgeAtDeath between 50 and 58 
+        or p.AgeAtDeath between 70 and 73 
+        or p.AgeAtDeath between 75 and 77 
+        then datefromparts(p.TermStart + 10, 01, 07)
         else null       
         end,
 
