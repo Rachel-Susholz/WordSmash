@@ -1,5 +1,4 @@
---AS Amazing job! 98% Please seee comments and resubmit.
---AS Add in use RehabDB
+--AS Amazing job! 100%
 use RehabDB
 go 
 delete Patient
@@ -44,7 +43,6 @@ select
 
 -- DischargeDate   
     case 
---AS -2 All cases have the same exact results, therefore, you can just have one when then statement separated by or's.
         when p.Party not in ('Democrat', 'Republican') 
         or p.AgeAtDeath between 50 and 58 
         or p.AgeAtDeath between 70 and 73 

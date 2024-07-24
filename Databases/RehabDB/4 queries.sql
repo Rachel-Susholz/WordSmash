@@ -1,4 +1,4 @@
---AS Amazing job! 96% Please see comment and resubmit.
+--AS Amazing job! 100%
 --1)
 --For government audit: list of all patients discharged, presented as: last name, first name, date of admit, date of discharge, condition upon admit and discharge. 
 --We want to show our success stories on top, order by condition at discharge.
@@ -31,7 +31,6 @@ and p.DischargeDate is not null
 
 --3)
 --Show me the average days patients stayed at our facility, per condition at admit. For patients that are not discharged yet calculate average days from the current date.
---AS -4 This should be done in one select statement using an isnull
 select AverageDaysAtFacility = avg(Datediff(year, p.AdmitDate, isnull (p.DischargeDate, getdate()))), p.AdmitConditionNum
 from patient p
 where p.DischargeDate is not null
