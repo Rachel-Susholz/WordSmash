@@ -2,7 +2,7 @@ Script of command line prompts entered for recipe info
 
 
 C:\Users\Rachel Susholz>cd repo
-
+-AS Missing the command that creates the folder.
 C:\Users\Rachel Susholz\repo> cd recipe-data
 
 C:\Users\Rachel Susholz\repo\recipe-data> git init
@@ -31,7 +31,7 @@ Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
 To https://github.com/Rachel-Susholz/recipe-data.git
  * [new branch]      main -> main
 branch 'main' set up to track 'origin/main'.
-
+-AS Instructions were to do it for recipe file
 C:\Users\Rachel Susholz\repo\recipe-data> echo ljkioo > meals.txt
 
 C:\Users\Rachel Susholz\repo\recipe-data> git restore *meals* 
@@ -39,7 +39,7 @@ C:\Users\Rachel Susholz\repo\recipe-data> git restore *meals*
 C:\Users\Rachel Susholz\repo\recipe-data>echo kjkl;lj > meals.txt
 
 C:\Users\Rachel Susholz\repo\recipe-data> git add .
-
+-AS In order to undo changes from staged and working tree add in: git restore --worktree --staged .
 C:\Users\Rachel Susholz\repo\recipe-data> git restore --staged .
 
 C:\Users\Rachel Susholz\repo\recipe-data> echo khlkjl > ingredients.txt
@@ -47,7 +47,7 @@ C:\Users\Rachel Susholz\repo\recipe-data> echo khlkjl > ingredients.txt
 C:\Users\Rachel Susholz\repo\recipe-data> git add *
 
 C:\Users\Rachel Susholz\repo\recipe-data> git commit -m "1 change" ingredients.txt
-
+-AS To ensure you are going back to the initial commit use git reset hard
 C:\Users\Rachel Susholz\repo\recipe-data> git restore --worktree --staged .
 
 C:\Users\Rachel Susholz\repo\recipe-data> echo sugar > ingredients.txt
