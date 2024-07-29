@@ -1,0 +1,66 @@
+Script of command line prompts entered for recipe info
+
+
+C:\Users\Rachel Susholz>cd repo
+
+C:\Users\Rachel Susholz\repo> cd recipe-data
+
+C:\Users\Rachel Susholz\repo\recipe-data> git init
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo ice cubes>recipes.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo water>ingredients.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo pallete cleanser> meals.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git add .
+
+C:\Users\Rachel Susholz\repo\recipe-data> git commit -m "recipe files with initial data"
+
+C:\Users\Rachel Susholz\repo\recipe-data>git remote add origin https://github.com/Rachel-Susholz/recipe-data.git
+
+C:\Users\Rachel Susholz\repo\recipe-data>git branch -M main
+
+C:\Users\Rachel Susholz\repo\recipe-data>git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (5/5), 350 bytes | 175.00 KiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Rachel-Susholz/recipe-data.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo ljkioo > meals.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git restore *meals* 
+
+C:\Users\Rachel Susholz\repo\recipe-data>echo kjkl;lj > meals.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git add .
+
+C:\Users\Rachel Susholz\repo\recipe-data> git restore --staged .
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo khlkjl > ingredients.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git add *
+
+C:\Users\Rachel Susholz\repo\recipe-data> git commit -m "1 change" ingredients.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git restore --worktree --staged .
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo sugar > ingredients.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git add .
+
+C:\Users\Rachel Susholz\repo\recipe-data> git commit -m "2 change" ingredients.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git reset a8169fd --soft
+
+C:\Users\Rachel Susholz\repo\recipe-data> echo chocolate chip cookies > recipes.txt
+
+C:\Users\Rachel Susholz\repo\recipe-data> git add .
+
+C:\Users\Rachel Susholz\repo\recipe-data> git commit -m "3 change" .
+
