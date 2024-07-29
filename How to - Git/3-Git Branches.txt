@@ -3,7 +3,7 @@ Script of command line prompts
 C:\Users\Rachel Susholz\repo\recipe-data> git switch -c diet
 
 C:\Users\Rachel Susholz\repo\recipe-data> echo stevia > ingredients.txt
-
+-AS Instructions don't say to connect your local repo to the github repo rather to show on the screen that the diet branch is connected to the remote.
 C:\Users\Rachel Susholz\repo\recipe-data> git remote add origin  https://github.com/Rachel-Susholz/recipe-data.git
 
 C:\Users\Rachel Susholz\repo\recipe-data> git push --all -u origin
