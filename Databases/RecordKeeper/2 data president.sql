@@ -59,3 +59,6 @@ union select p.PresidentId, 'None,Federalist', 1789, 'White' from president p wh
 union select p.PresidentId, 'National Union', 1864, 'Green' from president p where p.Num = 17 
 union select p.PresidentId, 'Democratic-Republican', 1792, 'Purple' from president p where p.Num in (3, 4, 5, 6)
 
+
+
+select * from party
