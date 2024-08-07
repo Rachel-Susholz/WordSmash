@@ -1,3 +1,4 @@
+--AS 100% session 22
 use RecordKeeperDB
 
 delete executiveorders  
@@ -73,3 +74,7 @@ union select p. PresidentId, 13494, '3', 'C.F.R.', 785, 1789, 'Ordering the Sele
 go
 
 
+
+
+select * from president
+select * from party

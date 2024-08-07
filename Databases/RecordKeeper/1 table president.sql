@@ -1,3 +1,4 @@
+--AS 100% session 22
 -- paste this on the bottom of the table file
 use RecordKeeperDB
 go 
