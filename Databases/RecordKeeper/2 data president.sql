@@ -1,4 +1,5 @@
 --AS 100% session 22
+--AS 100% session 23
 use RecordKeeperDB
 
 delete executiveorders  
@@ -78,3 +79,5 @@ go
 
 select * from president
 select * from party
+select * from ExecutiveOrders
+
