@@ -1,4 +1,5 @@
 -- Queries
+
 --a) list all executive orders sorted by page number, display the official executive order format
 select ExecutiveOrders = concat('Order No. ', e.OrderNumber, ', ', e.VolumeNumber, ' ', e.OrderCode, ' ', e.PageNumber, ' ', e.IssueYear, '. ', e.OrderName)
 from ExecutiveOrders e 
@@ -64,3 +65,4 @@ on r.PartyId = p.PartyId
 join ExecutiveOrders e 
 on p.PresidentId = e.PresidentId
 where r.PartyName = 'Federalist'
+

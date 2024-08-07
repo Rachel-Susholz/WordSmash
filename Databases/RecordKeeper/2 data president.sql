@@ -63,6 +63,13 @@ union select r.PartyId, 43, 'George W.', 'Bush', '1946-07-06', null, 2001, 2009 
 union select r.PartyId, 44, 'Barack', 'Obama', '1961-08-04', null, 2009, 2017 from party r where r.PartyName = 'Democrat'
 go
 
-
+insert ExecutiveOrders (PresidentId, OrderNumber, VolumeNumber, OrderCode, PageNumber, IssueYear, OrderName, OrderStatus)
+select p.PresidentId, 13765, '3', 'C.F.R.', 182, 1789, 'Comprehensive Plan for Reorganizing the Executive Branch', 1 from president p where p.Num = 1
+union select p.PresidentId, 13535, '3', 'C.F.R.', 458, 1864, 'Establishing a Coordinated Government-wide Initiative to Promote Diversity and Inclusion in the Federal Workforce', 1 from president p where p.Num = 17
+union select p.PresidentId, 13603, '3', 'C.F.R.', 599, 1833, 'National Defense Resources Preparedness', 1 from president p where p.Num = 2
+union select p. PresidentId, 13473, '3', 'C.F.R.', 679, 1833, 'United States Postal Service', 1 from president p where p.Num = 2
+union select p. PresidentId, 13489, '3', 'C.F.R.', 987, 1789, 'Ethics Commitments by Executive Branch Personnel', 1 from president p where p.Num = 1
+union select p. PresidentId, 13494, '3', 'C.F.R.', 785, 1789, 'Ordering the Selected Reserve and Certain Individual Ready Reserve Members of the Armed Forces to Active Duty', 1 from president p where p.Num = 1
+go
 
 

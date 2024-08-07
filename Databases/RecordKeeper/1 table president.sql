@@ -45,4 +45,23 @@ go
 alter table President add TermsServed as (TermEnd - Termstart) / 4  persisted
 go
 
+create table dbo.ExecutiveOrders(
+		ExecutiveOrderId int not null identity primary key,
+		PresidentId int not null 
+			constraint f_president_executive_orders_ foreign key references President(PresidentId),
+		OrderNumber int not null 
+			constraint u_executive_order_order_number_must_be_unique unique,
+		VolumeNumber char (1) not null 
+			constraint c_executive_order_volume_number_must_be_3 check (VolumeNumber = 3),
+		OrderCode char (6) not null 
+			constraint c_executive_order_code_must_be_C_F_R check (OrderCode like 'C.F.R.'),
+		PageNumber smallint not null
+			constraint c_executive_order_page_number_must_be_greater_than_zero check (PageNumber > 0),
+		IssueYear smallint not null
+			constraint c_executive_order_issue_year_must_be_greater_than_zero check (IssueYear > 0),
+		OrderName varchar (500) not null 
+			constraint c_executive_order_name_cannot_be_blank check (OrderName <> ''),
+		OrderStatus bit not null,
+		RecordDateTime as current_timestamp
+)
 		
