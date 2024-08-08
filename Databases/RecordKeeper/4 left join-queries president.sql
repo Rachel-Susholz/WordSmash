@@ -38,8 +38,10 @@ left join ExecutiveOrders e
 on p.PresidentId = e.PresidentId
 group by c.Color
 order by ExecutiveOrdersAmount desc
+
 -- it wasn't clear from the question if parties with no color should be included
 -- if you want to include executive orders made  by presidents belonging to parties with no color then:
+
 select c.Color, ExecutiveOrdersAmount = count(ExecutiveOrderId)
 from party r
 left join color c

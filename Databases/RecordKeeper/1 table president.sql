@@ -1,3 +1,5 @@
+--AS 100% session 22
+--AS 100% session 23. See comments no need to resubmit
 -- paste this on the bottom of the table file
 use RecordKeeperDB
 go 
@@ -60,6 +62,7 @@ create table dbo.ExecutiveOrders(
 			constraint f_president_executive_orders_ foreign key references President(PresidentId),
 		OrderNumber int not null 
 			constraint u_executive_order_order_number_must_be_unique unique,
+			--AS you can check to make sure that order num is greater then 0
 		VolumeNumber char (1) not null 
 			constraint c_executive_order_volume_number_must_be_3 check (VolumeNumber = 3),
 		OrderCode char (6) not null 
@@ -67,6 +70,7 @@ create table dbo.ExecutiveOrders(
 		PageNumber smallint not null
 			constraint c_executive_order_page_number_must_be_greater_than_zero check (PageNumber > 0),
 		IssueYear smallint not null
+			--AS The orders can't be from before 1776, as there was no president before that time.
 			constraint c_executive_order_issue_year_must_be_greater_than_zero check (IssueYear > 0),
 		OrderName varchar (500) not null 
 			constraint c_executive_order_name_cannot_be_blank check (OrderName <> ''),

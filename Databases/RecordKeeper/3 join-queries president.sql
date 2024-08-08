@@ -1,3 +1,4 @@
+-- AS Great job 100%
 -- Queries
 
 --a) list all executive orders sorted by page number, display the official executive order format
@@ -55,6 +56,7 @@ delete r
 from party r 
 where r.PartyName = 'National Union'
 
+
 --g) for a particular party with exec orders update all to not upheld
 update e
 set e.OrderStatus = 0
@@ -65,4 +67,3 @@ on r.PartyId = p.PartyId
 join ExecutiveOrders e 
 on p.PresidentId = e.PresidentId
 where r.PartyName = 'Federalist'
-
