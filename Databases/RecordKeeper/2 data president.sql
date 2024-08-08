@@ -3,17 +3,31 @@ use RecordKeeperDB
 delete executiveorders  
 delete president
 delete party 
+delete color
 
 
+insert Color(Color)
+select 'Red'
+union select 'Blue'
+union select 'Orange'
+union select 'Yellow'
+union select 'White'
+union select 'Green'
+union select 'Purple'
+union select 'Black'
+go
 
-insert party(PartyName, YearFormed, Color)
-select 'Republican', 1854, 'Red' 
-union select 'Democrat', 1828, 'Blue'
-union select 'Federalist', 1791, 'Orange' 
-union select 'Whig', 1833, 'Yellow' 
-union select 'None,Federalist', 1789, 'White' 
-union select 'National Union', 1864, 'Green' 
-union select 'Democratic-Republican', 1792, 'Purple'
+insert party(PartyName, YearFormed, ColorId)
+select 'Republican', 1854,  (select c.ColorId from color c where c.Color = 'Red')
+union select 'Democrat', 1828, (select c.ColorId from color c where c.Color = 'Blue')
+union select 'Federalist', 1791, (select c.ColorId from color c where c.Color = 'Orange') 
+union select 'Whig', 1833, (select c.ColorId from color c where c.Color = 'Yellow')
+union select 'None,Federalist', 1789, (select c.ColorId from color c where c.Color = 'White')
+union select 'National Union', 1864, (select c.ColorId from color c where c.Color = 'Green')
+union select 'Democratic-Republican',1792, (select c.ColorId from color c where c.Color = 'Purple')
+union select 'Black Panther', 1966, (select c.ColorId from color c where c.Color = 'Black')
+union select 'Socialist Party of America', 1901, null
+union select 'Prohibition', 1869, (select c.ColorId from color c where c.Color = 'Red')
 go
 
 insert president(PartyId, Num, FirstName, LastName, DateBorn, DateDied, TermStart, TermEnd)
@@ -71,5 +85,6 @@ union select p. PresidentId, 13473, '3', 'C.F.R.', 679, 1833, 'United States Pos
 union select p. PresidentId, 13489, '3', 'C.F.R.', 987, 1789, 'Ethics Commitments by Executive Branch Personnel', 1 from president p where p.Num = 1
 union select p. PresidentId, 13494, '3', 'C.F.R.', 785, 1789, 'Ordering the Selected Reserve and Certain Individual Ready Reserve Members of the Armed Forces to Active Duty', 1 from president p where p.Num = 1
 go
+
 
 

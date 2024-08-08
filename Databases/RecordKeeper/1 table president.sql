@@ -4,15 +4,24 @@ go
 drop table if exists ExecutiveOrders 
 drop table if exists president
 drop table if exists party
+drop table if exists Color
 go
 
+		create table dbo.Color(
+		ColorId int not null identity primary key,
+		Color varchar (10) not null
+		 constraint c_party_color_cannot_be_blank check (Color <> '') 
+		)
+
+go
 		create table dbo.party(
 		PartyId int not null identity primary key, 
-		PartyName varchar (25) not null 
+		ColorId int null 
+			constraint f_color_party foreign key references Color(ColorId),
+		PartyName varchar (50) not null 
 			constraint c_party_name_cannot_be_blank check (PartyName <> ''),
 		YearFormed int not null,
-		Color varchar (10) not null 
-			constraint c_party_color_cannot_be_blank check (Color <> '')
+		
 		)
 
 go
