@@ -1,80 +1,85 @@
---AS 100% session 22
 --AS 100% session 23. See comments no need to resubmit
--- paste this on the bottom of the table file
+--AS 100% session 24 Great job!!
+
+
 use RecordKeeperDB
-go 
-drop table if exists ExecutiveOrders 
+go
+drop table if exists ExecutiveOrders
 drop table if exists president
 drop table if exists party
 drop table if exists Color
 go
 
-		create table dbo.Color(
-		ColorId int not null identity primary key,
-		Color varchar (10) not null
-		 constraint c_party_color_cannot_be_blank check (Color <> '') 
-		)
+create table dbo.Color
+(
+	ColorId int not null identity primary key,
+	Color varchar (10) not null
+		constraint c_party_color_cannot_be_blank check (Color <> '')
+)
 
 go
-		create table dbo.party(
-		PartyId int not null identity primary key, 
-		ColorId int null 
-			constraint f_color_party foreign key references Color(ColorId),
-		PartyName varchar (50) not null 
-			constraint c_party_name_cannot_be_blank check (PartyName <> ''),
-		YearFormed int not null,
-		
-		)
+create table dbo.party
+(
+	PartyId int not null identity primary key,
+	ColorId int null
+		constraint f_color_party foreign key references Color(ColorId),
+	PartyName varchar (50) not null
+		constraint c_party_name_cannot_be_blank check (PartyName <> ''),
+	YearFormed int not null,
+
+)
 
 go
-		create table dbo.president(
-		PresidentId int not null identity primary key,
-		PartyId int not null 
-			constraint f_president_party foreign key references Party(PartyId),
-		Num int not null constraint u_President_num_must_be_unique unique
-            constraint ck_President_num_must_be_greater_than_zero check(Num > 0), 
-		FirstName varchar(100) not null constraint ck_President_first_name_cannot_be_blank check(FirstName <> ''), 
-        LastName varchar(100) not null constraint ck_President_last_name_cannot_be_blank check(LastName <> ''), 
-        DateBorn date not null constraint ck_President_date_born_cannot_be_blank check(DateBorn <> '' ),  
-		DateDied datetime2,
-		TermStart int not null constraint ck_President_term_must_begin_after_1775 check(TermStart >= 1776),
-		TermEnd int,
-        constraint ck_President_term_end_cannot_be_before_term_start check(TermEnd > = TermStart),
-        constraint ck_President_president_must_be_at_least_35_years_old_to_serve check(TermStart - year(DateBorn)>= 35)
-	)
+create table dbo.president
+(
+	PresidentId int not null identity primary key,
+	PartyId int not null
+		constraint f_president_party foreign key references Party(PartyId),
+	Num int not null constraint u_President_num_must_be_unique unique
+		constraint ck_President_num_must_be_greater_than_zero check(Num > 0),
+	FirstName varchar(100) not null constraint ck_President_first_name_cannot_be_blank check(FirstName <> ''),
+	LastName varchar(100) not null constraint ck_President_last_name_cannot_be_blank check(LastName <> ''),
+	DateBorn date not null constraint ck_President_date_born_cannot_be_blank check(DateBorn <> '' ),
+	DateDied datetime2,
+	TermStart int not null constraint ck_President_term_must_begin_after_1775 check(TermStart >= 1776),
+	TermEnd int,
+	constraint ck_President_term_end_cannot_be_before_term_start check(TermEnd > = TermStart),
+	constraint ck_President_president_must_be_at_least_35_years_old_to_serve check(TermStart - year(DateBorn)>= 35)
+)
 go
 alter table President drop column if exists AgeAtDeath
-go 
+go
 alter table President add AgeAtDeath as datediff(year, DateBorn, DateDied) persisted 
-go 
+go
 alter table President drop column if exists YearsServed
-go 
+go
 alter table President add YearsServed as TermEnd - TermStart persisted 
-go 
+go
 alter table President drop column if exists TermsServed
-go 
+go
 alter table President add TermsServed as (TermEnd - Termstart) / 4  persisted
 go
 
-create table dbo.ExecutiveOrders(
-		ExecutiveOrderId int not null identity primary key,
-		PresidentId int not null 
-			constraint f_president_executive_orders_ foreign key references President(PresidentId),
-		OrderNumber int not null 
-			constraint u_executive_order_order_number_must_be_unique unique,
-			--AS you can check to make sure that order num is greater then 0
-		VolumeNumber char (1) not null 
-			constraint c_executive_order_volume_number_must_be_3 check (VolumeNumber = 3),
-		OrderCode char (6) not null 
-			constraint c_executive_order_code_must_be_C_F_R check (OrderCode like 'C.F.R.'),
-		PageNumber smallint not null
-			constraint c_executive_order_page_number_must_be_greater_than_zero check (PageNumber > 0),
-		IssueYear smallint not null
-			--AS The orders can't be from before 1776, as there was no president before that time.
-			constraint c_executive_order_issue_year_must_be_greater_than_zero check (IssueYear > 0),
-		OrderName varchar (500) not null 
-			constraint c_executive_order_name_cannot_be_blank check (OrderName <> ''),
-		OrderStatus bit not null,
-		RecordDateTime as current_timestamp
+create table dbo.ExecutiveOrders
+(
+	ExecutiveOrderId int not null identity primary key,
+	PresidentId int not null
+		constraint f_president_executive_orders_ foreign key references President(PresidentId),
+	OrderNumber int not null
+		constraint u_executive_order_order_number_must_be_unique unique,
+	--AS you can check to make sure that order num is greater then 0
+	VolumeNumber char (1) not null
+		constraint c_executive_order_volume_number_must_be_3 check (VolumeNumber = 3),
+	OrderCode char (6) not null
+		constraint c_executive_order_code_must_be_C_F_R check (OrderCode like 'C.F.R.'),
+	PageNumber smallint not null
+		constraint c_executive_order_page_number_must_be_greater_than_zero check (PageNumber > 0),
+	IssueYear smallint not null
+		--AS The orders can't be from before 1776, as there was no president before that time.
+		constraint c_executive_order_issue_year_must_be_greater_than_zero check (IssueYear > 0),
+	OrderName varchar (500) not null
+		constraint c_executive_order_name_cannot_be_blank check (OrderName <> ''),
+	OrderStatus bit not null,
+	RecordDateTime as current_timestamp
 )
 		

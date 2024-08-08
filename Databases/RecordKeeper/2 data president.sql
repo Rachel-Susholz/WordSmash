@@ -1,5 +1,5 @@
---AS 100% session 22
 --AS 100% session 23
+--AS 100% session 24 perfect job!
 use RecordKeeperDB
 
 delete executiveorders  

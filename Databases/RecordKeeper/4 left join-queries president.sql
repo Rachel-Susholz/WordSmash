@@ -1,5 +1,9 @@
+--AS 91% Good job. See comments and resubmit
 --Reports: For all reports never show null, rather show blank or 0 depending on data type
 --1) Show all parties sorted in the descending order of amount of members elected to President. Include those with no presidents. Show party name, color and president count. 
+
+--AS remember to name columns
+
 select r.PartyName, isnull (c.Color, ''), PresCount = count(p.PresidentId)
 from party r
 left join color c
@@ -8,7 +12,10 @@ left join President p
 on r.PartyId = p.PartyId
 group by r.PartyName, c.Color
 order by PresCount desc 
+
 --2) Show all Presidents (Number, First name, Last name) and their party's color, sort by number
+-- AS -2 While it works now, if you would have a president from a party that doesn't have a color it would show a null
+
 select President = concat (p.Num, ', ', p.FirstName, ', ', p.LastName), c.Color
 from party r
 join color c
@@ -16,13 +23,17 @@ on c.ColorId = r.ColorId
 join President p 
 on r.PartyId = p.PartyId 
 order by p.Num
+
 --3) Show the parties that have not had any members elected as President
+--AS -2 You are showing nulls in result set. Also you should only select columns that are needed to see what is requested in the report
 select *
 from party r
 left join president p 
 on r.PartyId = p.PartyId
 where p.PresidentId is null
+
 --4) Breaking News!! Someone from the Prohibition Party was just elected president! Insert the new president (you make up the info, do not include in  "data president" file)
+--AS -5 This query doesn't run
 insert president(PartyId, Num, FirstName, LastName, DateBorn, DateDied, TermStart, TermEnd)
 select (select r.PartyId from party r where r.PartyName = 'Prohibition'), 45, 'Joel', 'McKensie', 1970, null, 2024, null
 /*
@@ -41,6 +52,7 @@ order by ExecutiveOrdersAmount desc
 
 -- it wasn't clear from the question if parties with no color should be included
 -- if you want to include executive orders made  by presidents belonging to parties with no color then:
+--AS great job!
 
 select c.Color, ExecutiveOrdersAmount = count(ExecutiveOrderId)
 from party r
