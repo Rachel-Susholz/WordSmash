@@ -4,7 +4,7 @@
 
 --AS remember to name columns
 
-select r.PartyName, isnull (c.Color, ''), PresCount = count(p.PresidentId)
+select r.PartyName, Color = isnull (c.Color, ''), PresCount = count(p.PresidentId)
 from party r
 left join color c
 on c.ColorId = r.ColorId
@@ -16,7 +16,7 @@ order by PresCount desc
 --2) Show all Presidents (Number, First name, Last name) and their party's color, sort by number
 -- AS -2 While it works now, if you would have a president from a party that doesn't have a color it would show a null
 
-select President = concat (p.Num, ', ', p.FirstName, ', ', p.LastName), c.Color
+select President = concat (p.Num, ', ', p.FirstName, ', ', p.LastName), Color = isnull(color, '')
 from party r
 join color c
 on c.ColorId = r.ColorId
@@ -26,7 +26,7 @@ order by p.Num
 
 --3) Show the parties that have not had any members elected as President
 --AS -2 You are showing nulls in result set. Also you should only select columns that are needed to see what is requested in the report
-select *
+select PartyName, LastName = isnull(LastName, '')
 from party r
 left join president p 
 on r.PartyId = p.PartyId
@@ -36,6 +36,7 @@ where p.PresidentId is null
 --AS -5 This query doesn't run
 insert president(PartyId, Num, FirstName, LastName, DateBorn, DateDied, TermStart, TermEnd)
 select (select r.PartyId from party r where r.PartyName = 'Prohibition'), 45, 'Joel', 'McKensie', 1970, null, 2024, null
+--RS It does run. were you on RecordKeeper database?
 /*
 5) The Times of CPU hired an investigative journalist to research any correlation between a Party's color and the amount of Executive Orders issued. 
     The investigator needs the following information: Show a list of colors and number of executive orders for each color, sort by highest number of executive orders to the lowest */
