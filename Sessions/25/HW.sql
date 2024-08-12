@@ -1,3 +1,4 @@
+--AS 80%. See comments and resubmit.
 /*
 1.
 The US Gov has prohibited certain words (listed below) from being used in political party names. 
@@ -58,6 +59,9 @@ on x.PartyName = r.PartyName
 where x.AverageAgeAtTermStart > (p.TermStart - year(p.DateBorn))
  
 --3. Set the color of the party with the most presidents to Gold
+--AS -10 I will try to explain, if you need more help reach out on slack. You can select the party that has most presidents in the cte, and then join it in the update.
+    -- You also shouldn't be updating the color table at all, you should update the color assaigned to the party in the party table.
+    -- I wouldn't take of points for the following just pointing out, you only need the president table in the cte, no other table is needed
 ;
 with x as 
     (
@@ -82,6 +86,8 @@ where AmountOfPres = 18
  
 
 --4 Delete the executive orders of the party with the least presidential executive orders
+--AS -10 This checks for the PRESIDENT with the least orders. We need to check for party with least orders. For the aggregate count look what I wrote in the previous question. 
+    --Also there are unneeded tables in the cte. 
 ;
 with x as 
     (
@@ -99,3 +105,4 @@ from x
 join ExecutiveOrders e 
 on x.PresidentId = e.PresidentId
 where AmountOfExecutiveOrders = 1
+
