@@ -34,7 +34,7 @@ where p.PresidentId is null
 --AS  This query doesn't run
 --AS I was on RecordKeeperDB. It was giving me a error for entering 1970 which is a int into a date column. If it works by you its fine. Just double check.
 insert president(PartyId, Num, FirstName, LastName, DateBorn, DateDied, TermStart, TermEnd)
-select (select r.PartyId from party r where r.PartyName = 'Prohibition'), 45, 'Joel', 'McKensie', 1970, null, 2024, null
+select (select r.PartyId from party r where r.PartyName = 'Prohibition'), 45, 'Joel', 'McKensie', '01/01/1970', null, 2024, null
 --RS It does run. were you on RecordKeeper database?
 /*
 5) The Times of CPU hired an investigative journalist to research any correlation between a Party's color and the amount of Executive Orders issued. 
