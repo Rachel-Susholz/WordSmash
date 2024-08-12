@@ -30,14 +30,11 @@ with x as
 insert party(PartyName, YearFormed, ColorId)
 select x.PartyName, x.YearFormed, c.ColorId
 from x 
-left join party p 
-on p.PartyName = x.PartyName
 left join color c 
 on c.Color = x.Color
 where x.PartyName not like '%hate%' 
 and x.PartyName not like '%war%' 
 and x.PartyName not like '%kill%'
-
 
 /*
 --2 Show all presidents where their age at term start is lower than the average age term start for their party. 
@@ -56,7 +53,8 @@ select x.PartyName, x.AverageAgeAtTermStart, p.Num, p.LastName, AgeAtTermStart =
 from x 
 join president p 
 on x.PartyId = p.PartyId
-join party r on x.PartyName = r.PartyName
+join party r 
+on x.PartyName = r.PartyName
 where x.AverageAgeAtTermStart > (p.TermStart - year(p.DateBorn))
  
 --3. Set the color of the party with the most presidents to Gold
