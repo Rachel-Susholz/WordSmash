@@ -1,4 +1,6 @@
+--AS Great job! 98% See comment and resubmit.
 --1 All presidents are participating in the Olympics! In all sports! Show me a list of presidents (Number, Last Name), and each sport in the medalist table. Sort by president number.
+--AS -2 No need for a CTE here. You can do the same thing with a basic cross join
 ;
 with x as 
     (
@@ -17,11 +19,11 @@ Sort by record name, and then by president number
 */
 
 select President = concat (p.Num,  ', ', p.LastName), w.RecordName 
-from
-president p 
+from president p 
 join party r
 on p.PartyId = r.PartyId
 cross join WorldRecord w
 where r.PartyName = 'Democrat'
 and w.Category = 'Dedication and Collections'
 order by w.RecordName, p.Num
+
