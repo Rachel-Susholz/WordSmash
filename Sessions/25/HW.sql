@@ -62,26 +62,24 @@ where x.AverageAgeAtTermStart > (p.TermStart - year(p.DateBorn))
 --AS -10 I will try to explain, if you need more help reach out on slack. You can select the party that has most presidents in the cte, and then join it in the update.
     -- You also shouldn't be updating the color table at all, you should update the color assaigned to the party in the party table.
     -- I wouldn't take of points for the following just pointing out, you only need the president table in the cte, no other table is needed
-;
+;   
 with x as 
     (
-    select r.PartyName, p.PartyId, c.color, AmountOfPres = count(p.LastName)
+    select top 1 p.PartyId, AmountOfPresPerParty = count(p.PartyId)
     from president p
-    join party r
-    on p.PartyId = r.PartyId
-    join color c 
-    on r.ColorId = c.ColorId
-    group by r.PartyName, p.PartyId, c.Color
+    group by p.PartyId
+    order by AmountOfPresPerParty desc 
     )
-update c
-set c.Color = 'gold'
---select PartyWithMostPres = max(AmountOfPres)
-from x 
+
+update r
+set r.ColorId = c.ColorId
+--select *
+from x
+join party r 
+on r.PartyId = x.PartyId 
 join color c
-on x.color = c.Color
-where AmountOfPres = 18
---How would I do this if I did not know that the max amount of presidents per party was 18? I cant do an update with an aggregate and I cant do a 
---aggregate on an aggregate, so how do I do a max count? I have the same question for number 4.
+on r.ColorId = c.ColorId
+where c.color = 'gold'
 
  
 
@@ -91,18 +89,19 @@ where AmountOfPres = 18
 ;
 with x as 
     (
-    select r.PartyName, p.PartyId, e.PresidentId, AmountOfExecutiveOrders = count(e.ExecutiveOrderId)
-    from party r
-    join president p
-    on p.PartyId = r.PartyId
+    select top 1 p.PartyId, AmountOfExecutiveOrders = count(e.ExecutiveOrderId)
+    from president p
     join ExecutiveOrders e
     on p.PresidentId = e.PresidentId
-    group by r.PartyName, p.PartyId, e.PresidentId
+    group by p.PartyId
+    order by AmountOfExecutiveOrders
     )
 delete e 
--- select min(AmountOfExecutiveOrders)
+-- select *
 from x 
+join president p
+on x.PartyId = p.PartyId
 join ExecutiveOrders e 
-on x.PresidentId = e.PresidentId
-where AmountOfExecutiveOrders = 1
+on p.PresidentId = e.PresidentId
 
+--Thank you so much for your help!
