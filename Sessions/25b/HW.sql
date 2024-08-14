@@ -1,6 +1,5 @@
---AS Great job! 98% See comment and resubmit.
+--AS Great job! 100% 
 --1 All presidents are participating in the Olympics! In all sports! Show me a list of presidents (Number, Last Name), and each sport in the medalist table. Sort by president number.
---AS -2 No need for a CTE here. You can do the same thing with a basic cross join
 
 select distinct m.sport, President = concat (p.Num,  ', ', p.LastName) 
 from president p 
