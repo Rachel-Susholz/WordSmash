@@ -70,17 +70,39 @@ with x as
     order by AmountOfPresPerParty desc 
     )
 
-update r
-set r.ColorId = c.ColorId
+update c
+set c.Color = 'Gold'
 --select *
 from x
 join party r 
 on r.PartyId = x.PartyId 
 join color c
 on r.ColorId = c.ColorId
-where c.color = 'gold'
 
- 
+--this would also update the color of the prohibition party since it shares the same ColorId as the Republican party.
+--So I inseted the color gold into the color table and then set the colorid in the party table to the colorid of gold. 
+--Please let me know if there is a simpler way of doing it.
+insert Color(Color)
+select 'Gold'
+
+;
+with x as 
+    (
+    select top 1 p.PartyId, AmountOfPresPerParty = count(p.PartyId)
+    from president p
+    group by p.PartyId
+    order by AmountOfPresPerParty desc 
+    )
+
+update r
+set r.ColorId = 25
+--Select * 
+from x
+join party r 
+on r.PartyId = x.PartyId
+join color c
+on r.ColorId = c.ColorId
+
 
 --4 Delete the executive orders of the party with the least presidential executive orders
 
