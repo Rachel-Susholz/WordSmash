@@ -82,6 +82,7 @@ on r.ColorId = c.ColorId
 --this would also update the color of the prohibition party since it shares the same ColorId as the Republican party.
 --So I inseted the color gold into the color table and then set the colorid in the party table to the colorid of gold. 
 --Please let me know if there is a simpler way of doing it.
+
 insert Color(Color)
 select 'Gold'
 
