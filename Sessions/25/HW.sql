@@ -104,7 +104,6 @@ on r.PartyId = x.PartyId
 join color c
 on r.ColorId = c.ColorId
 
-
 --4 Delete the executive orders of the party with the least presidential executive orders
 
 ;
