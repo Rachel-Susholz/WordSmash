@@ -63,8 +63,9 @@ where x.AverageAgeAtTermStart > (p.TermStart - year(p.DateBorn))
     --You are correct that the gold color need to be inserted into the color table before starting the update. 
     --Question: Why are you updating the color table? Maybe update the colorID in the PARTY table. 
     --AS If you need more help please reach out on slack
-    select * from Party
-;   
+    --RS That is exactly what I did the second time. I updated the colorId in the party table.
+    
+/*;   
 with x as 
     (
     select top 1 p.PartyId, AmountOfPresPerParty = count(p.PartyId)
@@ -81,6 +82,7 @@ join party r
 on r.PartyId = x.PartyId 
 join color c
 on r.ColorId = c.ColorId
+*/
 
 --this would also update the color of the prohibition party since it shares the same ColorId as the Republican party.
 --So I inseted the color gold into the color table and then set the colorid in the party table to the colorid of gold. 
