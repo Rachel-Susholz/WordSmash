@@ -1,4 +1,4 @@
---AS 93%. Almost there. See comments and resubmit.
+--AS 96%. Great job!
 /*
 1.
 The US Gov has prohibited certain words (listed below) from being used in political party names. 
@@ -59,12 +59,8 @@ on x.PartyName = r.PartyName
 where x.AverageAgeAtTermStart > (p.TermStart - year(p.DateBorn))
  
 --3. Set the color of the party with the most presidents to Gold
---AS -6 Almost there, but like you pointed out this will change the color for anyone sharing the color with the Republican party. The second way you did it will also have the issue.
-    --You are correct that the gold color need to be inserted into the color table before starting the update. 
-    --Question: Why are you updating the color table? Maybe update the colorID in the PARTY table. 
-    --AS If you need more help please reach out on slack
-    --RS That is exactly what I did the second time. I updated the colorId in the party table.
-    
+
+    --AS My mistake, sorry
 /*;   
 with x as 
     (
