@@ -1,3 +1,5 @@
+--AS Great job! 93% See comments.
+--AS The tables should be moved into the Table President file, and the data into the data presidents file. Please do it before you resubmit.
 /*
 The government is starting a new program to award medals to presidents for outstanding service. 
 Add tables to store medals and award them to presidents. A medal can be assigned to more than one president. 
@@ -22,6 +24,7 @@ drop table if exists Medal
 go 
 create table dbo.Medal(
     MedalId int not null identity primary key,
+--AS -1 This needs a constraint to ensure that the Name is not blank
     MedalName varchar (100) not null constraint u_Medal_Name unique
 )
 go 
@@ -58,7 +61,8 @@ on p.FirstName = x.FirstName
 and p.LastName = x.LastName
 
 --1) Select all presidents and any medals they may have, sorted by medal and president number. Show Name, Number, Medal, Party
-select p.FirstName, p.LastName, p.Num, m.MedalName, r.PartyName 
+--AS -2 This doesn't run
+select p.FirstName, p.LastName, p.Num--, m.MedalName, r.PartyName 
 from president p 
 left join party r
 on p.PresidentId = r.PresidentId 
@@ -67,6 +71,7 @@ on p.PresidentId = pm.PresidentId
 left join Medal m 
 on m.MedalId = pm.MedalId
 order by m.MedalName, p.Num
+
 --Obviously, if this is just asking to sort by medal id and only show the medal id, I would not join the medal table.
 --2) Show the Medal that was awarded the most times.
 select top 1 m.MedalName, AmountOfTimesAwarded = count(pm.MedalId) 
@@ -82,6 +87,7 @@ left join PresidentMedal pm
 on m.MedalId = pm.MedalId
 group by m.MedalName
 --4a) Show all parties and the number of medals awarded to it's presidents. Omit party if no medals
+--AS -2 This doesn't run. Also why do you need a left join on the president table?
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from PresidentMedal pm
 left join president p
@@ -90,6 +96,7 @@ join party r
 on p.PresidentId = r.PresidentId
 group by r.PartyName
 --4b) Same as 4a, but show zero if no medals awarded to a party's presidents
+--AS -2 This doesn't either run
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from party r
 join president p
@@ -131,7 +138,7 @@ join PresidentMedal pm
 on x.MedalId = pm.MedalId
 join president p 
 on pm.PresidentId = p.PresidentId
- 
+--AS The first way doesn't work. It will not give the medal to any president. The second way is correct
 --or
 
 insert PresidentMedal(presidentid, medalid)
@@ -141,7 +148,8 @@ cross join medal m
 where m.MedalName = 'Champion of Internet Safety'
 
 
---b) Uh. Somebody pointed out the presidents before 1993 could not have championed internet safety. Remove the award from all presidents that ended their terms prior to that year. 
+--b) Uh. Somebody pointed out the presidents before 1993 could not have championed internet safety. Remove the award from all presidents that ended their terms prior to that year.
+--AS This is not a safe way to do it, as medal ids can change. The correct way would be to join the medal table and select it by name.
 delete pm 
 --select * 
 from president p 
