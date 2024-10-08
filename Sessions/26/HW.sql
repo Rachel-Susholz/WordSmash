@@ -1,4 +1,4 @@
---AS Great job! 93% See comments.
+--AS Great job! 94% See comments.
 --AS The tables should be moved into the Table President file, and the data into the data presidents file. Please do it before you resubmit.
 /*
 The government is starting a new program to award medals to presidents for outstanding service. 
@@ -24,7 +24,6 @@ drop table if exists Medal
 go 
 create table dbo.Medal(
     MedalId int not null identity primary key,
---AS -1 This needs a constraint to ensure that the Name is not blank
     MedalName varchar (100) not null 
         constraint u_Medal_Name unique
         constaint c_Medal_Name_cannot_be_blank check (MedalName <> '')
@@ -64,6 +63,8 @@ and p.LastName = x.LastName
 
 --1) Select all presidents and any medals they may have, sorted by medal and president number. Show Name, Number, Medal, Party
 --AS -2 This doesn't run
+--AS I am not sure how it runs for you. You are joining a party on the presidentId, but the party table doesn't have a presidentId.
+
 select p.FirstName, p.LastName, p.Num, m.MedalName, r.PartyName 
 from president p 
 left join party r
@@ -92,6 +93,7 @@ group by m.MedalName
 --4a) Show all parties and the number of medals awarded to it's presidents. Omit party if no medals
 --AS -2 This doesn't run. Also why do you need a left join on the president table?
 --RS Its running on my end.
+--AS Same issue as before, party table shouldn't have a presidentId
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from PresidentMedal pm
 join president p
@@ -102,6 +104,8 @@ group by r.PartyName
 --4b) Same as 4a, but show zero if no medals awarded to a party's presidents
 --AS -2 This doesn't either run
 --RS Its running on my end.
+--AS Same issue as before, party table shouldn't have a presidentId
+
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from party r
 join president p
@@ -138,7 +142,6 @@ where m.MedalName = 'Champion of Internet Safety'
 
 
 --b) Uh. Somebody pointed out the presidents before 1993 could not have championed internet safety. Remove the award from all presidents that ended their terms prior to that year.
---AS This is not a safe way to do it, as medal ids can change. The correct way would be to join the medal table and select it by name.
 delete pm 
 --select * 
 from president p 
