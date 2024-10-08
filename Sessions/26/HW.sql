@@ -25,7 +25,9 @@ go
 create table dbo.Medal(
     MedalId int not null identity primary key,
 --AS -1 This needs a constraint to ensure that the Name is not blank
-    MedalName varchar (100) not null constraint u_Medal_Name unique
+    MedalName varchar (100) not null 
+        constraint u_Medal_Name unique
+        constaint c_Medal_Name_cannot_be_blank check (MedalName <> '')
 )
 go 
 insert Medal(MedalName)
@@ -62,7 +64,7 @@ and p.LastName = x.LastName
 
 --1) Select all presidents and any medals they may have, sorted by medal and president number. Show Name, Number, Medal, Party
 --AS -2 This doesn't run
-select p.FirstName, p.LastName, p.Num--, m.MedalName, r.PartyName 
+select p.FirstName, p.LastName, p.Num, m.MedalName, r.PartyName 
 from president p 
 left join party r
 on p.PresidentId = r.PresidentId 
@@ -71,6 +73,7 @@ on p.PresidentId = pm.PresidentId
 left join Medal m 
 on m.MedalId = pm.MedalId
 order by m.MedalName, p.Num
+--RS It runs for me
 
 --Obviously, if this is just asking to sort by medal id and only show the medal id, I would not join the medal table.
 --2) Show the Medal that was awarded the most times.
@@ -88,15 +91,17 @@ on m.MedalId = pm.MedalId
 group by m.MedalName
 --4a) Show all parties and the number of medals awarded to it's presidents. Omit party if no medals
 --AS -2 This doesn't run. Also why do you need a left join on the president table?
+--RS Its running on my end.
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from PresidentMedal pm
-left join president p
+join president p
 on p.PresidentId = pm.PresidentId 
 join party r
 on p.PresidentId = r.PresidentId
 group by r.PartyName
 --4b) Same as 4a, but show zero if no medals awarded to a party's presidents
 --AS -2 This doesn't either run
+--RS Its running on my end.
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from party r
 join president p
@@ -125,22 +130,6 @@ and p.LastName = 'Obama'
 insert Medal(MedalName)
 select 'Champion of Internet Safety' 
 
-;
-with x as (
-    select m.MedalId
-    from medal m 
-    where m.MedalName = 'Champion of Internet Safety'
-)
-insert PresidentMedal (PresidentId, MedalId)
-select p.PresidentId, x.MedalId
-from x 
-join PresidentMedal pm 
-on x.MedalId = pm.MedalId
-join president p 
-on pm.PresidentId = p.PresidentId
---AS The first way doesn't work. It will not give the medal to any president. The second way is correct
---or
-
 insert PresidentMedal(presidentid, medalid)
 select p.PresidentId, m.MedalId
 from President p
@@ -155,8 +144,10 @@ delete pm
 from president p 
 join PresidentMedal pm 
 on p.PresidentId = pm.PresidentId
+join medal m 
+on m.MedalId = pm.MedalId
 where p.TermEnd < 1993
-and pm.MedalId = 6
+and m.MedalName = 'Champion of Internet Safety'
 
 
 
