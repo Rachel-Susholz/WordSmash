@@ -1,4 +1,5 @@
 --AS Great job! 94% See comments.
+--RS Okay, I took out the PresidentId.
 --AS The tables should be moved into the Table President file, and the data into the data presidents file. Please do it before you resubmit.
 /*
 The government is starting a new program to award medals to presidents for outstanding service. 
@@ -68,7 +69,7 @@ and p.LastName = x.LastName
 select p.FirstName, p.LastName, p.Num, m.MedalName, r.PartyName 
 from president p 
 left join party r
-on p.PresidentId = r.PresidentId 
+on p.PartyId = r.PartyId
 left join PresidentMedal pm 
 on p.PresidentId = pm.PresidentId
 left join Medal m 
@@ -99,7 +100,7 @@ from PresidentMedal pm
 join president p
 on p.PresidentId = pm.PresidentId 
 join party r
-on p.PresidentId = r.PresidentId
+on p.PartyId = r.PartyId
 group by r.PartyName
 --4b) Same as 4a, but show zero if no medals awarded to a party's presidents
 --AS -2 This doesn't either run
@@ -109,7 +110,7 @@ group by r.PartyName
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from party r
 join president p
-on p.PresidentId = r.PresidentId 
+on p.PartyId = r.PartyId 
 left join PresidentMedal pm
 on p.PresidentId = pm.PresidentId
 group by r.PartyName

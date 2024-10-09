@@ -89,5 +89,28 @@ union select p. PresidentId, 13494, '3', 'C.F.R.', 785, 1789, 'Ordering the Sele
 union select p. PresidentId, 13485, '3', 'C.F.R.', 785, 1789, 'Ordering the Selected Reserve and Certain Individual Ready Reserve Members of the Armed Forces to Active Duty', 1 from president p where p.Num = 3
 go
 
+insert Medal(MedalName)
+select 'Made America Great'
+union select 'Preserved the Union'
+union select'Defender of Liberty'
+union select'Pioneer of Progress'
+union select'Champion of Democracy'
+go 
 
-
+; 
+with x as (
+    select MedalName = 'Made America Great', FirstName = 'George', LastName = 'Washington'
+    union select 'Made America Great', 'Abraham', 'Lincoln'
+    union select'Defender of Liberty', 'Barack', 'Obama'
+    union select'Pioneer of Progress', 'John', 'Adams'
+    union select'Champion of Democracy', 'Barack', 'Obama'
+) 
+insert PresidentMedal (MedalId, PresidentId) 
+select m.MedalId, p.PresidentId
+from x 
+left join Medal m 
+on m.MedalName = x.MedalName
+left join president p
+on p.FirstName = x.FirstName 
+and p.LastName = x.LastName
+go
