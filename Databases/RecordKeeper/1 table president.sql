@@ -4,6 +4,8 @@
 
 use RecordKeeperDB
 go
+drop table if exists PresidentMedal 
+drop table if exists Medal
 drop table if exists ExecutiveOrders
 drop table if exists president
 drop table if exists party
@@ -26,7 +28,6 @@ create table dbo.party
 	PartyName varchar (50) not null
 		constraint c_party_name_cannot_be_blank check (PartyName <> ''),
 	YearFormed int not null,
-
 )
 
 go
@@ -82,4 +83,16 @@ create table dbo.ExecutiveOrders
 	OrderStatus bit not null,
 	RecordDateTime as current_timestamp
 )
+go 
+
+create table dbo.PresidentMedal
+(
+    PresidentMedalId int not null identity primary key,
+    PresidentId int not null constraint f_President_PresidentMedal foreign key references President(PresidentId), 
+    MedalId int not null constraint f_Medal_PresidentMedal foreign key references Medal(MedalId),
+    AwardTime datetime default current_timestamp 
+    constraint u_PresidentMedal_President_Medal unique (PresidentId, MedalId)
+)
+go
+
 		
