@@ -14,7 +14,6 @@ CuisineType
 Ingredient
     IngredientId int, primary key
     IngredientName varchar(100), unique
---AS ImagePath will be computed and doesn't need a type.
     ImagePath
 
 Recipe
@@ -29,7 +28,6 @@ Recipe
         when published is not null and archived is null then published
         else drafted
         end )
-    --AS Drafted cannot be null. Also a good idea to default to getdate(), and to check that it is not a past date.
     Drafted datetime default getdate not null 
     Published datetime
     Archived datetime
@@ -46,14 +44,13 @@ RecipeIngredient
     RecipeId (fk - Recipe)
     IngredientId (fk - Ingredient)
     MeasurementId (fk - Measurement)
-    --AS The measurement type is going to be retyping the same values many times. Better make a master list (table) and put the foreign key here. 
     Amount decimal (6, 2)
     Sequence int 
     --AS This constraint will allow one recipe to have 2 ingredients by the 1 sequence as long as the ingredientid is diffrent. That shouldn't be allowed
+    --AS Better, but you should also make sure that the ingredient cannot be repeated in the recipe twice
     Unique RecipeId, Sequence
 
 RecipeDirection
---AS Missing null constraints.
     RecipeDirectionId int, primary key
     RecipeId (fk - Recipe)
     Directions text
@@ -64,7 +61,6 @@ Meal
     MealId int, primary key
     MealName varchar(100), unique
     Status bit
-    --AS As before, the image path should always be computed. Created can default to getdate() and CreatedBy should be name UserId
     ImagePath 
     Created datetime default getdate
     UserId (fk - User)
@@ -72,19 +68,16 @@ Meal
 CourseType
     CourseTypeId int, primary key
     CourseTypeName varchar(50), unique
+    --AS Make sure its greater then 0
     Sequence int 
-    --AS This is a bit confusing for many students, but the course also needs a seq. A example of courses would be 
-    -- "hors d'oeuvre, soup, appetizer, salad, fish, main course, palate cleanser, second main course, dessert, and mignardise"
-    -- Hors d'oeuvre will always be 1, soup 2 and so on. We don't need Hors d'oeuvre in every meal, but when it is, it will be first.
+
 
 MealCourse
     MealCourseId int, primary key
     MealId (fk - Meal)
     CourseTypeId (fk - CourseType)
     Unique MealId, CourseTypeId  
-    --AS It is a bit confusing, basically we only need a sequence in the coursetype table not here. I explained a little there, and I will slack you a voice note. 
-    (I cant figure out if I should include sequence here because not every meal has appetizer as the first course.
-    Some may have main as the first course etc. On the other hand meal names and course names are unique. Can you clarify for me?)
+
 
 CourseRecipe
     CourseRecipeId int, primary key
@@ -98,7 +91,6 @@ Cookbook
     CookbookName varchar(100), unique
     Price decimal(10,2)
     Status bit
-    --AS Same as before with computed and UserId
     ImagePath
     Created datetime
     UserID (fk - User)
@@ -108,7 +100,6 @@ CookbookRecipe
     CookbookId (fk - Cookbook)
     RecipeId (fk - Recipe)
     Sequence int
-    --AS Same as previous comment, this will not block from entering the same recipe twice, and will also not block from entering the same sequence twice.
     Unique CookbookId, RecipeId
     Unique CookbookId, Sequence
 /*
