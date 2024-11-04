@@ -1,3 +1,5 @@
+--AS Great job, 97%
+--AS -3 This file cannot be run repeatedly. The delete is not in the correct order.
 go
 delete CookbookRecipe
 delete Cookbook

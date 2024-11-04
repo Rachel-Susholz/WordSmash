@@ -1,3 +1,4 @@
+--AS Amazing job, 95% See comments
 /*
 Our website development is underway! 
 Below is the layout of the pages on our website, please provide the SQL to produce the necessary result sets.
@@ -12,21 +13,21 @@ b) Whenever you have a record for a specific item include the name of the pictur
 Home Page
     One result set with the number of recipes, meals, and cookbooks. Each row should have a column with the item name (Ex: Recipes) and a column with the count.
 */
-    select 
+    select
         Item = 'Recipes',
         Amount = count(*)
     from Recipe
 
-    union all
+union all
 
-    select 
+    select
         Item = 'Meals',
         Amount = count(*)
     from Meal
 
-    union all
+union all
 
-    select 
+    select
         Item = 'Cookbooks',
         Amount = count(*)
     from Cookbook
@@ -38,7 +39,8 @@ Recipe list page:
     In the resultset show the Recipe with its status, dates it was published and archived in mm/dd/yyyy format (blank if not archived), user, number of calories and number of ingredients.
     Tip: You'll need to use the convert function for the dates
 */
-   select RecipeName = 
+--AS -1 This should show a blank for null dates, not null
+select RecipeName = 
     case 
         when r.RecipeStatus = 'published' then r.RecipeName 
         else '<span style="color:gray">' + r.RecipeName + '</span>'
@@ -48,10 +50,12 @@ Recipe list page:
     ArchivedDate = convert(varchar(10), r.Archived, 101),
     sm.UserName,
     r.Calories,
-    NumberOfIngredients = (select count(*) from RecipeIngredient ri where ri.RecipeId = r.RecipeId) 
+    NumberOfIngredients = (select count(*)
+    from RecipeIngredient ri
+    where ri.RecipeId = r.RecipeId)
 from Recipe r
-join StaffMember sm
-on r.StaffMemberId = sm.StaffMemberId
+    join StaffMember sm
+    on r.StaffMemberId = sm.StaffMemberId
 where r.RecipeStatus in ('published', 'archived')
 order by r.RecipeStatus desc, r.RecipeName
 
@@ -63,51 +67,56 @@ Recipe details page:
         c) List of prep steps sorted by sequence.
 */
 --A)
-select 
+--AS While this works, there is no need for a subquery in the count. You can group it by the recipe and then cound distinct ingredients and steps
+select
     r.RecipeName,
     r.Calories,
-    NumberOfIngredients = (select count(*) from RecipeIngredient ri where ri.RecipeId = r.RecipeId),
-    NumberOfSteps = (select max(DirectionSequence) from RecipeDirection rd where rd.RecipeId = r.RecipeId)
+    NumberOfIngredients = (select count(*)
+    from RecipeIngredient ri
+    where ri.RecipeId = r.RecipeId),
+    NumberOfSteps = (select max(DirectionSequence)
+    from RecipeDirection rd
+    where rd.RecipeId = r.RecipeId)
 from Recipe r
 where r.RecipeName = 'Cheese Bread'
 --B)
 select ListOfIngredients = concat(ri.Amount, ' ', m.MeasurementType, ' ', i.IngredientName)
-from RecipeIngredient ri 
-join Measurement m 
-on ri.MeasurementId = m.MeasurementId
-join Ingredient i 
-on ri.IngredientId = i.IngredientId
-join Recipe r 
-on ri.RecipeId = r.RecipeId
+from RecipeIngredient ri
+    join Measurement m
+    on ri.MeasurementId = m.MeasurementId
+    join Ingredient i
+    on ri.IngredientId = i.IngredientId
+    join Recipe r
+    on ri.RecipeId = r.RecipeId
 where r.RecipeName = 'Cheese Bread'
 order by ri.IngredientSequence
 --C)
-select ListOfPrepSteps = rd.Directions 
+select ListOfPrepSteps = rd.Directions
 from RecipeDirection rd
-join Recipe r 
-on rd.RecipeId = r.RecipeId
+    join Recipe r
+    on rd.RecipeId = r.RecipeId
 where r.RecipeName = 'Cheese Bread'
 order by rd.DirectionSequence
 /*
 Meal list page:
     For all active meals, show the meal name, user that created the meal, number of calories for the meal, number of courses, and number of recipes per each meal, sorted by name of meal
 */
-select 
+select
     m.MealName,
     CreatedBy = sm.UserName,
     TotalCalories= sum(r.Calories),
     NumberOfCourses= count(mc.CourseTypeId),
     NumberOfRecipes = count(cr.RecipeId)
 from Meal m
-join StaffMember sm 
-on m.StaffMemberId = sm.StaffMemberId
-join MealCourse mc 
-on m.MealId = mc.MealId
-join CourseRecipe cr 
-on mc.MealCourseId = cr.MealCourseId
-join Recipe r 
-on cr.RecipeId = r.RecipeId
-where m.MealStatus = 1 
+    join StaffMember sm
+    on m.StaffMemberId = sm.StaffMemberId
+    join MealCourse mc
+    on m.MealId = mc.MealId
+    join CourseRecipe cr
+    on mc.MealCourseId = cr.MealCourseId
+    join Recipe r
+    on cr.RecipeId = r.RecipeId
+where m.MealStatus = 1
 group by m.MealName, sm.UserName
 order by m.MealName
 
@@ -128,8 +137,8 @@ Meal details page:
 --A)
 select m.MealName, CreatedBy = sm.UserName, DateCreated = m.Created
 from Meal m
-join StaffMember sm 
-on m.StaffMemberId = sm.StaffMemberId
+    join StaffMember sm
+    on m.StaffMemberId = sm.StaffMemberId
 where 
 m.MealName = 'Breakfast Bash'
 --B)
@@ -140,14 +149,14 @@ case
     else ct.CourseTypeName + ': ' + r.RecipeName 
 end
 from MealCourse mc
-join CourseRecipe cr 
-on mc.MealCourseId = cr.MealCourseId
-join Recipe r 
-on cr.RecipeId = r.RecipeId
-join CourseType ct 
-on mc.CourseTypeId = ct.CourseTypeId
-join Meal m 
-on mc.MealId = m.MealId
+    join CourseRecipe cr
+    on mc.MealCourseId = cr.MealCourseId
+    join Recipe r
+    on cr.RecipeId = r.RecipeId
+    join CourseType ct
+    on mc.CourseTypeId = ct.CourseTypeId
+    join Meal m
+    on mc.MealId = m.MealId
 where m.MealName = 'Breakfast Bash'
 
 /*
@@ -156,10 +165,10 @@ Cookbook list page:
 */
 select c.cookbookname, Author = sm.username, NumberOfRecipes = count(cr.RecipeId)
 from Cookbook c
-join StaffMember sm 
-on c.StaffMemberId = sm.StaffMemberId
-join CookbookRecipe cr 
-on c.CookBookId = cr.CookBookId
+    join StaffMember sm
+    on c.StaffMemberId = sm.StaffMemberId
+    join CookbookRecipe cr
+    on c.CookBookId = cr.CookBookId
 where c.CookbookStatus = 1
 group by c.CookbookName, sm.UserName
 order by c.CookbookName
@@ -174,28 +183,28 @@ Cookbook details page:
 --A) 
 select c.CookbookName, Author = sm.FirstName + ' '+ sm.LastName, CreatedDate = c.Created, c.Price, NumberOfRecipes = count(cr.RecipeId)
 from Cookbook c
-join Staffmember sm 
-on c.StaffMemberId = sm.StaffMemberId
-join CookbookRecipe cr 
-on c.CookbookId = cr.CookbookId
+    join Staffmember sm
+    on c.StaffMemberId = sm.StaffMemberId
+    join CookbookRecipe cr
+    on c.CookbookId = cr.CookbookId
 where c.CookbookName = 'Quick Breakfast Recipes'
 group by c.CookbookName, sm.UserName, c.Created, c.Price
 
 
 --B)
 select r.RecipeName, ct.CuisineName, NumOfIngredients = count(distinct ri.IngredientId), NumOfSteps = count(distinct rd.RecipeDirectionId)
-from Cookbook c 
-join CookbookRecipe cr
-on c.CookbookId = cr.CookbookId
-join Recipe r 
-on cr.RecipeId = r.RecipeId
-join CuisineType ct 
-on r.CuisineId = ct.CuisineId
-join RecipeIngredient ri 
-on r.RecipeId = ri.RecipeId
-join RecipeDirection rd 
-on r.recipeid = rd.recipeid
-where c.CookbookName = 'Quick Breakfast Recipes' 
+from Cookbook c
+    join CookbookRecipe cr
+    on c.CookbookId = cr.CookbookId
+    join Recipe r
+    on cr.RecipeId = r.RecipeId
+    join CuisineType ct
+    on r.CuisineId = ct.CuisineId
+    join RecipeIngredient ri
+    on r.RecipeId = ri.RecipeId
+    join RecipeDirection rd
+    on r.recipeid = rd.recipeid
+where c.CookbookName = 'Quick Breakfast Recipes'
 group by r.RecipeName, ct.CuisineName, cr.RecipeSequence
 order by cr.RecipeSequence
 
@@ -209,29 +218,35 @@ April Fools Page:
         Hint: Use CTE
 */
 --A)
+--AS -2 Nice job! However the reversed name has the last letter capitalized instead of the first. 
+--AS Why do you need to join in the cookbook? If it is in the Cookbook Recipe it is in a cookbook
 select ReversedRecipeName = reverse(concat(upper(substring(r.RecipeName, 1, 1)), lower(substring(r.RecipeName, 2, len(r.RecipeName) - 1)))),
-       ImagePath = concat('Recipe_', replace(reverse(r.RecipeName), ' ', '_'), '.jpg')
+    ImagePath = concat('Recipe_', replace(reverse(r.RecipeName), ' ', '_'), '.jpg')
 from Recipe r
-join CookbookRecipe cr 
-on r.RecipeId = cr.RecipeId
-left join Cookbook c 
-on cr.CookbookId = c.CookbookId
+    join CookbookRecipe cr
+    on r.RecipeId = cr.RecipeId
+    left join Cookbook c
+    on cr.CookbookId = c.CookbookId
 --B)
+--AS Could be the question wasn't clear, but what is needed is to show ALL last steps from all recipes in the system when selecting any recipe
 ;
-with x as (
-    select rd.RecipeId, rd.Directions
-    from RecipeDirection rd
-    where rd.DirectionSequence = (select max(DirectionSequence) 
-                                 from RecipeDirection rd
-                                 where RecipeId = rd.RecipeId)
-)
+with
+    x
+    as
+    (
+        select rd.RecipeId, rd.Directions
+        from RecipeDirection rd
+        where rd.DirectionSequence = (select max(DirectionSequence)
+        from RecipeDirection rd
+        where RecipeId = rd.RecipeId)
+    )
 
-select 
+select
     r.RecipeName,
     x.Directions
 from x
-join Recipe r 
-on x.RecipeId = r.RecipeId
+    join Recipe r
+    on x.RecipeId = r.RecipeId
 /*
 For site administration page:
 5 seperate reports
@@ -243,44 +258,46 @@ For site administration page:
         Hint: For active/inactive columns, use SUM function with CASE to only include in sum if active/inactive 
     e) List of archived recipes that were never published, and how long it took for them to be archived.
 */
+
 --A) 
 select sm.FirstName, sm.LastName,
     PublishedRecipes = sum(case when r.RecipeStatus = 'published' then 1 else 0 end),
     ArchivedRecipes = sum(case when r.RecipeStatus = 'archived' then 1 else 0 end),
     DraftedRecipes = sum(case when r.RecipeStatus = 'drafted' then 1 else 0 end)
 from StaffMember sm
-left join  Recipe r 
-on sm.StaffMemberId = r.StaffMemberId
+    left join Recipe r
+    on sm.StaffMemberId = r.StaffMemberId
 group by sm.FirstName, sm.LastName
 --B)
+--AS What are you accomplishing with the case clause?
 select sm.FirstName, sm.LastName,
     TotalRecipes = count(r.RecipeId),
     AverageDaysToPublish = avg(case when r.Published is not null then  datediff(day, r.Drafted, r.Published) end)
 from StaffMember sm
-left join Recipe r 
-on sm.StaffMemberId = r.StaffMemberId
+    left join Recipe r
+    on sm.StaffMemberId = r.StaffMemberId
 group by sm.FirstName, sm.LastName
 --C)
 select sm.FirstName, sm.LastName, TotalMeals = count(m.MealId),
     TotalActiveMeals = sum(case when m.MealStatus = 1 then 1 else 0 end),
     TotalInactiveMeals = sum(case when m.MealStatus = 0 then 1 else 0 end)
 from StaffMember sm
-left join Meal m 
-on sm.StaffMemberId = m.StaffMemberId
+    left join Meal m
+    on sm.StaffMemberId = m.StaffMemberId
 group by sm.FirstName, sm.LastName
 --D)
 select sm.FirstName, sm.LastName, TotalCookbooks = count(c.CookbookId),
     TotalActiveCookbooks = sum(case when c.CookbookStatus = 1 then 1 else 0 end),
     TotalInactiveCookbooks = sum(case when c.CookbookStatus = 0 then 1 else 0 end)
 from StaffMember sm
-left join Cookbook c 
-on sm.StaffMemberId = c.StaffMemberId
+    left join Cookbook c
+    on sm.StaffMemberId = c.StaffMemberId
 group by sm.FirstName, sm.LastName
 --E)
 select r.RecipeName, r.Drafted, r.Archived, DaysToArchive = datediff(day, r.Drafted, r.Archived)
 from Recipe r
 where r.RecipeStatus = 'archived'
-and r.Published is null
+    and r.Published is null
 
 /*
 For user dashboard page:
@@ -290,56 +307,64 @@ For user dashboard page:
 */
 --A)
 ;
-with x as (
-    select StaffMemberId
-    from StaffMember
-    where FirstName = 'John'
-    and LastName = 'Doe' 
-)
+with
+    x
+    as
+    (
+        select StaffMemberId
+        from StaffMember
+        where FirstName = 'John'
+            and LastName = 'Doe'
+    )
 
-select StaffMember = x.StaffMemberId, ItemName = 'Recipes', Count = count(*)
-from x
-left join Recipe r 
-on x.StaffMemberId = r.StaffMemberId
-group by x.StaffMemberId
-
-union all
-
-select StaffMember = x.StaffMemberId, ItemName = 'Meals', Count = count(*)
-from x
-left join Meal m 
-on x.StaffMemberId = m.StaffMemberId
-group by x.StaffMemberId
+    select StaffMember = x.StaffMemberId, ItemName = 'Recipes', Count = count(*)
+    from x
+        left join Recipe r
+        on x.StaffMemberId = r.StaffMemberId
+    group by x.StaffMemberId
 
 union all
 
-select StaffMember = x.StaffMemberId, ItemName = 'Cookbooks', Count = count(*) 
-from x
-left join Cookbook c 
-on x.StaffMemberId = c.StaffMemberId
-group by x.StaffMemberId
+    select StaffMember = x.StaffMemberId, ItemName = 'Meals', Count = count(*)
+    from x
+        left join Meal m
+        on x.StaffMemberId = m.StaffMemberId
+    group by x.StaffMemberId
+
+union all
+
+    select StaffMember = x.StaffMemberId, ItemName = 'Cookbooks', Count = count(*)
+    from x
+        left join Cookbook c
+        on x.StaffMemberId = c.StaffMemberId
+    group by x.StaffMemberId
 
 --B)
+--AS There is no point in using the CTE here, you can just put it in the where clause. In the previous question you gained that you shouldn't have to repeat it 3 times.
 ;
-with x as (
-    select StaffMemberId
-    from StaffMember
-    where FirstName = 'John'
-    and LastName = 'Doe' 
-)
+with
+    x
+    as
+    (
+        select StaffMemberId
+        from StaffMember
+        where FirstName = 'John'
+            and LastName = 'Doe'
+    )
 
-select 
+select
     x.StaffMemberId,
     r.RecipeName,
     r.RecipeStatus,
     HoursBtwnStatuses = 
     case 
         when r.RecipeStatus = 'published' then datediff(hour, r.drafted, r.published)
+     --AS -2 If it was never published it would return a null
         when r.RecipeStatus = 'archived' then datediff(hour, r.published, r.archived)
-    end 
+    end
 from Recipe r
-join x 
-on r.StaffMemberId = x.StaffMemberId
+    join x
+    on r.StaffMemberId = x.StaffMemberId
 where r.recipestatus in ('published', 'archived')
 
 
