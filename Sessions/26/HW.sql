@@ -1,6 +1,5 @@
---AS Great job! 94% See comments.
---RS Okay, I took out the PresidentId.
---AS The tables should be moved into the Table President file, and the data into the data presidents file. Please do it before you resubmit.
+--AS Excellent! 100%
+
 /*
 The government is starting a new program to award medals to presidents for outstanding service. 
 Add tables to store medals and award them to presidents. A medal can be assigned to more than one president. 
@@ -27,7 +26,7 @@ create table dbo.Medal(
     MedalId int not null identity primary key,
     MedalName varchar (100) not null 
         constraint u_Medal_Name unique
-        constaint c_Medal_Name_cannot_be_blank check (MedalName <> '')
+        constraint c_Medal_Name_cannot_be_blank check (MedalName <> '')
 )
 go 
 insert Medal(MedalName)
@@ -63,8 +62,7 @@ on p.FirstName = x.FirstName
 and p.LastName = x.LastName
 
 --1) Select all presidents and any medals they may have, sorted by medal and president number. Show Name, Number, Medal, Party
---AS -2 This doesn't run
---AS I am not sure how it runs for you. You are joining a party on the presidentId, but the party table doesn't have a presidentId.
+
 
 select p.FirstName, p.LastName, p.Num, m.MedalName, r.PartyName 
 from president p 
@@ -92,9 +90,7 @@ left join PresidentMedal pm
 on m.MedalId = pm.MedalId
 group by m.MedalName
 --4a) Show all parties and the number of medals awarded to it's presidents. Omit party if no medals
---AS -2 This doesn't run. Also why do you need a left join on the president table?
---RS Its running on my end.
---AS Same issue as before, party table shouldn't have a presidentId
+
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from PresidentMedal pm
 join president p
@@ -103,9 +99,7 @@ join party r
 on p.PartyId = r.PartyId
 group by r.PartyName
 --4b) Same as 4a, but show zero if no medals awarded to a party's presidents
---AS -2 This doesn't either run
---RS Its running on my end.
---AS Same issue as before, party table shouldn't have a presidentId
+
 
 select r.PartyName, NumOfMedalsAwarded = count(pm.MedalId)
 from party r
