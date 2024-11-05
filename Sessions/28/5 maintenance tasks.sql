@@ -1,7 +1,10 @@
+--AS Nice! 96% Please see all comments.
 --Note: some of these scripts are needed for specific items, when the instructions say "specific" pick one item in your data and specify it in the where clause using a unique value that identifies it, do not use the primary key.
 
 --1) Sometimes when a staff member is fired. We need to eradicate everything from that user in our system. Write the SQL to delete a specific user and all the user's related records.
-
+--AS -2 This didn't work when I tried to run it. I got back "f_Recipe_CourseRecipe". Perhaps even though you deleted any meals that where created by the User, you still have some reciepes in 
+    --that table that belong to the user. 
+    --I didn't check if there are any other tables that are a problem, make sure it runs before resubmitting it.
 delete cbr
 from CookbookRecipe cbr
 join Cookbook c 
@@ -119,6 +122,7 @@ Tip: To get a unique sequential number for each row in the result set use the RO
 	 The following can be a column in your select statement: Sequence = ROW_NUMBER() over (order by colum name) , replace column name with the name of the column that the row number should be sorted
 */
 -- Step 1: Insert the new cookbook for the specified user
+--AS Why is this a left join? You seem to be using left joins more then needed
 ;
 with x as (
     select
@@ -167,12 +171,19 @@ For example, the calorie count for butter went down by 2 per ounce, and 10 per s
 Write an update statement that changes the number of calories of a recipe for a specific ingredient. 
 The statement should include at least two measurement types, like the example above. 
 */
+--AS -2 You wrote this way to complicated. You don't need any nested select or where clauses. This should be straightforward update with a case in the 
+ --set clause (like you did) and then just joins and where clause. 
 
+--RS can you explain to me why when I run the subquery alone from recipe, all 7 recipes are updated? why do I need the outer where clause to specify that the update 
+--should only affect those recipes with butter?
+--AS To answer this question, look where the nested select statement ends, and what I commented there. If you need more help, you can reach out on slack.
+    --Either way, like I wrote this is to complicated to be considered the right way to do it.
 update r
 set Calories = r.Calories + (
     select
     (
 		case
+        --AS In your Measurment type it is oz not ounce
             when m.MeasurementType = 'ounce' then ri.Amount * -2
             when m.MeasurementType = 'stick' then ri.Amount * -10
             else 0 
@@ -186,7 +197,8 @@ set Calories = r.Calories + (
           from Ingredient
           where IngredientName = 'Butter'  
       )
-	and r.RecipeId = ri.RecipeId
+--AS This is where the select statement ends. 
+    --Now you are saying that you are updating r on any recipe that has any Measurment type that is in the ri table by butter. 
 )
 from recipe r
 where RecipeId in ( select ri.RecipeId
@@ -197,8 +209,7 @@ where RecipeId in ( select ri.RecipeId
     where IngredientName = 'Butter'
     ))
 
---RS can you explain to me why when I run the subquery alone from recipe, all 7 recipes are updated? why do I need the outer where clause to specify that the update 
---should only affect those recipes with butter?
+
 /*
 5) We need to send out alerts to users that have recipes sitting in draft longer the average amount of time that recipes have taken to be published.
 Produce a result set that has 4 columns (Data values in brackets should be replaced with actual data)
@@ -209,7 +220,8 @@ Produce a result set that has 4 columns (Data values in brackets should be repla
 		Your recipe [recipe name] is sitting in draft for [X] hours.
 		That is [Z] hours more than the average [Y] hours all other recipes took to be published.
 */
-with x as (
+--AS Normally in programming when you see [recipe name], it means that the brackets should be removed and the value replaced.
+;with x as (
     select AvgHoursToPublish = avg(datediff(hour, drafted, published))
     from recipe
     where published is not null
@@ -233,7 +245,8 @@ z as (
     from y, x
     where datediff(hour, y.drafted, getdate()) > x.AvgHoursToPublish
 )
-
+--AS This works but you are using CTE's much more then it is called for. Why cant you select the user's name and email from the table directly? You can 
+    --have a where clause to only select drafted and where datediff(hour, y.drafted, getdate()) > x.AvgHoursToPublish?
 select 
     UserFirstName = z.FirstName,
     UserLastName = z.LastName,
