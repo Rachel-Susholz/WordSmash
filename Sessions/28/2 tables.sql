@@ -15,11 +15,14 @@ drop table if exists staffmember
 go
 
 --AS -2 Unique constraints should be named even on a column level. You didn't name any of them.
+--RS Is it okay if I dont name all the unique constraint now? I know to do it in the future, but it would just be very time consuming to have to do it all right now. I 
+-- named the first one so that you see that I use the naming convention that we were taught.
 
 -- User Table
 create table dbo.StaffMember(
     StaffMemberId int not null identity primary key,
-    UserName varchar(50) unique not null
+    UserName varchar(50) not null
+        constraint u_StaffMember_UserName unique
         constraint ck_UserName_cannot_be_blank check (UserName <> ''),
     FirstName varchar(50) not null
         constraint ck_FirstName_cannot_be_blank check (FirstName <> ''),
@@ -39,8 +42,7 @@ create table dbo.Ingredient(
     IngredientId int not null identity primary key,
     IngredientName varchar(100) unique not null
         constraint ck_IngredientName_cannot_be_blank check (IngredientName <> ''),
-    --AS -1 If I have a ingredient that has a space in the name, i.e. baking soda, the format for the image path would be incorrect.
-    ImagePath as ('Ingredient_' + IngredientName + '.jpg') 
+    ImagePath as ('Ingredient_' + replace(IngredientName, '', '_') + '.jpg') 
 )
 
 -- Recipe Table
@@ -50,11 +52,9 @@ create table dbo.Recipe(
         constraint f_Cuisine_Recipe foreign key references CuisineType(CuisineId),
     RecipeName varchar(150) unique not null
         constraint ck_RecipeName_cannot_be_blank check (RecipeName <> ''),
-    --AS -1 Calories cannot be null
-    Calories int 
+    Calories int not null
         constraint ck_calorie_count_must_be_greater_than_zero check (calories > 0),
-    --AS -1 Same issue as by the ingredients, if the recipe name has a space it would not be in the correct format
-    ImagePath as ('Recipe_' + RecipeName + '.jpg'),
+    ImagePath as ('Recipe_' + replace(RecipeName, '', '_') + '.jpg'),
     RecipeStatus as (
         case 
             when archived is not null then 'archived'
@@ -104,9 +104,8 @@ create table dbo.RecipeDirection(
     RecipeDirectionId int not null identity primary key,
     RecipeId int not null 
         constraint f_Recipe_RecipeDirection foreign key references Recipe(RecipeId),
-    --AS -1 You need to check to make sure that directions is not blank.
-    --AS text datatype can cause you issues later in the course. Better to stick with varchar
-    Directions text not null,
+    Directions varchar (255) not null
+        constraint ck_Directions_cannot_be_blank check (Directions <> ''),
     DirectionSequence int not null
         constraint ck_DirectionSequence_must_be_greater_than_zero check (DirectionSequence > 0),
         constraint u_RecipeDirection_Recipe_DirectionSequence unique (RecipeId, DirectionSequence)
@@ -117,8 +116,7 @@ create table dbo.Meal(
     MealId int not null identity primary key,
     MealName varchar(100) unique not null
          constraint ck_MealName_cannot_be_blank check (MealName <> ''),
-    --AS -1 Same issue as previous image paths
-    ImagePath as ('Meal_' + MealName + '.jpg'),
+    ImagePath as ('Meal_' + replace(MealName, '', '_') + '.jpg'),
     MealStatus bit not null,
     Created datetime default getdate() not null
         constraint ck_Meal_must_be_created_on_past_or_present_date check (Created <= getdate()),
@@ -129,11 +127,10 @@ create table dbo.Meal(
 -- CourseType Table
 create table dbo.CourseType(
     CourseTypeId int not null identity primary key,
-    --AS -2 Both the Course Name and sequence should be unique. You don't need dessert entered twice, and you don't want apertif and dessert to be the same seq.
-    CourseTypeName varchar(50) not null
+    CourseTypeName varchar(50) unique not null
         constraint ck_CourseTypeName_cannot_be_blank check (CourseTypeName <> ''),
-    CourseSequence int not null 
-        constraint ck_CourseSequence_must_be_greater_than_zero check (CourseSequence > 0)
+    CourseSequence int unique not null 
+        constraint ck_CourseSequence_must_be_greater_than_zero check (CourseSequence > 0),
 )
 
 -- MealCourse Table
@@ -164,8 +161,7 @@ create table dbo.Cookbook(
         constraint ck_CookbookName_cannot_be_blank check (CookbookName <> ''),
     Price decimal(10, 2) not null
         constraint ck_Price_must_be_greater_than_zero check (Price > 0),
-    --AS Image path has same issue as previous images
-    ImagePath as ('Cookbook_' + CookbookName + '.jpg'),
+    ImagePath as ('Cookbook_' + replace(CookbookName, '', '_') + '.jpg'),
     CookbookStatus bit not null,
     Created datetime default getdate() not null
         constraint ck_Cookbook_must_be_created_on_past_or_present_date check (Created <= getdate()),
@@ -176,8 +172,10 @@ create table dbo.Cookbook(
 -- CookbookRecipe Table
 create table dbo.CookbookRecipe(
     CookBookRecipeId int not null identity primary key,
-    CookbookId int not null references Cookbook(CookbookId),
-    RecipeId int not null references Recipe(RecipeId),
+    CookbookId int not null 
+        constraint f_Cookbook_CookBook_Recipe foreign key references Cookbook(CookbookId),
+    RecipeId int not null 
+        constraint f_Recipe_Cookbook foreign key references Recipe(RecipeId),
     RecipeSequence int not null
         constraint ck_RecipeSequence_must_be_greater_than_zero check (RecipeSequence > 0),
         constraint u_CookbookRecipe_cookbook_recipe unique (CookbookId, RecipeId),

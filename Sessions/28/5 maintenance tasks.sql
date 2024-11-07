@@ -5,12 +5,21 @@
 --AS -2 This didn't work when I tried to run it. I got back "f_Recipe_CourseRecipe". Perhaps even though you deleted any meals that where created by the User, you still have some reciepes in 
     --that table that belong to the user. 
     --I didn't check if there are any other tables that are a problem, make sure it runs before resubmitting it.
+    --I worked on this for a very long time. I saw that it didn't run, but I cant figure out the problem.
 delete cbr
 from CookbookRecipe cbr
 join Cookbook c 
 on cbr.CookbookId = c.CookbookId
 join StaffMember sm 
 on c.StaffMemberId = sm.StaffMemberId
+where sm.FirstName = 'John' and sm.LastName = 'Doe'
+
+delete cbr 
+from CookbookRecipe cbr
+join recipe r 
+on cbr.RecipeId = r.RecipeId
+join StaffMember sm  
+on r.StaffMemberId = sm.StaffMemberId
 where sm.FirstName = 'John' and sm.LastName = 'Doe'
 
 delete c
@@ -21,13 +30,21 @@ where sm.FirstName = 'John' and sm.LastName = 'Doe'
 
 delete cr
 --select *
-from MealCourse mc
-join CourseRecipe cr
+from CourseRecipe cr
+join MealCourse mc
 on cr.MealCourseId = mc.MealCourseId
 join Meal m
 on mc.MealId = m.MealId
 join StaffMember sm
 on m.StaffMemberId = sm.StaffMemberId
+where sm.FirstName = 'John' and sm.LastName = 'Doe'
+
+delete cr 
+from CourseRecipe cr
+join recipe r 
+on cr.RecipeId = r.RecipeId
+join StaffMember sm  
+on r.StaffMemberId = sm.StaffMemberId
 where sm.FirstName = 'John' and sm.LastName = 'Doe'
 
 delete mc
@@ -45,14 +62,6 @@ join StaffMember sm
 on m.StaffMemberId = sm.StaffMemberId
 where sm.FirstName = 'John' and sm.LastName = 'Doe'
 
-delete ri 
-from RecipeIngredient ri 
-join Recipe r 
-on ri.RecipeId = r.RecipeId
-join StaffMember sm 
-on r.StaffMemberId = sm.StaffMemberId
-where sm.FirstName = 'John' and sm.LastName = 'Doe'
-
 delete rd 
 from RecipeDirection rd 
 join Recipe r 
@@ -61,11 +70,22 @@ join StaffMember sm
 on r.StaffMemberId = sm.StaffMemberId 
 where sm.FirstName = 'John' and sm.LastName = 'Doe'
 
+delete ri 
+from RecipeIngredient ri 
+join Recipe r 
+on ri.RecipeId = r.RecipeId
+join StaffMember sm 
+on r.StaffMemberId = sm.StaffMemberId
+where sm.FirstName = 'John' and sm.LastName = 'Doe'
+
+
 delete r
+--select *
 from Recipe r
 join StaffMember sm
 on r.StaffMemberId = sm.StaffMemberId
 where sm.FirstName = 'John' and sm.LastName = 'Doe'
+
 
 delete sm
 from StaffMember sm
@@ -123,6 +143,7 @@ Tip: To get a unique sequential number for each row in the result set use the RO
 */
 -- Step 1: Insert the new cookbook for the specified user
 --AS Why is this a left join? You seem to be using left joins more then needed
+--RS Where else did I use left join unnecessarily? I just want to know what I am doing wrong so that I can learn from my mistakes.
 ;
 with x as (
     select
@@ -130,7 +151,7 @@ with x as (
         CookbookName = 'Recipes by ' + FirstName + ' ' + LastName,
         Price = count(r.RecipeId) * 1.33
     from StaffMember sm
-    left join Recipe r 
+    join Recipe r 
 	on sm.StaffMemberId = r.StaffMemberId
     where sm.FirstName = 'John' 
 	and sm.LastName = 'Doe' 
@@ -171,43 +192,26 @@ For example, the calorie count for butter went down by 2 per ounce, and 10 per s
 Write an update statement that changes the number of calories of a recipe for a specific ingredient. 
 The statement should include at least two measurement types, like the example above. 
 */
---AS -2 You wrote this way to complicated. You don't need any nested select or where clauses. This should be straightforward update with a case in the 
- --set clause (like you did) and then just joins and where clause. 
 
---RS can you explain to me why when I run the subquery alone from recipe, all 7 recipes are updated? why do I need the outer where clause to specify that the update 
---should only affect those recipes with butter?
---AS To answer this question, look where the nested select statement ends, and what I commented there. If you need more help, you can reach out on slack.
-    --Either way, like I wrote this is to complicated to be considered the right way to do it.
 update r
-set Calories = r.Calories + (
-    select
+set Calories = r.Calories +  
     (
 		case
-        --AS In your Measurment type it is oz not ounce
-            when m.MeasurementType = 'ounce' then ri.Amount * -2
+            when m.MeasurementType = 'oz' then ri.Amount * -2
             when m.MeasurementType = 'stick' then ri.Amount * -10
             else 0 
         end
 	)
-    from RecipeIngredient ri
-	join Measurement m
-	on ri.MeasurementId = m.MeasurementId
-	where ri.IngredientId = (
-          select IngredientId
-          from Ingredient
-          where IngredientName = 'Butter'  
-      )
---AS This is where the select statement ends. 
-    --Now you are saying that you are updating r on any recipe that has any Measurment type that is in the ri table by butter. 
-)
-from recipe r
-where RecipeId in ( select ri.RecipeId
-	from RecipeIngredient ri
-    where ri.IngredientId = (
-    select IngredientId
-    from Ingredient
-    where IngredientName = 'Butter'
-    ))
+from Recipe r 
+join RecipeIngredient ri
+on r.RecipeId = ri.RecipeId
+join Ingredient i 
+on ri.IngredientId = i.IngredientId
+join Measurement m
+on ri.MeasurementId = m.MeasurementId
+where i.IngredientName = 'Butter'
+
+
 
 
 /*
@@ -220,42 +224,31 @@ Produce a result set that has 4 columns (Data values in brackets should be repla
 		Your recipe [recipe name] is sitting in draft for [X] hours.
 		That is [Z] hours more than the average [Y] hours all other recipes took to be published.
 */
---AS Normally in programming when you see [recipe name], it means that the brackets should be removed and the value replaced.
-;with x as (
-    select AvgHoursToPublish = avg(datediff(hour, drafted, published))
-    from recipe
-    where published is not null
-),
 
-y as (
-    select r.RecipeId, r.RecipeName, r.Drafted, sm.FirstName, sm.LastName
+;
+with x as (
+    select r.RecipeName, AvgHoursToPublish = avg(datediff(hour, drafted, published))
     from recipe r
-    join StaffMember sm 
-	on r.StaffMemberId = sm.StaffMemberId
-    where r.Published is null
-),
-
-z as (
-    select 
-        y.FirstName,
-        y.LastName,
-        y.RecipeName,
-        DraftHours = datediff(hour, y.Drafted, getdate()),
-        AvgHours = x.AvgHoursToPublish
-    from y, x
-    where datediff(hour, y.drafted, getdate()) > x.AvgHoursToPublish
+    where published is not null
 )
---AS This works but you are using CTE's much more then it is called for. Why cant you select the user's name and email from the table directly? You can 
-    --have a where clause to only select drafted and where datediff(hour, y.drafted, getdate()) > x.AvgHoursToPublish?
+
 select 
-    UserFirstName = z.FirstName,
-    UserLastName = z.LastName,
-    Email = lower(substring(z.FirstName, 1, 1) + z.LastName + '@heartyhearth.com'),
-    Alert = 'Your recipe ' + '[' + z.recipename + ']' + ' is sitting in draft for ' + '['
-    + convert(varchar, z.DraftHours) + ']' + ' hours. That is ' + '['
-    + convert(varchar, z.DraftHours - z.AvgHours) + ']' + ' hours more than the average ' + '['
-    + convert(varchar, z.AvgHours) + ']' + ' hours all other recipes took to be published.'    
-from z
+    UserFirstName = sm.FirstName,
+    UserLastName = sm.LastName,
+    Email = lower(substring(sm.FirstName, 1, 1) + sm.LastName + '@heartyhearth.com'),
+    Alert = 'Your recipe ' + r.RecipeName + ' is sitting in draft for '
+    + convert(varchar, (datediff(hour, r.Drafted, getdate()))) + ' hours. That is '
+    + convert(varchar, (datediff(hour, r.Drafted, getdate())) - x.AvgHoursToPublish) + ' hours more than the average '
+    + convert(varchar, (avg(datediff(hour, drafted, published)))) + ' hours all other recipes took to be published.'    
+from x 
+join Recipe r 
+on x.RecipeName = r.RecipeName
+join StaffMember sm 
+on r.StaffMemberId = sm.StaffMemberId
+where r.Published is null
+and r.Archived is null
+and datediff(hour, r.drafted, getdate()) > x.AvgHoursToPublish
+
 
 /*
 6) We want to send out marketing emails for books. Produce a result set with one row and one column "Email Body" as specified below.
@@ -277,3 +270,4 @@ select
     + '">here</a> to order.'
 from cookbook c
 where c.CookbookStatus = 1
+
