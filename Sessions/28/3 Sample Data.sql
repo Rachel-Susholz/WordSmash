@@ -1,8 +1,10 @@
 --AS Great job, 97%
 --AS -3 This file cannot be run repeatedly. The delete is not in the correct order.
+--RS it was in the correct order. It just was missing the courserecipe delete. I mistakenly saved the work before inserting it, but I did notice it before submitting.
 go
 delete CookbookRecipe
 delete Cookbook
+delete CourseRecipe
 delete MealCourse
 delete Meal
 delete CourseType

@@ -39,7 +39,6 @@ Recipe list page:
     In the resultset show the Recipe with its status, dates it was published and archived in mm/dd/yyyy format (blank if not archived), user, number of calories and number of ingredients.
     Tip: You'll need to use the convert function for the dates
 */
---AS -1 This should show a blank for null dates, not null
 select RecipeName = 
     case 
         when r.RecipeStatus = 'published' then r.RecipeName 
@@ -47,7 +46,7 @@ select RecipeName =
     end,
     r.RecipeStatus,
     PublishedDate = convert(varchar(10), r.Published, 101),
-    ArchivedDate = convert(varchar(10), r.Archived, 101),
+    ArchivedDate = isnull(convert(varchar(10), r.Archived, 101), ''),
     sm.UserName,
     r.Calories,
     NumberOfIngredients = (select count(*)
@@ -217,36 +216,32 @@ April Fools Page:
     b) When the user clicks on any recipe they should see a spoof steps lists showing the step instructions for the LAST step of EACH recipe in the system. No sequence required.
         Hint: Use CTE
 */
---A)
---AS -2 Nice job! However the reversed name has the last letter capitalized instead of the first. 
---AS Why do you need to join in the cookbook? If it is in the Cookbook Recipe it is in a cookbook
-select ReversedRecipeName = reverse(concat(upper(substring(r.RecipeName, 1, 1)), lower(substring(r.RecipeName, 2, len(r.RecipeName) - 1)))),
-    ImagePath = concat('Recipe_', replace(reverse(r.RecipeName), ' ', '_'), '.jpg')
+--A) 
+select ReversedRecipeName = concat(upper(substring(reverse(r.RecipeName), 1, 1)), lower(substring(reverse(r.RecipeName), 2, len(r.RecipeName) - 1))),
+    ImagePath = concat('Recipe_', replace(concat(upper(substring(reverse(r.RecipeName), 1, 1)), lower(substring(reverse(r.RecipeName), 2, len(r.RecipeName) - 1))), ' ', '_'), '.jpg')
 from Recipe r
     join CookbookRecipe cr
     on r.RecipeId = cr.RecipeId
-    left join Cookbook c
-    on cr.CookbookId = c.CookbookId
 --B)
 --AS Could be the question wasn't clear, but what is needed is to show ALL last steps from all recipes in the system when selecting any recipe
 ;
-with
-    x
-    as
+with x as
     (
-        select rd.RecipeId, rd.Directions
-        from RecipeDirection rd
-        where rd.DirectionSequence = (select max(DirectionSequence)
-        from RecipeDirection rd
-        where RecipeId = rd.RecipeId)
+    select RecipeId, MaxSequence = max(DirectionSequence)
+    from RecipeDirection
+    group by RecipeId  
     )
 
 select
     r.RecipeName,
-    x.Directions
-from x
-    join Recipe r
-    on x.RecipeId = r.RecipeId
+    rd.Directions
+from Recipe r
+join x
+on x.RecipeId = r.RecipeId
+join RecipeDirection rd 
+on r.RecipeId = rd.RecipeId
+where rd.DirectionSequence = x.MaxSequence
+ 
 /*
 For site administration page:
 5 seperate reports
@@ -270,13 +265,16 @@ from StaffMember sm
 group by sm.FirstName, sm.LastName
 --B)
 --AS What are you accomplishing with the case clause?
+--RS I was just assuming that the question is only asking about published recipes and did it as a cases statement, but I switched it to a where clause.
 select sm.FirstName, sm.LastName,
     TotalRecipes = count(r.RecipeId),
-    AverageDaysToPublish = avg(case when r.Published is not null then  datediff(day, r.Drafted, r.Published) end)
+    AverageDaysToPublish = avg(datediff(day, r.Drafted, r.Published))
 from StaffMember sm
     left join Recipe r
     on sm.StaffMemberId = r.StaffMemberId
+where r.Published is not null
 group by sm.FirstName, sm.LastName
+
 --C)
 select sm.FirstName, sm.LastName, TotalMeals = count(m.MealId),
     TotalActiveMeals = sum(case when m.MealStatus = 1 then 1 else 0 end),
@@ -319,53 +317,42 @@ with
 
     select StaffMember = x.StaffMemberId, ItemName = 'Recipes', Count = count(*)
     from x
-        left join Recipe r
-        on x.StaffMemberId = r.StaffMemberId
+    left join Recipe r
+    on x.StaffMemberId = r.StaffMemberId
     group by x.StaffMemberId
 
 union all
 
     select StaffMember = x.StaffMemberId, ItemName = 'Meals', Count = count(*)
     from x
-        left join Meal m
-        on x.StaffMemberId = m.StaffMemberId
+    left join Meal m
+    on x.StaffMemberId = m.StaffMemberId
     group by x.StaffMemberId
 
 union all
 
     select StaffMember = x.StaffMemberId, ItemName = 'Cookbooks', Count = count(*)
     from x
-        left join Cookbook c
-        on x.StaffMemberId = c.StaffMemberId
+    left join Cookbook c
+    on x.StaffMemberId = c.StaffMemberId
     group by x.StaffMemberId
 
 --B)
---AS There is no point in using the CTE here, you can just put it in the where clause. In the previous question you gained that you shouldn't have to repeat it 3 times.
-;
-with
-    x
-    as
-    (
-        select StaffMemberId
-        from StaffMember
-        where FirstName = 'John'
-            and LastName = 'Doe'
-    )
-
 select
-    x.StaffMemberId,
+    sm..StaffMemberId,
     r.RecipeName,
     r.RecipeStatus,
     HoursBtwnStatuses = 
     case 
         when r.RecipeStatus = 'published' then datediff(hour, r.drafted, r.published)
-     --AS -2 If it was never published it would return a null
-        when r.RecipeStatus = 'archived' then datediff(hour, r.published, r.archived)
+        when r.RecipeStatus = 'archived' then isnull(datediff(hour, r.published, r.archived), (datediff(hour, r.drafted, r.archived)))
     end
 from Recipe r
-    join x
-    on r.StaffMemberId = x.StaffMemberId
+join StaffMember sm
+on r.StaffMemberId = sm.StaffMemberId
 where r.recipestatus in ('published', 'archived')
+and sm.FirstName = 'John'
+and sm.LastName = 'Doe'
 
 
 
