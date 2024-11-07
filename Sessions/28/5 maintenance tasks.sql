@@ -1,10 +1,7 @@
---AS Nice! 96% Please see all comments.
+--AS Nice! 100% 
 --Note: some of these scripts are needed for specific items, when the instructions say "specific" pick one item in your data and specify it in the where clause using a unique value that identifies it, do not use the primary key.
 
 --1) Sometimes when a staff member is fired. We need to eradicate everything from that user in our system. Write the SQL to delete a specific user and all the user's related records.
---AS -2 This didn't work when I tried to run it. I got back "f_Recipe_CourseRecipe". Perhaps even though you deleted any meals that where created by the User, you still have some reciepes in 
-    --that table that belong to the user. 
-    --I didn't check if there are any other tables that are a problem, make sure it runs before resubmitting it.
     
 delete cbr
 from CookbookRecipe cbr
@@ -144,6 +141,7 @@ Tip: To get a unique sequential number for each row in the result set use the RO
 -- Step 1: Insert the new cookbook for the specified user
 --AS Why is this a left join? You seem to be using left joins more then needed
 --RS Where else did I use left join unnecessarily? I just want to know what I am doing wrong so that I can learn from my mistakes.
+--AS Sure. When I looked the whole HW I found several places. I would need to look over to find all of them, but in the reports num 5 a would be a example
 ;
 with x as (
     select

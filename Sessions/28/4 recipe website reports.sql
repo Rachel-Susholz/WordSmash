@@ -1,4 +1,4 @@
---AS Amazing job, 95% See comments
+--AS Amazing job, 100% 
 /*
 Our website development is underway! 
 Below is the layout of the pages on our website, please provide the SQL to produce the necessary result sets.
@@ -223,7 +223,6 @@ from Recipe r
 join CookbookRecipe cr
 on r.RecipeId = cr.RecipeId
 --B)
---AS Could be the question wasn't clear, but what is needed is to show ALL last steps from all recipes in the system when selecting any recipe
 ;
 with x as
     (
