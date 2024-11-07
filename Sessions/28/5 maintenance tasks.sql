@@ -5,7 +5,7 @@
 --AS -2 This didn't work when I tried to run it. I got back "f_Recipe_CourseRecipe". Perhaps even though you deleted any meals that where created by the User, you still have some reciepes in 
     --that table that belong to the user. 
     --I didn't check if there are any other tables that are a problem, make sure it runs before resubmitting it.
-    --I worked on this for a very long time. I saw that it didn't run, but I cant figure out the problem.
+    
 delete cbr
 from CookbookRecipe cbr
 join Cookbook c 
