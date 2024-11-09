@@ -1,4 +1,4 @@
---AS Great job, 91% See comments.
+--AS Great job, 100% 
 
 drop table if exists cookbookrecipe
 drop table if exists cookbook
@@ -15,9 +15,9 @@ drop table if exists cuisinetype
 drop table if exists staffmember
 go
 
---AS -2 Unique constraints should be named even on a column level. You didn't name any of them.
 --RS Is it okay if I dont name all the unique constraint now? I know to do it in the future, but it would just be very time consuming to have to do it all right now. I 
 -- named the first one so that you see that I use the naming convention that we were taught.
+--AS OK
 
 -- User Table
 create table dbo.StaffMember(
