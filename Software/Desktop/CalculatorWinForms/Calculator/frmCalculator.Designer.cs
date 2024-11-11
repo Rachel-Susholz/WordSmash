@@ -323,6 +323,7 @@
             txtFactor1.Name = "txtFactor1";
             txtFactor1.Size = new Size(143, 89);
             txtFactor1.TabIndex = 18;
+            txtFactor1.TextAlign = HorizontalAlignment.Center;
             // 
             // txtOperator
             // 
@@ -333,6 +334,7 @@
             txtOperator.Name = "txtOperator";
             txtOperator.Size = new Size(143, 89);
             txtOperator.TabIndex = 19;
+            txtOperator.TextAlign = HorizontalAlignment.Center;
             // 
             // txtFactor2
             // 
@@ -343,6 +345,7 @@
             txtFactor2.Name = "txtFactor2";
             txtFactor2.Size = new Size(143, 89);
             txtFactor2.TabIndex = 20;
+            txtFactor2.TextAlign = HorizontalAlignment.Center;
             // 
             // txtAnswer
             // 
@@ -353,6 +356,7 @@
             txtAnswer.Name = "txtAnswer";
             txtAnswer.Size = new Size(144, 89);
             txtAnswer.TabIndex = 21;
+            txtAnswer.TextAlign = HorizontalAlignment.Center;
             // 
             // frmCalculator
             // 
