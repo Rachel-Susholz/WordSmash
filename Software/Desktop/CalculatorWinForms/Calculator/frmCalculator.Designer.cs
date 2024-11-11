@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             tblMain = new TableLayoutPanel();
-            btn7 = new Button();
             btn8 = new Button();
+            btn7 = new Button();
             btn9 = new Button();
             btnMultiply = new Button();
             btnDivide = new Button();
@@ -47,11 +47,11 @@
             btnDecimal = new Button();
             btnEquals = new Button();
             tblClearButton = new TableLayoutPanel();
+            btnClear = new Button();
             txtFactor1 = new TextBox();
             txtOperator = new TextBox();
             txtFactor2 = new TextBox();
             txtAnswer = new TextBox();
-            btnClear = new Button();
             tblMain.SuspendLayout();
             tblClearButton.SuspendLayout();
             SuspendLayout();
@@ -100,17 +100,6 @@
             tblMain.TabIndex = 0;
             tblMain.Paint += tblMain_Paint;
             // 
-            // btn7
-            // 
-            btn7.BackColor = SystemColors.ActiveCaption;
-            btn7.Dock = DockStyle.Fill;
-            btn7.Location = new Point(3, 193);
-            btn7.Name = "btn7";
-            btn7.Size = new Size(143, 89);
-            btn7.TabIndex = 2;
-            btn7.Text = "7";
-            btn7.UseVisualStyleBackColor = false;
-            // 
             // btn8
             // 
             btn8.BackColor = SystemColors.ActiveCaption;
@@ -121,6 +110,17 @@
             btn8.TabIndex = 3;
             btn8.Text = "8";
             btn8.UseVisualStyleBackColor = false;
+            // 
+            // btn7
+            // 
+            btn7.BackColor = SystemColors.ActiveCaption;
+            btn7.Dock = DockStyle.Fill;
+            btn7.Location = new Point(3, 193);
+            btn7.Name = "btn7";
+            btn7.Size = new Size(143, 89);
+            btn7.TabIndex = 2;
+            btn7.Text = "7";
+            btn7.UseVisualStyleBackColor = false;
             // 
             // btn9
             // 
@@ -135,7 +135,7 @@
             // 
             // btnMultiply
             // 
-            btnMultiply.BackColor = SystemColors.ControlDark;
+            btnMultiply.BackColor = Color.FromArgb(255, 128, 128);
             btnMultiply.Dock = DockStyle.Fill;
             btnMultiply.Location = new Point(450, 193);
             btnMultiply.Name = "btnMultiply";
@@ -146,7 +146,7 @@
             // 
             // btnDivide
             // 
-            btnDivide.BackColor = SystemColors.ControlDark;
+            btnDivide.BackColor = Color.FromArgb(255, 128, 128);
             btnDivide.Dock = DockStyle.Fill;
             btnDivide.Location = new Point(450, 98);
             btnDivide.Name = "btnDivide";
@@ -190,7 +190,7 @@
             // 
             // btnSubtract
             // 
-            btnSubtract.BackColor = SystemColors.ControlDark;
+            btnSubtract.BackColor = Color.FromArgb(255, 128, 128);
             btnSubtract.Dock = DockStyle.Fill;
             btnSubtract.Location = new Point(450, 288);
             btnSubtract.Name = "btnSubtract";
@@ -234,7 +234,7 @@
             // 
             // btnAdd
             // 
-            btnAdd.BackColor = SystemColors.ControlDark;
+            btnAdd.BackColor = Color.FromArgb(255, 128, 128);
             btnAdd.Dock = DockStyle.Fill;
             btnAdd.Location = new Point(450, 383);
             btnAdd.Name = "btnAdd";
@@ -278,7 +278,7 @@
             // 
             // btnEquals
             // 
-            btnEquals.BackColor = SystemColors.ControlDark;
+            btnEquals.BackColor = Color.FromArgb(255, 128, 128);
             btnEquals.Dock = DockStyle.Fill;
             btnEquals.Location = new Point(450, 478);
             btnEquals.Name = "btnEquals";
@@ -302,6 +302,17 @@
             tblClearButton.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tblClearButton.Size = new Size(441, 89);
             tblClearButton.TabIndex = 17;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.FromArgb(255, 128, 128);
+            btnClear.Dock = DockStyle.Fill;
+            btnClear.Location = new Point(3, 3);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(435, 83);
+            btnClear.TabIndex = 0;
+            btnClear.Text = "C";
+            btnClear.UseVisualStyleBackColor = false;
             // 
             // txtFactor1
             // 
@@ -342,17 +353,6 @@
             txtAnswer.Name = "txtAnswer";
             txtAnswer.Size = new Size(144, 89);
             txtAnswer.TabIndex = 21;
-            // 
-            // btnClear
-            // 
-            btnClear.BackColor = SystemColors.ControlDark;
-            btnClear.Dock = DockStyle.Fill;
-            btnClear.Location = new Point(3, 3);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(435, 83);
-            btnClear.TabIndex = 0;
-            btnClear.Text = "C";
-            btnClear.UseVisualStyleBackColor = false;
             // 
             // frmCalculator
             // 
