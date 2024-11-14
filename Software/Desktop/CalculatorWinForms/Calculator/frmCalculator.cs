@@ -194,6 +194,7 @@ namespace Calculator
 
         }
         // This just popped up, not sure how to get rid of it withought going to the back file.
+
         private void BtnDecimal_Click(object? sender, EventArgs e)
         {
             if (!GetActiveBoxFactorValue().Contains("."))
