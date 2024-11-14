@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    //YM Super work 90%! See a couple of comments below to improve.
     public partial class frmCalculator : Form
     {
        
@@ -89,6 +90,7 @@ namespace Calculator
             }
         }
 
+        //YM This should be named ClearInputs as that is what you are doing.
         private void ClearInvalidInputs()
         {
             txtFactor1.Text = "";
@@ -101,6 +103,7 @@ namespace Calculator
 
         private void BtnClear_Click(object? sender, EventArgs e)
         {
+            //YM This is a repeat of ClearInvalidInputs - just reuse the same method here.
             txtOperator.Text = "";
             txtFactor1.Text = "";
             txtFactor2.Text = "";
@@ -108,6 +111,7 @@ namespace Calculator
 
         }
 
+        //YM It's best not to have code in the event handlers.  These should be in a separate method. You could try and combine it or as 4 separate methods.
         private void BtnSubtract_Click(object? sender, EventArgs e)
         { 
             if (txtFactor1.Text != "")
@@ -188,12 +192,9 @@ namespace Calculator
         {
             InputToActiveBox("0");
         }
-
-        private void tblMain_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+      
         // This just popped up, not sure how to get rid of it withought going to the back file.
+        //YM Yes you need to go to the back file to remove. I've done it for you now.
 
         private void BtnDecimal_Click(object? sender, EventArgs e)
         {
@@ -204,7 +205,7 @@ namespace Calculator
         }
         private void BtnSign_Click(object? sender, EventArgs e)
         {
-            //
+            //YM This should be in a separate procedure InputSign().  Try and consolidate the code in the first if statement and the last else branch.
             if (GetActiveBoxFactorValue().StartsWith("-"))
             {
                 int n = DetermineActiveBox();
@@ -238,6 +239,7 @@ namespace Calculator
         }
         private void BtnEquals_Click(object? sender, EventArgs e)
         {
+            //YM This should be in a separate method i.e. Calculate.
             decimal factor1, factor2;
             string s = "";
             // Check for empty input fields
@@ -280,6 +282,7 @@ namespace Calculator
             {
                 ClearInvalidInputs();
             }
+            //YM This property can be set on the form - no need to do it here.
             txtAnswer.ReadOnly = true;
         }
     }

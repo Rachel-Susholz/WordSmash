@@ -98,7 +98,6 @@
             tblMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tblMain.Size = new Size(597, 575);
             tblMain.TabIndex = 0;
-            tblMain.Paint += tblMain_Paint;
             // 
             // btn8
             // 
