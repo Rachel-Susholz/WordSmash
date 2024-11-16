@@ -14,7 +14,7 @@ namespace Calculator
     //YM Super work 90%! See a couple of comments below to improve.
     public partial class frmCalculator : Form
     {
-       
+
         public frmCalculator()
         {
             InitializeComponent();
@@ -36,6 +36,7 @@ namespace Calculator
             btnDecimal.Click += BtnDecimal_Click;
             btnSign.Click += BtnSign_Click;
             btnEquals.Click += BtnEquals_Click;
+            txtAnswer.ReadOnly = true;
         }
 
         private int DetermineActiveBox()
@@ -73,6 +74,15 @@ namespace Calculator
             return s;
         }
 
+        private void SetOperator(string value)
+        {
+            if (txtFactor1.Text != "")
+            {
+                txtOperator.Text = value;
+            }
+        }
+
+
 
         private void InputToActiveBox(string value)
         {
@@ -90,8 +100,7 @@ namespace Calculator
             }
         }
 
-        //YM This should be named ClearInputs as that is what you are doing.
-        private void ClearInvalidInputs()
+        private void ClearInputs()
         {
             txtFactor1.Text = "";
             txtFactor2.Text = "";
@@ -99,47 +108,98 @@ namespace Calculator
             txtAnswer.Text = "";
         }
 
+        private void InputSign(string value)
+        {
+            int n = DetermineActiveBox();
+
+            if (n == 1)
+            {
+                txtFactor1.Text = value;
+            }
+            else if (n == 2)
+            {
+                txtFactor2.Text = value;
+            }
+        }
+
+        private void Calculate()
+        {
+            decimal factor1, factor2;
+            string s = "";
+            // Check for empty input fields
+            if (txtFactor1.Text == s || txtFactor2.Text == s || txtOperator.Text == s)
+            {
+                return;
+            }
+
+            // Try parsing factor1 and factor2 as decimals
+            if (!decimal.TryParse(txtFactor1.Text, out factor1) || !decimal.TryParse(txtFactor2.Text, out factor2))
+            {
+                // Clear invalid inputs if parsing fails
+                ClearInputs();
+                return;
+            }
+
+
+            if (txtOperator.Text == "+")
+            {
+                txtAnswer.Text = (factor1 + factor2).ToString();
+            }
+            else if (txtOperator.Text == "-")
+            {
+                txtAnswer.Text = (factor1 - factor2).ToString();
+            }
+            else if (txtOperator.Text == "x")
+            {
+                txtAnswer.Text = (factor1 * factor2).ToString();
+            }
+            else if (txtOperator.Text == "/")
+            {
+                if (factor2 == 0)
+                {
+                    ClearInputs();
+                    return;
+                }
+                txtAnswer.Text = (factor1 / factor2).ToString();
+            }
+            else
+            {
+                ClearInputs();
+            }
+        }
 
 
         private void BtnClear_Click(object? sender, EventArgs e)
         {
-            //YM This is a repeat of ClearInvalidInputs - just reuse the same method here.
-            txtOperator.Text = "";
-            txtFactor1.Text = "";
-            txtFactor2.Text = "";
-            txtAnswer.Text = "";
-
+            ClearInputs();
         }
 
         //YM It's best not to have code in the event handlers.  These should be in a separate method. You could try and combine it or as 4 separate methods.
         private void BtnSubtract_Click(object? sender, EventArgs e)
-        { 
-            if (txtFactor1.Text != "")
+        {
+            
             {
-                txtOperator.Text = "-";
+                SetOperator("-");
             }
         }
         private void BtnMultiply_Click(object? sender, EventArgs e)
-        {
-            if (txtFactor1.Text != "")
+        {  
             {
-                txtOperator.Text = "x";
+                SetOperator("x");
             }
         }
 
         private void BtnDivide_Click(object? sender, EventArgs e)
         {
-            if (txtFactor1.Text != "")
             {
-                txtOperator.Text = "/";
+                SetOperator("/");
             }
         }
 
         private void BtnAdd_Click(object? sender, EventArgs e)
         {
-            if (txtFactor1.Text != "")
             {
-                txtOperator.Text = "+";
+                SetOperator("+");
             }
         }
 
@@ -192,9 +252,8 @@ namespace Calculator
         {
             InputToActiveBox("0");
         }
-      
-        // This just popped up, not sure how to get rid of it withought going to the back file.
-        //YM Yes you need to go to the back file to remove. I've done it for you now.
+
+
 
         private void BtnDecimal_Click(object? sender, EventArgs e)
         {
@@ -205,19 +264,10 @@ namespace Calculator
         }
         private void BtnSign_Click(object? sender, EventArgs e)
         {
-            //YM This should be in a separate procedure InputSign().  Try and consolidate the code in the first if statement and the last else branch.
             if (GetActiveBoxFactorValue().StartsWith("-"))
-            {
-                int n = DetermineActiveBox();
+            {   
                 string s = GetActiveBoxFactorValue().Substring(1);
-                if (n == 1)
-                {
-                    txtFactor1.Text = s;
-                }
-                else if (n == 2)
-                {
-                    txtFactor2.Text = s;
-                }
+                InputSign(s);  
             }
             else if (GetActiveBoxFactorValue() == "")
             {
@@ -225,66 +275,19 @@ namespace Calculator
             }
             else
             {
-                int n = DetermineActiveBox();
                 string s = ("-") + GetActiveBoxFactorValue();
-                if (n == 1)
-                {
-                    txtFactor1.Text = s;
-                }
-                else if (n == 2)
-                {
-                    txtFactor2.Text = s;
-                }
+                InputSign(s);
             }
         }
-        private void BtnEquals_Click(object? sender, EventArgs e)
+      
+private void BtnEquals_Click(object? sender, EventArgs e)
         {
-            //YM This should be in a separate method i.e. Calculate.
-            decimal factor1, factor2;
-            string s = "";
-            // Check for empty input fields
-            if (txtFactor1.Text == s || txtFactor2.Text == s || txtOperator.Text == s)
-            {
-                return;
-            }
 
-            // Try parsing factor1 and factor2 as decimals
-            if (!decimal.TryParse(txtFactor1.Text, out factor1) || !decimal.TryParse(txtFactor2.Text, out factor2))
-            {
-                // Clear invalid inputs if parsing fails
-                ClearInvalidInputs();
-                return;
-            }
+            Calculate();
 
-            
-            if (txtOperator.Text == "+")
-            {
-                txtAnswer.Text = (factor1 + factor2).ToString();
-            }
-            else if (txtOperator.Text == "-")
-            {
-                txtAnswer.Text = (factor1 - factor2).ToString();
-            }
-            else if (txtOperator.Text == "x")
-            {
-                txtAnswer.Text = (factor1 * factor2).ToString();
-            }
-            else if (txtOperator.Text == "/")
-            {
-                if (factor2 == 0)
-                {
-                    ClearInvalidInputs();
-                    return;
-                }
-                txtAnswer.Text = (factor1 / factor2).ToString();
-            }
-            else
-            {
-                ClearInvalidInputs();
-            }
-            //YM This property can be set on the form - no need to do it here.
-            txtAnswer.ReadOnly = true;
         }
+       
+        
     }
 }
 
