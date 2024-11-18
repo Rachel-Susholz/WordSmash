@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    //YM Super work 90%! See a couple of comments below to improve.
+    //YM Super work 96%! See a couple of comments below to improve.
     public partial class frmCalculator : Form
     {
 
@@ -36,6 +36,7 @@ namespace Calculator
             btnDecimal.Click += BtnDecimal_Click;
             btnSign.Click += BtnSign_Click;
             btnEquals.Click += BtnEquals_Click;
+            //YM FYI there is a property on the form designer to set a text box to readonly. You could just use that rather than setting it in code.
             txtAnswer.ReadOnly = true;
         }
 
@@ -125,6 +126,8 @@ namespace Calculator
         private void Calculate()
         {
             decimal factor1, factor2;
+
+            //YM No need to use the 's' variable you can just check for blanks.
             string s = "";
             // Check for empty input fields
             if (txtFactor1.Text == s || txtFactor2.Text == s || txtOperator.Text == s)
@@ -174,7 +177,7 @@ namespace Calculator
             ClearInputs();
         }
 
-        //YM It's best not to have code in the event handlers.  These should be in a separate method. You could try and combine it or as 4 separate methods.
+        //YM You have an extra set of {} for the below 4 methods. You can remove them.
         private void BtnSubtract_Click(object? sender, EventArgs e)
         {
             
@@ -262,6 +265,9 @@ namespace Calculator
                 InputToActiveBox(".");
             }
         }
+
+        //YM The below logic should all be moved to the InputSign method.
+        //You could also consolidate it all by declaring a variable for what the text should be and then at the end of the if statement just re-use the 'InputToActiveBox' method for all 3 cases.
         private void BtnSign_Click(object? sender, EventArgs e)
         {
             if (GetActiveBoxFactorValue().StartsWith("-"))
