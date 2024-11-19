@@ -36,8 +36,6 @@ namespace Calculator
             btnDecimal.Click += BtnDecimal_Click;
             btnSign.Click += BtnSign_Click;
             btnEquals.Click += BtnEquals_Click;
-            //YM FYI there is a property on the form designer to set a text box to readonly. You could just use that rather than setting it in code.
-            txtAnswer.ReadOnly = true;
         }
 
         private int DetermineActiveBox()
@@ -121,6 +119,7 @@ namespace Calculator
             {
                 txtFactor2.Text = value;
             }
+
         }
 
         private void Calculate()
@@ -128,9 +127,8 @@ namespace Calculator
             decimal factor1, factor2;
 
             //YM No need to use the 's' variable you can just check for blanks.
-            string s = "";
-            // Check for empty input fields
-            if (txtFactor1.Text == s || txtFactor2.Text == s || txtOperator.Text == s)
+      
+            if (txtFactor1.Text == "" || txtFactor2.Text == "" || txtOperator.Text == "")
             {
                 return;
             }
@@ -180,31 +178,22 @@ namespace Calculator
         //YM You have an extra set of {} for the below 4 methods. You can remove them.
         private void BtnSubtract_Click(object? sender, EventArgs e)
         {
-            
-            {
                 SetOperator("-");
-            }
         }
+        
         private void BtnMultiply_Click(object? sender, EventArgs e)
-        {  
-            {
+        {
                 SetOperator("x");
-            }
         }
-
         private void BtnDivide_Click(object? sender, EventArgs e)
         {
-            {
                 SetOperator("/");
-            }
         }
-
         private void BtnAdd_Click(object? sender, EventArgs e)
         {
-            {
                 SetOperator("+");
-            }
         }
+        
 
         private void Btn9_Click(object? sender, EventArgs e)
         {
@@ -268,12 +257,13 @@ namespace Calculator
 
         //YM The below logic should all be moved to the InputSign method.
         //You could also consolidate it all by declaring a variable for what the text should be and then at the end of the if statement just re-use the 'InputToActiveBox' method for all 3 cases.
+        //RS I dont understand what you mean. The 'InputToActiveBox' method returns the current value plus the new value. I'm having a reaaly hard time with this. Can you explain a little? 
         private void BtnSign_Click(object? sender, EventArgs e)
         {
             if (GetActiveBoxFactorValue().StartsWith("-"))
-            {   
+            {
                 string s = GetActiveBoxFactorValue().Substring(1);
-                InputSign(s);  
+                InputSign(s);
             }
             else if (GetActiveBoxFactorValue() == "")
             {
@@ -285,15 +275,15 @@ namespace Calculator
                 InputSign(s);
             }
         }
-      
-private void BtnEquals_Click(object? sender, EventArgs e)
+
+        private void BtnEquals_Click(object? sender, EventArgs e)
         {
 
             Calculate();
 
         }
-       
-        
+
+
     }
 }
 

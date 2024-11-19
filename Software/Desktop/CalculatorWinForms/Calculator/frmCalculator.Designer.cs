@@ -353,6 +353,7 @@
             txtAnswer.Location = new Point(450, 3);
             txtAnswer.Multiline = true;
             txtAnswer.Name = "txtAnswer";
+            txtAnswer.ReadOnly = true;
             txtAnswer.Size = new Size(144, 89);
             txtAnswer.TabIndex = 21;
             txtAnswer.TextAlign = HorizontalAlignment.Center;
