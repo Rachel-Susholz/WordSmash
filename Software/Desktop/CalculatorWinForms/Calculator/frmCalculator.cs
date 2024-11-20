@@ -109,32 +109,29 @@ namespace Calculator
 
         private void InputSign()
         {
-            //string s
-            //Declare string s variable here.
+            string s = "";
             if (GetActiveBoxFactorValue().StartsWith("-"))
             {
                 // Set s to GetActiveBoxFactorValue().Substring(1);
-                string s = GetActiveBoxFactorValue().Substring(1);
+                s = GetActiveBoxFactorValue().Substring(1);
             }
             else if (GetActiveBoxFactorValue() == "")
             {
-                // set s = "-"
-                InputToActiveBox("-");
+                s = "-";
             }
             else
             {
-                string s = ("-") + GetActiveBoxFactorValue();
-                InputSign();
+                s = ("-") + GetActiveBoxFactorValue();
             }
             int n = DetermineActiveBox();
 
             if (n == 1)
             {
-                txtFactor1.Text ;
+                txtFactor1.Text = s;
             }
             else if (n == 2)
             {
-                txtFactor2.Text;
+                txtFactor2.Text = s;
             }
             
 
