@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    //YM Super work 98%! See my response below.
     public partial class frmCalculator : Form
     {
 
@@ -112,7 +111,6 @@ namespace Calculator
             string s = "";
             if (GetActiveBoxFactorValue().StartsWith("-"))
             {
-                // Set s to GetActiveBoxFactorValue().Substring(1);
                 s = GetActiveBoxFactorValue().Substring(1);
             }
             else if (GetActiveBoxFactorValue() == "")
@@ -267,29 +265,15 @@ namespace Calculator
             }
         }
 
-        //YM The below logic should all be moved to the InputSign method.
-        //You could also consolidate it all by declaring a variable for what the text should be and then at the end of the if statement just re-use the 'InputToActiveBox' method for all 3 cases.
-        //RS I dont understand what you mean. The 'InputToActiveBox' method returns the current value plus the new value. I'm having a reaaly hard time with this. Can you explain a little? 
-        //YM I will try :)
-        //Firstly, InputSign and InputToActiveBox have the exact same code so you don't need both. You can just use InputToActiveBox.
-        //The code that is in this method is what should be moved to the InputSign method so the logic is not in a button click event.
-        //In the case of 1 and 3 of your if statements you declare a variable and then pass that into InputSign. Instead you can declare a variable at the beginning of the method, set it to 
-        // the value you want and then at the end of the if statement call InputToActiveBox with that variable as the parameter. I have demonstrated below.
-        //RS Can you slack me so that you're on my list? otherwise, I cant slack you. Thank you.
         private void BtnSign_Click(object? sender, EventArgs e)
         {
 
             InputSign();
-
-
-            // Call InputToActiveBox(s) here.
         }
 
         private void BtnEquals_Click(object? sender, EventArgs e)
         {
-
             Calculate();
-
         }
 
 
