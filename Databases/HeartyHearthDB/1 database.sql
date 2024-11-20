@@ -1,8 +1,8 @@
 --AS 100%
 use master 
 go 
-drop database if exists RecipeWebsiteDB
+drop database if exists HeartyHearthDB
 go
-create database RecipeWebsiteDB
+create database HeartyHearthDB
 go
-use RecipeWebsiteDB
+use HeartyHearthDB

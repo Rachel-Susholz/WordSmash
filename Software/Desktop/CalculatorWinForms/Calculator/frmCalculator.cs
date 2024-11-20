@@ -107,18 +107,36 @@ namespace Calculator
             txtAnswer.Text = "";
         }
 
-        private void InputSign(string value)
+        private void InputSign()
         {
+            //string s
+            //Declare string s variable here.
+            if (GetActiveBoxFactorValue().StartsWith("-"))
+            {
+                // Set s to GetActiveBoxFactorValue().Substring(1);
+                string s = GetActiveBoxFactorValue().Substring(1);
+            }
+            else if (GetActiveBoxFactorValue() == "")
+            {
+                // set s = "-"
+                InputToActiveBox("-");
+            }
+            else
+            {
+                string s = ("-") + GetActiveBoxFactorValue();
+                InputSign();
+            }
             int n = DetermineActiveBox();
 
             if (n == 1)
             {
-                txtFactor1.Text = value;
+                txtFactor1.Text ;
             }
             else if (n == 2)
             {
-                txtFactor2.Text = value;
+                txtFactor2.Text;
             }
+            
 
         }
 
@@ -264,23 +282,9 @@ namespace Calculator
         private void BtnSign_Click(object? sender, EventArgs e)
         {
 
-            //Declare string s variable here.
-            if (GetActiveBoxFactorValue().StartsWith("-"))
-            {
-                // Set s to GetActiveBoxFactorValue().Substring(1);
-                string s = GetActiveBoxFactorValue().Substring(1);
-                InputSign(s);
-            }
-            else if (GetActiveBoxFactorValue() == "")
-            {
-                // set s = "-"
-                InputToActiveBox("-");
-            }
-            else
-            {
-                string s = ("-") + GetActiveBoxFactorValue();
-                InputSign(s);
-            }
+            InputSign();
+
+
             // Call InputToActiveBox(s) here.
         }
 
