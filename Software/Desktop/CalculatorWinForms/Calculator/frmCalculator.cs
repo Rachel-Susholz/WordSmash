@@ -41,34 +41,24 @@ namespace Calculator
 
         {
             int n = 0;
-            // Return 1 if the first factor should be active
-            if (txtFactor1.Text == "" || txtOperator.Text == "")
-            {
-                n = 1;
-            }
-            // Return 2 if the second factor should be active and the answer is empty
-            else if (txtFactor1.Text != "" && txtOperator.Text != "" && txtAnswer.Text == "")
-            {
-                return 2;
-            }
-            // Return 0 if none are active (answer already filled)
+            n = (txtFactor1.Text == "" || txtOperator.Text == "") ? 1 :
+            n = (txtFactor1.Text != "" && txtOperator.Text != "" && txtAnswer.Text == "") ? 2 : 0;
             return n;
         }
 
         private string GetActiveBoxFactorValue()
         {
-            int n = DetermineActiveBox();
             string s = "";
 
-            if (n == 1)
+            switch (DetermineActiveBox())
             {
+                case 1:
                 s = txtFactor1.Text;
+                    break;
+                case 2:
+                    s = txtFactor2.Text;
+                    break;
             }
-            else if (n == 2)
-            {
-                s = txtFactor2.Text;
-            }
-
             return s;
         }
 
@@ -84,60 +74,47 @@ namespace Calculator
 
         private void InputToActiveBox(string value)
         {
-            int n = DetermineActiveBox();
-
-            if (n == 1)
+            switch (DetermineActiveBox())
             {
-                // Append value to txtFactor1 if it's active
-                txtFactor1.Text += value;
-            }
-            else if (n == 2)
-            {
-                // Append value to txtFactor2 if it's active
-                txtFactor2.Text += value;
+                case 1:
+                    txtFactor1.Text += value;
+                    break;
+                case 2:
+                    txtFactor2.Text += value;
+                    break;
             }
         }
 
-        private void ClearInputs()
+        private string ClearInputs()
         {
+            string s = "";
             txtFactor1.Text = "";
             txtFactor2.Text = "";
             txtOperator.Text = "";
             txtAnswer.Text = "";
+            return s;
         }
 
         private void InputSign()
         {
-            string s = "";
-            if (GetActiveBoxFactorValue().StartsWith("-"))
-            {
-                s = GetActiveBoxFactorValue().Substring(1);
-            }
-            else if (GetActiveBoxFactorValue() == "")
-            {
-                s = "-";
-            }
-            else
-            {
-                s = ("-") + GetActiveBoxFactorValue();
-            }
-            int n = DetermineActiveBox();
 
-            if (n == 1)
+            string newValue = GetActiveBoxFactorValue().StartsWith("-") ? GetActiveBoxFactorValue().Substring(1) : "-" + GetActiveBoxFactorValue();
+            switch (DetermineActiveBox())
             {
-                txtFactor1.Text = s;
+                case 1:
+                    txtFactor1.Text = newValue;
+                    break;
+                case 2:
+                    txtFactor2.Text = newValue;
+                    break;
             }
-            else if (n == 2)
-            {
-                txtFactor2.Text = s;
-            }
-            
 
         }
 
         private void Calculate()
         {
             decimal factor1, factor2;
+            
 
             if (txtFactor1.Text == "" || txtFactor2.Text == "" || txtOperator.Text == "")
             {
@@ -152,31 +129,24 @@ namespace Calculator
                 return;
             }
 
-
-            if (txtOperator.Text == "+")
+          
+            switch (txtOperator.Text.ToString())
             {
-                txtAnswer.Text = (factor1 + factor2).ToString();
-            }
-            else if (txtOperator.Text == "-")
-            {
-                txtAnswer.Text = (factor1 - factor2).ToString();
-            }
-            else if (txtOperator.Text == "x")
-            {
-                txtAnswer.Text = (factor1 * factor2).ToString();
-            }
-            else if (txtOperator.Text == "/")
-            {
-                if (factor2 == 0)
-                {
+                case "+":
+                    txtAnswer.Text = (factor1 + factor2).ToString();
+                    break;
+                case "-":
+                    txtAnswer.Text = (factor1 - factor2).ToString();
+                    break;
+                case "x":
+                    txtAnswer.Text = (factor1 * factor2).ToString();
+                    break;
+                case "/":
+                    txtAnswer.Text = (factor2 == 0) ? ClearInputs() : (factor1 / factor2).ToString();
+                    break;
+                default:
                     ClearInputs();
-                    return;
-                }
-                txtAnswer.Text = (factor1 / factor2).ToString();
-            }
-            else
-            {
-                ClearInputs();
+                    break;
             }
         }
 
@@ -222,7 +192,7 @@ namespace Calculator
                 InputToActiveBox(".");
             }
         }
-
+      
         private void BtnSign_Click(object? sender, EventArgs e)
         {
 
