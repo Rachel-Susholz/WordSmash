@@ -31,10 +31,10 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             lblDatabase = new Label();
             pnlServer = new Panel();
-            rbtLocal = new RadioButton();
+            rbtLocalDB = new RadioButton();
             rbtAzure = new RadioButton();
             pnlDatabase = new Panel();
-            rbtRecipe = new RadioButton();
+            rbtHeartyHearth = new RadioButton();
             rbtRecordKeeper = new RadioButton();
             txtTypeQuery = new TextBox();
             btnRunQuery = new Button();
@@ -87,7 +87,7 @@
             // pnlServer
             // 
             pnlServer.BackColor = SystemColors.Control;
-            pnlServer.Controls.Add(rbtLocal);
+            pnlServer.Controls.Add(rbtLocalDB);
             pnlServer.Controls.Add(rbtAzure);
             pnlServer.Dock = DockStyle.Fill;
             pnlServer.Location = new Point(170, 3);
@@ -95,16 +95,16 @@
             pnlServer.Size = new Size(442, 32);
             pnlServer.TabIndex = 1;
             // 
-            // rbtLocal
+            // rbtLocalDB
             // 
-            rbtLocal.AutoSize = true;
-            rbtLocal.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            rbtLocal.Location = new Point(115, 3);
-            rbtLocal.Name = "rbtLocal";
-            rbtLocal.Size = new Size(101, 29);
-            rbtLocal.TabIndex = 1;
-            rbtLocal.Text = "Local DB";
-            rbtLocal.UseVisualStyleBackColor = true;
+            rbtLocalDB.AutoSize = true;
+            rbtLocalDB.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtLocalDB.Location = new Point(115, 3);
+            rbtLocalDB.Name = "rbtLocalDB";
+            rbtLocalDB.Size = new Size(96, 29);
+            rbtLocalDB.TabIndex = 1;
+            rbtLocalDB.Text = "LocalDB";
+            rbtLocalDB.UseVisualStyleBackColor = true;
             // 
             // rbtAzure
             // 
@@ -122,7 +122,7 @@
             // pnlDatabase
             // 
             pnlDatabase.BackColor = SystemColors.Control;
-            pnlDatabase.Controls.Add(rbtRecipe);
+            pnlDatabase.Controls.Add(rbtHeartyHearth);
             pnlDatabase.Controls.Add(rbtRecordKeeper);
             pnlDatabase.Dock = DockStyle.Fill;
             pnlDatabase.Location = new Point(3, 41);
@@ -131,16 +131,16 @@
             pnlDatabase.Size = new Size(161, 140);
             pnlDatabase.TabIndex = 2;
             // 
-            // rbtRecipe
+            // rbtHeartyHearth
             // 
-            rbtRecipe.AutoSize = true;
-            rbtRecipe.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            rbtRecipe.Location = new Point(6, 32);
-            rbtRecipe.Name = "rbtRecipe";
-            rbtRecipe.Size = new Size(84, 29);
-            rbtRecipe.TabIndex = 1;
-            rbtRecipe.Text = "Recipe";
-            rbtRecipe.UseVisualStyleBackColor = true;
+            rbtHeartyHearth.AutoSize = true;
+            rbtHeartyHearth.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            rbtHeartyHearth.Location = new Point(6, 32);
+            rbtHeartyHearth.Name = "rbtHeartyHearth";
+            rbtHeartyHearth.Size = new Size(138, 29);
+            rbtHeartyHearth.TabIndex = 1;
+            rbtHeartyHearth.Text = "HeartyHearth";
+            rbtHeartyHearth.UseVisualStyleBackColor = true;
             // 
             // rbtRecordKeeper
             // 
@@ -167,7 +167,9 @@
             txtTypeQuery.Name = "txtTypeQuery";
             txtTypeQuery.Size = new Size(442, 101);
             txtTypeQuery.TabIndex = 3;
+            txtTypeQuery.TabStop = false;
             txtTypeQuery.Text = "Type Query Here";
+            txtTypeQuery.UseWaitCursor = true;
             // 
             // btnRunQuery
             // 
@@ -255,10 +257,10 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Label lblDatabase;
         private Panel pnlServer;
-        private RadioButton rbtLocal;
+        private RadioButton rbtLocalDB;
         private RadioButton rbtAzure;
         private Panel pnlDatabase;
-        private RadioButton rbtRecipe;
+        private RadioButton rbtHeartyHearth;
         private RadioButton rbtRecordKeeper;
         private TextBox txtTypeQuery;
         private Button btnRunQuery;

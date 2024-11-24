@@ -14,6 +14,13 @@ namespace SqlExecutor
 {
     public partial class SQL_Executor : Form
     {
+
+        private enum ServerChoiceEnum { Local, Azure }
+        private enum DatabaseChoiceEnum { RecordKeeperDB, HeartyHearthDB }
+
+        string SelectedServer = "";
+        string SelectedDatabase = "";
+
         public SQL_Executor()
         {
             InitializeComponent();
@@ -21,17 +28,35 @@ namespace SqlExecutor
             btnRunQuery.Click += BtnRunQuery_Click;
         }
 
-
+        private void UpdateFormVariables()
+        {
+            if (rbtLocalDB.Checked)
+            {
+                SelectedServer = ServerChoiceEnum.Local.ToString();
+            }
+            else if (rbtAzure.Checked)
+            {
+                SelectedServer = ServerChoiceEnum.Azure.ToString();
+            }
+            if (rbtRecordKeeper.Checked)
+            {
+                SelectedDatabase = DatabaseChoiceEnum.RecordKeeperDB.ToString();
+            }
+            else if (rbtHeartyHearth.Checked)
+            {
+                SelectedDatabase = DatabaseChoiceEnum.HeartyHearthDB.ToString();
+            }
+        }
 
         private string GetDatabaseName()
         {
-            string s = "";
+            var s = "";
 
             if (rbtRecordKeeper.Checked)
             {
                 s = "RecordKeeperDB";
             }
-            else if (rbtRecipe.Checked)
+            else if (rbtHeartyHearth.Checked)
             {
                 s = "HeartyHearthDB";
             }
@@ -42,10 +67,10 @@ namespace SqlExecutor
 
         private string GetConnectionString()
         {
-            string s = "";
-            string DatabaseName = GetDatabaseName();
+            var s = "";
+            var DatabaseName = GetDatabaseName();
 
-            if (rbtLocal.Checked)
+            if (rbtLocalDB.Checked)
             {
                 // Local SQL Server connection string
                 s = $"Server=.\\SQLExpress;DataBase={DatabaseName};Trusted_Connection=True";
@@ -55,33 +80,33 @@ namespace SqlExecutor
                 // Azure SQL Server connection string
                 s = $"Server=tcp:dev-rochelsusholz.database.windows.net,1433; Initial Catalog={DatabaseName};Persist Security Info=False;User ID=rsadmin;Password=Rochel@9225; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
             }
-            
+
             return s;
         }
 
         private DataTable GetDataTable(string sqlstatement)
         {
-            DataTable dt = new DataTable();
-            SqlConnection conn = new SqlConnection();
+            DataTable dt = new();
+            SqlConnection conn = new();
             conn.ConnectionString = GetConnectionString();
             conn.Open();
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new();
             cmd.Connection = conn;
             cmd.CommandText = sqlstatement;
-            SqlDataReader dr = cmd.ExecuteReader();
+            var dr = cmd.ExecuteReader();
             dt.Load(dr);
             return dt;
         }
 
         private void ShowDataInGrid()
         {
-            TabPage p = new TabPage("Query" + (tbcQuery.TabPages.Count + 1).ToString());
+            var p = new TabPage($"{tbcQuery.TabPages.Count + 1} {SelectedServer} {SelectedDatabase}");
             tbcQuery.TabPages.Add(p);
             tbcQuery.SelectedTab = p;
 
-            string s = txtTypeQuery.Text;
-            DataTable dt = GetDataTable(s);
-            DataGridView dgv = new DataGridView()
+            var s = txtTypeQuery.Text;
+            var dt = GetDataTable(s);
+            DataGridView dgv = new()
             {
                 Dock = DockStyle.Fill,
                 DataSource = dt,
@@ -90,9 +115,13 @@ namespace SqlExecutor
         }
         private void BtnRunQuery_Click(object? sender, EventArgs e)
         {
-
+            UpdateFormVariables();
             ShowDataInGrid();
-            
+
         }
+        //RS I called UpdateFormVariables() here so that when the user clicks run
+        //query it selects server and database based on what radio buttons are selected
+        //and then converts those value to string values which are displayed in the thab window titles.
+        //Is there a better way to do this? 
     }
 }
