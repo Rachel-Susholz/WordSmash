@@ -165,10 +165,10 @@
             txtTypeQuery.Location = new Point(170, 41);
             txtTypeQuery.Multiline = true;
             txtTypeQuery.Name = "txtTypeQuery";
+            txtTypeQuery.PlaceholderText = "Type Query Here";
             txtTypeQuery.Size = new Size(442, 101);
             txtTypeQuery.TabIndex = 3;
             txtTypeQuery.TabStop = false;
-            txtTypeQuery.Text = "Type Query Here";
             txtTypeQuery.UseWaitCursor = true;
             // 
             // btnRunQuery

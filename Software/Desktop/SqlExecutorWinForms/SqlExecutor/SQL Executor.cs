@@ -100,7 +100,7 @@ namespace SqlExecutor
                 DataSource = dt,
             };
             p.Controls.Add(dgv);
-            
+
         }
         private void BtnRunQuery_Click(object? sender, EventArgs e)
         {

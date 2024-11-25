@@ -616,6 +616,7 @@
             // 
             // pnlShape
             // 
+            pnlShape.BackColor = Color.Black;
             pnlShape.Dock = DockStyle.Fill;
             pnlShape.Location = new Point(346, 3);
             pnlShape.Name = "pnlShape";

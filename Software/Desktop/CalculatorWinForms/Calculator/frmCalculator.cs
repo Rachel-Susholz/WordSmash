@@ -89,14 +89,14 @@ namespace Calculator
 
         //YM ClearInputs should remain a method not a function. I understand you did it for Calculate() txtAnswer.Text but in that scenario it is best 
         //to just leave it as an if statement rather than changing this to a funciton.
-        private string ClearInputs()
+        private void ClearInputs()
         {
-            string s = "";
+            
             txtFactor1.Text = "";
             txtFactor2.Text = "";
             txtOperator.Text = "";
             txtAnswer.Text = "";
-            return s;
+            
         }
 
         private void InputSign()
@@ -146,7 +146,12 @@ namespace Calculator
                     txtAnswer.Text = (factor1 * factor2).ToString();
                     break;
                 case "/":
-                    txtAnswer.Text = (factor2 == 0) ? ClearInputs() : (factor1 / factor2).ToString();
+                    if (factor2 == 0)
+                    {
+                        ClearInputs();
+                        return;
+                    }
+                    txtAnswer.Text = (factor1 / factor2).ToString();
                     break;
                 default:
                     ClearInputs();
