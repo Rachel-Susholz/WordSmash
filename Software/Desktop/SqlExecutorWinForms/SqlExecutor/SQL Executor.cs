@@ -48,17 +48,18 @@ namespace SqlExecutor
             }
         }
 
+        //No need for this funtrion - you have the Global SelectedDatabase variable instead. 
         private string GetDatabaseName()
         {
             var s = "";
 
             if (rbtRecordKeeper.Checked)
             {
-                s = "RecordKeeperDB";
+                s = "RecordKeeperDB"; //FB Please sure Enum values
             }
             else if (rbtHeartyHearth.Checked)
             {
-                s = "HeartyHearthDB";
+                s = "HeartyHearthDB"; //FB Please sure Enum values
             }
 
             return s;
@@ -70,6 +71,7 @@ namespace SqlExecutor
             var s = "";
             var DatabaseName = GetDatabaseName();
 
+            ///FB Use the SelectedServer variable and check if it's equal to the enum.
             if (rbtLocalDB.Checked)
             {
                 // Local SQL Server connection string
@@ -123,5 +125,6 @@ namespace SqlExecutor
         //query it selects server and database based on what radio buttons are selected
         //and then converts those value to string values which are displayed in the thab window titles.
         //Is there a better way to do this? 
+        //FB You can call it from SHowDataInGrid() as that is always called and it's better not to keep anything in the button click so that the code should be reusable.
     }
 }
