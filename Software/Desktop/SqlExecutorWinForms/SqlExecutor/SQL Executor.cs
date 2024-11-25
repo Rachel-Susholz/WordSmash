@@ -48,36 +48,21 @@ namespace SqlExecutor
             }
         }
 
-        //No need for this funtrion - you have the Global SelectedDatabase variable instead. 
-        private string GetDatabaseName()
-        {
-            var s = "";
-
-            if (rbtRecordKeeper.Checked)
-            {
-                s = "RecordKeeperDB"; //FB Please sure Enum values
-            }
-            else if (rbtHeartyHearth.Checked)
-            {
-                s = "HeartyHearthDB"; //FB Please sure Enum values
-            }
-
-            return s;
-        }
 
 
         private string GetConnectionString()
         {
             var s = "";
-            var DatabaseName = GetDatabaseName();
+            var DatabaseName = SelectedDatabase;
+            UpdateFormVariables();
 
             ///FB Use the SelectedServer variable and check if it's equal to the enum.
-            if (rbtLocalDB.Checked)
+            if (SelectedServer == ServerChoiceEnum.Local.ToString())
             {
                 // Local SQL Server connection string
                 s = $"Server=.\\SQLExpress;DataBase={DatabaseName};Trusted_Connection=True";
             }
-            else if (rbtAzure.Checked)
+            else if (SelectedServer == ServerChoiceEnum.Azure.ToString())
             {
                 // Azure SQL Server connection string
                 s = $"Server=tcp:dev-rochelsusholz.database.windows.net,1433; Initial Catalog={DatabaseName};Persist Security Info=False;User ID=rsadmin;Password=Rochel@9225; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
@@ -102,6 +87,7 @@ namespace SqlExecutor
 
         private void ShowDataInGrid()
         {
+            UpdateFormVariables();
             var p = new TabPage($"{tbcQuery.TabPages.Count + 1} {SelectedServer} {SelectedDatabase}");
             tbcQuery.TabPages.Add(p);
             tbcQuery.SelectedTab = p;
@@ -114,10 +100,10 @@ namespace SqlExecutor
                 DataSource = dt,
             };
             p.Controls.Add(dgv);
+            
         }
         private void BtnRunQuery_Click(object? sender, EventArgs e)
         {
-            UpdateFormVariables();
             ShowDataInGrid();
 
         }
