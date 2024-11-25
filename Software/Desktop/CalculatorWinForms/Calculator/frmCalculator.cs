@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    //YM Excellent work 99% See one comment below.
     public partial class frmCalculator : Form
     {
 
@@ -85,6 +86,9 @@ namespace Calculator
             }
         }
 
+
+        //YM ClearInputs should remain a method not a function. I understand you did it for Calculate() txtAnswer.Text but in that scenario it is best 
+        //to just leave it as an if statement rather than changing this to a funciton.
         private string ClearInputs()
         {
             string s = "";
