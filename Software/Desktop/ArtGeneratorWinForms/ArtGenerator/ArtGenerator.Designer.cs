@@ -153,7 +153,7 @@
             rbtShapeDisplayTime.Location = new Point(6, 70);
             rbtShapeDisplayTime.Name = "rbtShapeDisplayTime";
             rbtShapeDisplayTime.Size = new Size(185, 21);
-            rbtShapeDisplayTime.TabIndex = 2;
+            rbtShapeDisplayTime.TabIndex = 6;
             rbtShapeDisplayTime.TabStop = true;
             rbtShapeDisplayTime.Text = "Add Shapes For x Seconds";
             rbtShapeDisplayTime.UseVisualStyleBackColor = true;
@@ -165,7 +165,7 @@
             rbtShapeFrequency.Location = new Point(6, 36);
             rbtShapeFrequency.Name = "rbtShapeFrequency";
             rbtShapeFrequency.Size = new Size(214, 21);
-            rbtShapeFrequency.TabIndex = 1;
+            rbtShapeFrequency.TabIndex = 4;
             rbtShapeFrequency.TabStop = true;
             rbtShapeFrequency.Text = "Add Shape Every x Milliseconds";
             rbtShapeFrequency.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             rbtShapeCount.Location = new Point(6, 3);
             rbtShapeCount.Name = "rbtShapeCount";
             rbtShapeCount.Size = new Size(187, 21);
-            rbtShapeCount.TabIndex = 0;
+            rbtShapeCount.TabIndex = 2;
             rbtShapeCount.TabStop = true;
             rbtShapeCount.Text = "Specific Number of Shapes";
             rbtShapeCount.UseVisualStyleBackColor = true;
@@ -200,7 +200,7 @@
             txtShapeFrequency.Name = "txtShapeFrequency";
             txtShapeFrequency.PlaceholderText = " # of milliseconds";
             txtShapeFrequency.Size = new Size(107, 27);
-            txtShapeFrequency.TabIndex = 4;
+            txtShapeFrequency.TabIndex = 5;
             // 
             // txtShapeDisplayTime
             // 
@@ -210,7 +210,7 @@
             txtShapeDisplayTime.Name = "txtShapeDisplayTime";
             txtShapeDisplayTime.PlaceholderText = " # of seconds";
             txtShapeDisplayTime.Size = new Size(107, 27);
-            txtShapeDisplayTime.TabIndex = 5;
+            txtShapeDisplayTime.TabIndex = 7;
             // 
             // lblSettings
             // 
@@ -221,7 +221,7 @@
             lblSettings.Location = new Point(3, 0);
             lblSettings.Name = "lblSettings";
             lblSettings.Size = new Size(331, 33);
-            lblSettings.TabIndex = 6;
+            lblSettings.TabIndex = 0;
             lblSettings.Text = "Art Generator Settings";
             lblSettings.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -233,7 +233,7 @@
             lblShapes.Location = new Point(3, 33);
             lblShapes.Name = "lblShapes";
             lblShapes.Size = new Size(106, 33);
-            lblShapes.TabIndex = 7;
+            lblShapes.TabIndex = 1;
             lblShapes.Text = "Shapes";
             lblShapes.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -246,7 +246,7 @@
             lblColorRange.Location = new Point(3, 165);
             lblColorRange.Name = "lblColorRange";
             lblColorRange.Size = new Size(218, 33);
-            lblColorRange.TabIndex = 8;
+            lblColorRange.TabIndex = 5;
             lblColorRange.Text = "Color Range (RGB)";
             lblColorRange.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -282,6 +282,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(331, 93);
             tableLayoutPanel1.TabIndex = 9;
             // 
@@ -292,7 +293,7 @@
             lblRed.Location = new Point(3, 0);
             lblRed.Name = "lblRed";
             lblRed.Size = new Size(60, 31);
-            lblRed.TabIndex = 0;
+            lblRed.TabIndex = 8;
             lblRed.Text = "Red:";
             lblRed.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -303,7 +304,7 @@
             lblGreen.Location = new Point(3, 31);
             lblGreen.Name = "lblGreen";
             lblGreen.Size = new Size(60, 31);
-            lblGreen.TabIndex = 1;
+            lblGreen.TabIndex = 11;
             lblGreen.Text = "Green:";
             lblGreen.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -314,7 +315,7 @@
             lblBlue.Location = new Point(3, 62);
             lblBlue.Name = "lblBlue";
             lblBlue.Size = new Size(60, 31);
-            lblBlue.TabIndex = 2;
+            lblBlue.TabIndex = 14;
             lblBlue.Text = "Blue:";
             lblBlue.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -325,7 +326,7 @@
             lblMinRed.Location = new Point(69, 0);
             lblMinRed.Name = "lblMinRed";
             lblMinRed.Size = new Size(60, 31);
-            lblMinRed.TabIndex = 3;
+            lblMinRed.TabIndex = 1;
             lblMinRed.Text = "Min";
             lblMinRed.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -336,7 +337,7 @@
             lblMinGreen.Location = new Point(69, 31);
             lblMinGreen.Name = "lblMinGreen";
             lblMinGreen.Size = new Size(60, 31);
-            lblMinGreen.TabIndex = 4;
+            lblMinGreen.TabIndex = 6;
             lblMinGreen.Text = "Min";
             lblMinGreen.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -358,7 +359,7 @@
             txtMinRed.Location = new Point(135, 3);
             txtMinRed.Name = "txtMinRed";
             txtMinRed.Size = new Size(60, 27);
-            txtMinRed.TabIndex = 6;
+            txtMinRed.TabIndex = 9;
             // 
             // txtMinGreen
             // 
@@ -367,7 +368,7 @@
             txtMinGreen.Location = new Point(135, 34);
             txtMinGreen.Name = "txtMinGreen";
             txtMinGreen.Size = new Size(60, 27);
-            txtMinGreen.TabIndex = 7;
+            txtMinGreen.TabIndex = 12;
             // 
             // txtMinBlue
             // 
@@ -376,7 +377,7 @@
             txtMinBlue.Location = new Point(135, 65);
             txtMinBlue.Name = "txtMinBlue";
             txtMinBlue.Size = new Size(60, 27);
-            txtMinBlue.TabIndex = 8;
+            txtMinBlue.TabIndex = 15;
             // 
             // lblMaxRed
             // 
@@ -385,7 +386,7 @@
             lblMaxRed.Location = new Point(201, 0);
             lblMaxRed.Name = "lblMaxRed";
             lblMaxRed.Size = new Size(60, 31);
-            lblMaxRed.TabIndex = 9;
+            lblMaxRed.TabIndex = 3;
             lblMaxRed.Text = "Max";
             lblMaxRed.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -396,7 +397,7 @@
             lblMaxGreen.Location = new Point(201, 31);
             lblMaxGreen.Name = "lblMaxGreen";
             lblMaxGreen.Size = new Size(60, 31);
-            lblMaxGreen.TabIndex = 10;
+            lblMaxGreen.TabIndex = 8;
             lblMaxGreen.Text = "Max";
             lblMaxGreen.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -418,7 +419,7 @@
             txtMaxRed.Location = new Point(267, 3);
             txtMaxRed.Name = "txtMaxRed";
             txtMaxRed.Size = new Size(61, 27);
-            txtMaxRed.TabIndex = 12;
+            txtMaxRed.TabIndex = 10;
             // 
             // txtMaxGreen
             // 
@@ -436,7 +437,7 @@
             txtMaxBlue.Location = new Point(267, 65);
             txtMaxBlue.Name = "txtMaxBlue";
             txtMaxBlue.Size = new Size(61, 27);
-            txtMaxBlue.TabIndex = 14;
+            txtMaxBlue.TabIndex = 16;
             // 
             // lblSize
             // 
@@ -446,7 +447,7 @@
             lblSize.Location = new Point(3, 297);
             lblSize.Name = "lblSize";
             lblSize.Size = new Size(106, 33);
-            lblSize.TabIndex = 10;
+            lblSize.TabIndex = 17;
             lblSize.Text = "Size";
             lblSize.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -486,7 +487,7 @@
             lblHeight.Location = new Point(3, 0);
             lblHeight.Name = "lblHeight";
             lblHeight.Size = new Size(60, 30);
-            lblHeight.TabIndex = 0;
+            lblHeight.TabIndex = 18;
             lblHeight.Text = "Height:";
             lblHeight.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -497,7 +498,7 @@
             lblWidth.Location = new Point(3, 30);
             lblWidth.Name = "lblWidth";
             lblWidth.Size = new Size(60, 30);
-            lblWidth.TabIndex = 1;
+            lblWidth.TabIndex = 21;
             lblWidth.Text = "Width:";
             lblWidth.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -552,7 +553,7 @@
             txtMinHeight.Location = new Point(135, 3);
             txtMinHeight.Name = "txtMinHeight";
             txtMinHeight.Size = new Size(60, 27);
-            txtMinHeight.TabIndex = 6;
+            txtMinHeight.TabIndex = 19;
             // 
             // txtMinWidth
             // 
@@ -561,7 +562,7 @@
             txtMinWidth.Location = new Point(135, 33);
             txtMinWidth.Name = "txtMinWidth";
             txtMinWidth.Size = new Size(60, 27);
-            txtMinWidth.TabIndex = 7;
+            txtMinWidth.TabIndex = 22;
             // 
             // txtMaxHeight
             // 
@@ -570,7 +571,7 @@
             txtMaxHeight.Location = new Point(267, 3);
             txtMaxHeight.Name = "txtMaxHeight";
             txtMaxHeight.Size = new Size(61, 27);
-            txtMaxHeight.TabIndex = 8;
+            txtMaxHeight.TabIndex = 20;
             // 
             // txtMaxWidth
             // 
@@ -579,7 +580,7 @@
             txtMaxWidth.Location = new Point(267, 33);
             txtMaxWidth.Name = "txtMaxWidth";
             txtMaxWidth.Size = new Size(61, 27);
-            txtMaxWidth.TabIndex = 9;
+            txtMaxWidth.TabIndex = 23;
             // 
             // btnStart
             // 
@@ -588,7 +589,7 @@
             btnStart.Location = new Point(3, 399);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(106, 42);
-            btnStart.TabIndex = 12;
+            btnStart.TabIndex = 24;
             btnStart.Text = "Start";
             btnStart.UseVisualStyleBackColor = true;
             // 
@@ -599,7 +600,7 @@
             btnClearShapes.Location = new Point(115, 399);
             btnClearShapes.Name = "btnClearShapes";
             btnClearShapes.Size = new Size(106, 42);
-            btnClearShapes.TabIndex = 13;
+            btnClearShapes.TabIndex = 25;
             btnClearShapes.Text = "Clear Shapes";
             btnClearShapes.UseVisualStyleBackColor = true;
             // 
@@ -610,7 +611,7 @@
             btnRefreshColor.Location = new Point(227, 399);
             btnRefreshColor.Name = "btnRefreshColor";
             btnRefreshColor.Size = new Size(107, 42);
-            btnRefreshColor.TabIndex = 14;
+            btnRefreshColor.TabIndex = 26;
             btnRefreshColor.Text = "Refresh Color";
             btnRefreshColor.UseVisualStyleBackColor = true;
             // 
@@ -665,8 +666,6 @@
         private Label lblMinRed;
         private Label lblMinGreen;
         private Label lblMinBlue;
-        private TextBox txtMinRed;
-        private TextBox txtMinGreen;
         private TextBox txtMinBlue;
         private Label lblMaxRed;
         private Label lblMaxGreen;
@@ -689,5 +688,7 @@
         private Button btnStart;
         private Button btnClearShapes;
         private Button btnRefreshColor;
+        private TextBox txtMinRed;
+        private TextBox txtMinGreen;
     }
 }
