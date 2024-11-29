@@ -27,10 +27,10 @@ namespace Calculator
             btn7.Click += Btn_Click;
             btn8.Click += Btn_Click;
             btn9.Click += Btn_Click;
-            btnAdd.Click += BtnAdd_Click;
-            btnDivide.Click += BtnDivide_Click;
-            btnMultiply.Click += BtnMultiply_Click;
-            btnSubtract.Click += BtnSubtract_Click;
+            btnAdd.Click += BtnOperator_Click;
+            btnDivide.Click += BtnOperator_Click;
+            btnMultiply.Click += BtnOperator_Click;
+            btnSubtract.Click += BtnOperator_Click;
             btnClear.Click += BtnClear_Click;
             btnDecimal.Click += BtnDecimal_Click;
             btnSign.Click += BtnSign_Click;
@@ -64,7 +64,7 @@ namespace Calculator
 
         private void SetOperator(string value)
         {
-            if (txtFactor1.Text != "")
+            if (txtFactor1.Text != "" && txtFactor2.Text == "" && txtOperator.Text == "")
             {
                 txtOperator.Text = value;
             }
@@ -160,23 +160,7 @@ namespace Calculator
             ClearInputs();
         }
 
-        private void BtnSubtract_Click(object? sender, EventArgs e)
-        {
-                SetOperator("-");
-        }
         
-        private void BtnMultiply_Click(object? sender, EventArgs e)
-        {
-                SetOperator("x");
-        }
-        private void BtnDivide_Click(object? sender, EventArgs e)
-        {
-                SetOperator("/");
-        }
-        private void BtnAdd_Click(object? sender, EventArgs e)
-        {
-                SetOperator("+");
-        }
 
 
         private void Btn_Click(object? sender, EventArgs e)
@@ -185,6 +169,13 @@ namespace Calculator
             Button btn = (Button)sender;
             string s = btn.Text;
             InputToActiveBox(s);
+        }
+
+        private void BtnOperator_Click(object ? sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string s = btn.Text;
+            SetOperator(s);
         }
 
 
