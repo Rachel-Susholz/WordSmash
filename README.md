@@ -1,4 +1,4 @@
-# WordSmash
+# Word Smash
 ## Game Overview
 Word Smash is an engaging word game where players guess hidden words by smashing buttons. The game is designed to be quick, fun, and stimulating, perfect for anyone looking for a light challenge. Players will be presented with a series of blank spaces, each representing a hidden word, and must choose the correct letters from a set of buttons to complete the word.
 ## Features
