@@ -196,7 +196,7 @@
             btnPickWord.TabIndex = 0;
             btnPickWord.Text = "Pick a Word";
             btnPickWord.UseVisualStyleBackColor = false;
-            btnPickWord.Click += btnPickWord_Click;
+            
             // 
             // btnGiveUp
             // 

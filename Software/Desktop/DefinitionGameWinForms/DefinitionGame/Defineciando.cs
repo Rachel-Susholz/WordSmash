@@ -17,7 +17,7 @@ namespace DefinitionGame
         List<Word> lstWord = new();
         private Word currentWord;
         int score = 0;
-        int numberOfTries = 0;
+        int numberOfTries = -1;
         int correctIndex = -1;
         int selectedIndex = -1;
         Random rnd = new();
@@ -34,7 +34,7 @@ namespace DefinitionGame
 
         }
 
-      
+
         private void btnPickWord_Click(object sender, EventArgs e)
         {
             ClearPreviousSelection();
@@ -42,6 +42,7 @@ namespace DefinitionGame
             ApplyFilters();
             GenerateDefinitions(currentWord);
             btnEnter.Enabled = true;
+            btnGiveUp.Enabled = true;
 
         }
         private void btnEnter_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace DefinitionGame
             UpdateScore();
             ShowUpdatedScoreAndTries();
             btnPickWord.Enabled = true;
+            btnGiveUp.Enabled = false;
         }
         private void btnGiveUp_Click(object sender, EventArgs e)
 
@@ -60,6 +62,7 @@ namespace DefinitionGame
             ShowUpdatedScoreAndTries();
             btnPickWord.Enabled = true;
             btnEnter.Enabled = false;
+            btnGiveUp.Enabled = false;
         }
 
         private void ShowUpdatedScoreAndTries()
@@ -100,7 +103,7 @@ namespace DefinitionGame
 
         }
 
-        
+
         private void GenerateDefinitions(Word word)
         {
             var correctDefinition = word.Definition;
