@@ -21,6 +21,9 @@ namespace DefinitionGame
         int correctIndex = -1;
         int selectedIndex = -1;
         Random rnd = new();
+        
+
+
         public Defineciando()
         {
             InitializeComponent();
@@ -44,25 +47,36 @@ namespace DefinitionGame
             btnGiveUp.Enabled = true;
 
         }
+ 
         private void btnEnter_Click(object sender, EventArgs e)
         {
-            ShowAnswers();
+            if (!rbDefinition1.Checked && !rbDefinition2.Checked && !rbDefinition3.Checked)
+            {
+                MessageBox.Show("Please select a definition before clicking Enter!", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Exit the method to prevent further processing
+            }
+            btnEnter.Enabled = false;
             UpdateScore();
+            ShowAnswers();
             ShowUpdatedScoreAndTries();
+            
             btnPickWord.Enabled = true;
             btnGiveUp.Enabled = false;
         }
         private void btnGiveUp_Click(object sender, EventArgs e)
 
         {
-
+           
             lblFeedback.Text = $"The correct definition was: {currentWord.Definition}";
             ShowAnswers();
+            UpdateScore();
             ShowUpdatedScoreAndTries();
             btnPickWord.Enabled = true;
             btnEnter.Enabled = false;
             btnGiveUp.Enabled = false;
+            
         }
+
 
         private void ShowUpdatedScoreAndTries()
         {
@@ -136,12 +150,13 @@ namespace DefinitionGame
 
         private void ShowAnswers()
         {
-
-
+            
 
             if (rbDefinition1.Checked) selectedIndex = 0;
             else if (rbDefinition2.Checked) selectedIndex = 1;
             else if (rbDefinition3.Checked) selectedIndex = 2;
+
+           
 
             lblAnswer1.Visible = true;
             lblAnswer2.Visible = true;
@@ -157,16 +172,19 @@ namespace DefinitionGame
             lblAnswer3.Text = (correctIndex == 2) ? "Correct!" : "Incorrect!";
             lblAnswer3.BackColor = (correctIndex == 2) ? Color.Green : Color.Red;
 
-            numberOfTries++;
+            
         }
 
         private void UpdateScore()
         {
+            numberOfTries++;
             if (selectedIndex == correctIndex)
             {
                 score++;
                 lblFeedback.Text = "Good, Your choice is correct!";
             }
+            
+            
             else
             {
                 score--;
@@ -175,6 +193,7 @@ namespace DefinitionGame
 
 
         }
+     
 
 
     }
