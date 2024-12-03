@@ -66,10 +66,9 @@ namespace DefinitionGame
         private void btnGiveUp_Click(object sender, EventArgs e)
 
         {
-           
+            numberOfTries++;
             lblFeedback.Text = $"The correct definition was: {currentWord.Definition}";
             ShowAnswers();
-            UpdateScore();
             ShowUpdatedScoreAndTries();
             btnPickWord.Enabled = true;
             btnEnter.Enabled = false;
@@ -185,7 +184,7 @@ namespace DefinitionGame
             }
             
             
-            else
+            else 
             {
                 score--;
                 lblFeedback.Text = "Try again!";
