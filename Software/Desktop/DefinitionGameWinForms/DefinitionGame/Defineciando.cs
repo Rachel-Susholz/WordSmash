@@ -17,7 +17,7 @@ namespace DefinitionGame
         List<Word> lstWord = new();
         private Word currentWord;
         int score = 0;
-        int numberOfTries = -1;
+        int numberOfTries = 0;
         int correctIndex = -1;
         int selectedIndex = -1;
         Random rnd = new();
