@@ -1,4 +1,5 @@
-![Word Smash Icon](https://github.com/user-attachments/assets/f01cc51d-4388-4331-8fa3-3985047e6c86)
+![Word Smash Readme Photo](https://github.com/user-attachments/assets/d8b8974a-8d84-4f39-965c-3899497724d3)
+
 
 # Word Smash
 ## Game Overview
