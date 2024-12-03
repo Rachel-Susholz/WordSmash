@@ -21,7 +21,6 @@ namespace DefinitionGame
         int correctIndex = -1;
         int selectedIndex = -1;
         Random rnd = new();
-
         public Defineciando()
         {
             InitializeComponent();
