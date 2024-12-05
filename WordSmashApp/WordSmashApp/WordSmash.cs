@@ -112,27 +112,27 @@ namespace WordSmashApp
         private void UseHint()
         {
             char nextLetter = targetWord.First(c => !revealedLetters.Contains(c));
-           
-                revealedLetters.Add(nextLetter);
-                remainingTries--;
-                lblFeedback.Text = "Hint used!";
-                UpdateUIState();
-           
+
+            revealedLetters.Add(nextLetter);
+            remainingTries--;
+            lblFeedback.Text = "Hint used!";
+            UpdateUIState();
+
             CheckGameEndConditions();
         }
 
         private void UpdateUIState()
         {
             lblDisplayWord.Text = GetRevealedWord();
-            lblScore.Text = score.ToString();
+            txtScore.Text = score.ToString();
             txtRemainingTries.Text = remainingTries.ToString();
         }
 
         private string GetRevealedWord()
         {
-            var displayWord = new StringBuilder(); 
+            var displayWord = new StringBuilder();
 
-            for (int i = 0; i < targetWord.Length; i++) 
+            for (int i = 0; i < targetWord.Length; i++)
             {
                 displayWord.Append(revealedLetters.Contains(targetWord[i]) ? targetWord[i] : '_');
 
@@ -160,7 +160,7 @@ namespace WordSmashApp
                 EndGame($"The word was: {targetWord}. So Close! Press Start to try again!");
             }
         }
-        
+
         private void EndGame(string feedback)
         {
             lblFeedback.Text = feedback;
@@ -176,7 +176,7 @@ namespace WordSmashApp
             lblFeedback.Text = feedback;
             lblStatus.Text = status;
             lblDisplayWord.Text = string.Join(" ", displayWord);
-            lblScore.Text = score.ToString();
+            txtScore.Text = score.ToString();
             txtRemainingTries.Text = remainingTries.ToString();
         }
 

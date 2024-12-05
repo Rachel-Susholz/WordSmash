@@ -34,7 +34,7 @@
             pnlScore = new Panel();
             txtRemainingTries = new TextBox();
             lblRemainingTries = new Label();
-            Score = new TextBox();
+            txtScore = new TextBox();
             lblScore = new Label();
             tblPlayAndStatus = new TableLayoutPanel();
             lblStatus = new Label();
@@ -127,7 +127,7 @@
             // 
             pnlScore.Controls.Add(txtRemainingTries);
             pnlScore.Controls.Add(lblRemainingTries);
-            pnlScore.Controls.Add(Score);
+            pnlScore.Controls.Add(txtScore);
             pnlScore.Controls.Add(lblScore);
             pnlScore.Dock = DockStyle.Fill;
             pnlScore.Location = new Point(3, 82);
@@ -158,15 +158,15 @@
             lblRemainingTries.Text = "Remaining Tries:";
             lblRemainingTries.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // Score
+            // txtScore
             // 
-            Score.BackColor = Color.LightYellow;
-            Score.ForeColor = Color.Pink;
-            Score.Location = new Point(683, 0);
-            Score.Name = "Score";
-            Score.ReadOnly = true;
-            Score.Size = new Size(125, 27);
-            Score.TabIndex = 1;
+            txtScore.BackColor = Color.LightYellow;
+            txtScore.ForeColor = Color.Pink;
+            txtScore.Location = new Point(683, 0);
+            txtScore.Name = "txtScore";
+            txtScore.ReadOnly = true;
+            txtScore.Size = new Size(125, 27);
+            txtScore.TabIndex = 1;
             // 
             // lblScore
             // 
@@ -674,7 +674,7 @@
         private Button btnStart;
         private Panel pnlScore;
         private Label lblScore;
-        private TextBox Score;
+        private TextBox txtScore;
         private TableLayoutPanel tblPlayAndStatus;
         private Panel pnlFeedback;
         private Label lblFeedback;
