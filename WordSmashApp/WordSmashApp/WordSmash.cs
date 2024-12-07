@@ -82,8 +82,11 @@ namespace WordSmashApp
         {
             char guessedLetter = btn.Text[0];
             btn.Enabled = false;
-
-            if (targetWord.Contains(guessedLetter))
+            if (revealedLetters.Contains(guessedLetter))
+            {
+                return;
+            }
+            else if (targetWord.Contains(guessedLetter))
             {
                 revealedLetters.Add(guessedLetter);
                 score += 10;
