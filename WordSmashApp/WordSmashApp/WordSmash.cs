@@ -10,7 +10,7 @@ namespace WordSmashApp
     public partial class WordSmash : Form
     {
         // Form-level variables
-        List<Word> lstWord = new();
+        
         List<char> revealedLetters = new();
         List<Button> alphabetButtons = new();
         string targetWord = "";
@@ -22,6 +22,7 @@ namespace WordSmashApp
         {
             InitializeComponent();
             InitializeGameSetup();
+   
         }
 
         private void InitializeGameSetup()
@@ -55,6 +56,7 @@ namespace WordSmashApp
         // Start a new game
         private void StartGame()
         {
+            List<Word> lstWord = new();
             if (!lstWord.Any())
             {
                 var allWords = gnuciDictionary.EnglishDictionary.GetAllWords().ToList();
@@ -71,7 +73,7 @@ namespace WordSmashApp
             remainingTries = 6;
 
             // Update UI
-            UpdateUI("", "Game Started", targetWord.Select(l => "_").ToList());
+            InitializeGameUI("", "Game Started", targetWord.Select(l => "_").ToList());
             EnableAlphabetButtons();
             btnStart.Enabled = false;
             btnHint.Enabled = true;
@@ -82,6 +84,7 @@ namespace WordSmashApp
         {
             char guessedLetter = btn.Text[0];
             btn.Enabled = false;
+            btn.Text = "";
             if (revealedLetters.Contains(guessedLetter))
             {
                 return;
@@ -107,7 +110,7 @@ namespace WordSmashApp
                 lblFeedback.Text = "Try Again!";
             }
 
-            UpdateUIState();
+            RefreshGameUI();
             CheckGameEndConditions();
         }
 
@@ -119,17 +122,11 @@ namespace WordSmashApp
             revealedLetters.Add(nextLetter);
             remainingTries--;
             lblFeedback.Text = "Hint used!";
-            UpdateUIState();
-
+            RefreshGameUI();
             CheckGameEndConditions();
         }
 
-        private void UpdateUIState()
-        {
-            lblDisplayWord.Text = GetRevealedWord();
-            txtScore.Text = score.ToString();
-            txtRemainingTries.Text = remainingTries.ToString();
-        }
+    
 
         private string GetRevealedWord()
         {
@@ -155,7 +152,7 @@ namespace WordSmashApp
             if (targetWord.All(c => revealedLetters.Contains(c)))
             {
                 score += 100; // Add 100 points for uncovering the word
-                UpdateUIState(); // Ensure the updated score is reflected in the UI
+                RefreshGameUI(); // Ensure the updated score is reflected in the UI
                 EndGame("You uncovered the hidden word!!!!!!");
             }
             else if (remainingTries == 0)
@@ -174,13 +171,18 @@ namespace WordSmashApp
         }
 
         // UI Updates and helpers
-        private void UpdateUI(string feedback, string status, IEnumerable<string> displayWord)
+        private void InitializeGameUI(string feedback, string status, IEnumerable<string> displayWord)
         {
             lblFeedback.Text = feedback;
             lblStatus.Text = status;
             lblDisplayWord.Text = string.Join(" ", displayWord);
+            RefreshGameUI();
+        }
+        private void RefreshGameUI()
+        {
             txtScore.Text = score.ToString();
             txtRemainingTries.Text = remainingTries.ToString();
+            lblDisplayWord.Text = GetRevealedWord();
         }
 
         private void EnableAlphabetButtons() => alphabetButtons.ForEach(btn => btn.Enabled = true);
