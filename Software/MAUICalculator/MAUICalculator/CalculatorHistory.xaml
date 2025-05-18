@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MAUICalculator.CalculatorHistory"
+    Title="History"
+    BackgroundColor="White">
+
+    <ScrollView
+    VerticalOptions="FillAndExpand"
+    Padding="12">
+
+        <VerticalStackLayout
+      VerticalOptions="Start"
+      HorizontalOptions="FillAndExpand"
+      Spacing="16">
+
+            <Label
+        Text="Origins and Ancient Devices"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="Black" />
+            <Label
+        Text="Long before the electronic age, humans used simple tools to speed up arithmetic. The earliest known aids were tally sticks, counting boards, and, by around 2000 BC, the abacus—used in Sumer and Egypt and later refined across Asia and Europe."
+        FontSize="16"
+        TextColor="Black" />
+
+            <Label
+        Text="17th-Century Mechanical Calculators"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="Black" />
+            <Label
+        Text="In 1623 Wilhelm Schickard built what may have been the first “calculating clock.” Blaise Pascal followed in 1642 with his Pascaline—a geared adding machine with an innovative carry mechanism. Gottfried Wilhelm Leibniz then designed the Stepped Reckoner around 1673, aiming to perform all four arithmetic operations, though fabrication limits kept it largely experimental."
+        FontSize="16"
+        TextColor="Black" />
+
+            <Label
+        Text="19th-Century Commercial Machines"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="Black" />
+            <Label
+        Text="Charles Xavier Thomas de Colmar’s Arithmometer (patented 1820; in production from 1851) was the first reliable, mass-market machine, selling thousands worldwide. Push-button interfaces arrived in 1902 with James Dalton’s adding machine, and the purely mechanical, hand-cranked Curta debuted in 1948."
+        FontSize="16"
+        TextColor="Black" />
+
+            <Label
+        Text="Advent of Electronic Calculators"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="Black" />
+            <Label
+        Text="Relay-based machines like Casio’s 1957 Model 14-A and IBM’s all-transistor 608 hinted at what was possible—but the real breakthrough came in October 1961 when Bell Punch (Sumlock Comptometer) unveiled the ANITA Mk VII and VIII, the first all-electronic desktop calculators. Transistor-based models, and then integrated-circuit versions (e.g. the Friden EC-130 in 1963), followed quickly."
+        FontSize="16"
+        TextColor="Black" />
+
+            <Label
+        Text="Pocket Calculators and Beyond"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="Black" />
+            <Label
+        Text="The first truly pocket-sized calculators appeared in the early 1970s, driven by Intel’s 4004 microprocessor (1971), originally made for Busicom. By the mid-’70s, CMOS ICs drove costs down, making calculators ubiquitous in schools, offices—and, eventually, smartphones, where every device ships with a built-in calculator app."
+        FontSize="16"
+        TextColor="Black" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
