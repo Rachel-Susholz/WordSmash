@@ -10,29 +10,42 @@
     Padding="12"
     RowSpacing="8"
     ColumnSpacing="8"
-    RowDefinitions="Auto,*,*,*,*,*"
+    RowDefinitions="*,*,*,*,*,*"
     ColumnDefinitions="*,*,*,*">
         
-        <Label
-      Grid.Row="0"
-      Grid.ColumnSpan="4"
-      Text="0"
-      FontSize="36"
-      HorizontalTextAlignment="End"
-      VerticalOptions="Center" />
+        <Grid.Resources>
+            <Style TargetType="Border">
+                <Setter Property="Stroke" Value="LightGray" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="Background" Value="White" />
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="Margin" Value="2" />
+            </Style>
+        </Grid.Resources>
 
-        <Button
-      Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
-      Text="C"
-      FontSize="24"
-      BackgroundColor="LightGray"
-      Style="{StaticResource Key=clear-button}"/>
-        <Button
-      Grid.Row="1" Grid.Column="3"
-      Text="÷"
-      FontSize="24"
-      BackgroundColor="LightGray" 
-      Style="{StaticResource Key=operator-button}"/>
+        <Border Grid.Row="0" Grid.Column="0">
+            <Label FontSize="24"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="1">
+            <Label FontSize="24"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="2">
+            <Label FontSize="24"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="3">
+            <Label FontSize="24"
+             HorizontalOptions="Center"
+             VerticalOptions="Center"/>
+        </Border>
+
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="C" FontSize="24" Style="{StaticResource Key=clear-button}"/>
+        <Button Grid.Row="1" Grid.Column="3" Text="÷" FontSize="24" Style="{StaticResource Key=operator-button}"/>
 
         <Button Grid.Row="2" Grid.Column="0" Text="7" FontSize="24" BackgroundColor="LightBlue" Style="{StaticResource Key=numeric-button}"/>
         <Button Grid.Row="2" Grid.Column="1" Text="8" FontSize="24" BackgroundColor="LightBlue" Style="{StaticResource Key=numeric-button}"/>

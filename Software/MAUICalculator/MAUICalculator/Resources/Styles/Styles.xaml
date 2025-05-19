@@ -26,7 +26,7 @@
     <Style TargetType="Button" x:Key="numeric-button">
         <Setter Property="CornerRadius" Value="8" />
         <Setter Property="Margin" Value="10" />
-        <Setter Property="BorderColor" Value="White"/>
+        <Setter Property="BorderColor" Value="#FFFAF3"/>
         <Setter Property="BorderWidth" Value="2" />
         <Setter Property="Shadow">
             <Setter.Value>
@@ -72,8 +72,6 @@
         <Setter Property="TextColor" Value="White" />
     </Style>
     <Style TargetType="Button" x:Key="clear-button">
-        <Setter Property="HeightRequest" Value="95" />
-        <Setter Property="WidthRequest"  Value="500" />
         <Setter Property="CornerRadius" Value="34" />
 
         <Setter Property="FontAttributes" Value="Bold" />
@@ -102,8 +100,6 @@
         </Setter>
     </Style>
     <Style TargetType="Button" x:Key="equals-button" >
-        <Setter Property="HeightRequest" Value="95" />
-        <Setter Property="WidthRequest"  Value="95" />
         <Setter Property="CornerRadius" Value="34" />
 
         <Setter Property="FontAttributes" Value="Bold" />
