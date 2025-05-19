@@ -18,6 +18,11 @@
                 <Setter Property="Stroke" Value="LightGray" />
                 <Setter Property="StrokeThickness" Value="2" />
                 <Setter Property="Background" Value="White" />
+                <Setter Property="StrokeShape">
+                    <Setter.Value>
+                        <RoundRectangle CornerRadius="6" />
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Padding" Value="8" />
                 <Setter Property="Margin" Value="2" />
             </Style>
