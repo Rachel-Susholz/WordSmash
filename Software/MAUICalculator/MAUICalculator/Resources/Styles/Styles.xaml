@@ -23,32 +23,115 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
-    <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
-        <Setter Property="FontFamily" Value="OpenSansRegular"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="BorderWidth" Value="0"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="14,10"/>
-        <Setter Property="MinimumHeightRequest" Value="44"/>
-        <Setter Property="MinimumWidthRequest" Value="44"/>
-        <Setter Property="VisualStateManager.VisualStateGroups">
-            <VisualStateGroupList>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="Disabled">
-                        <VisualState.Setters>
-                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState x:Name="PointerOver" />
-                </VisualStateGroup>
-            </VisualStateGroupList>
+    <Style TargetType="Button" x:Key="numeric-button">
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="BorderColor" Value="White"/>
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Black"
+                Offset="10,10"
+                Radius="20"
+                Opacity="0.4" />
+            </Setter.Value>
         </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush >
+                    <GradientStop Color="White"    Offset="0.0" />
+                    <GradientStop Color="LightBlue" Offset="0.3" />
+                    <GradientStop Color="Blue"      Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="White" />
     </Style>
 
+    <Style TargetType="Button"  x:Key="operator-button">
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="BorderColor" Value="white" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Black"
+                Offset="10,10"
+                Radius="20"
+                Opacity="0.3" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush >
+                    <GradientStop Color="White"  Offset="0.0" />
+                    <GradientStop Color="#FF6F91" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="White" />
+    </Style>
+    <Style TargetType="Button" x:Key="clear-button">
+        <Setter Property="HeightRequest" Value="95" />
+        <Setter Property="WidthRequest"  Value="500" />
+        <Setter Property="CornerRadius" Value="34" />
+
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="TextColor" Value="#E0FFFFFF" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="BorderColor" Value="#FFFAF3" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="#88000000"
+        Offset="5,5"
+        Radius="30"
+        Opacity="0.6" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FFFAF3" Offset="0.0" />
+                    <GradientStop Color="#FF6F91" Offset="0.5" />
+                    <GradientStop Color="Blue" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="equals-button" >
+        <Setter Property="HeightRequest" Value="95" />
+        <Setter Property="WidthRequest"  Value="95" />
+        <Setter Property="CornerRadius" Value="34" />
+
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="TextColor" Value="#E0FFFFFF" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="BorderColor" Value="#FFFAF3" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="#88000000"
+                Offset="5,5"
+                Radius="30"
+                Opacity="0.6" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FFFAF3" Offset="0.0" />
+                    <GradientStop Color="#FF6F91" Offset="0.5" />
+                    <GradientStop Color="Blue" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
     <Style TargetType="CheckBox">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
