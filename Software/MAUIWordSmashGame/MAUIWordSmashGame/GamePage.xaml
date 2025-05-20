@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUIWordSmashGame.GamePage"
+             BackgroundColor="Transparent">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#42A5F5" Offset="0" />
+            <GradientStop Color="#FFA726" Offset="1" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto,Auto,4*,2*,4*,Auto"
+          RowSpacing="0" Padding="20" >
+        <!-- Title -->
+        <Label Grid.Row="0"
+               Text="WordSmash"
+               FontFamily="DisplayFont"
+               FontSize="40"
+               HorizontalOptions="Center"
+               TextColor="#FFC107" />
+
+        <!-- Tagline -->
+        <Label Grid.Row="1"
+               Text="Smash the letters to uncover the hidden word"
+               FontFamily="ComicSans"
+               FontSize="16"
+               HorizontalOptions="Center"
+               TextColor="White" />
+
+        <!-- Image -->
+        <Image Grid.Row="2"
+               Source="hammer_mascot.png"
+               Aspect="AspectFit" />
+
+        <!-- Word placeholders-->
+        <HorizontalStackLayout Grid.Row="3"
+                               Spacing="14"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+           <Frame Style="{StaticResource PlaceholderFrameStyle}">
+                <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
+           </Frame>
+            <Frame Style="{StaticResource PlaceholderFrameStyle}">
+                <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
+            </Frame>
+            <Frame Style="{StaticResource PlaceholderFrameStyle}">
+                <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
+            </Frame>
+            <Frame Style="{StaticResource PlaceholderFrameStyle}">
+                <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
+            </Frame>
+            <Frame Style="{StaticResource PlaceholderFrameStyle}">
+                <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
+            </Frame>
+        </HorizontalStackLayout>
+
+        <!-- Alphabet buttons -->
+        <FlexLayout Grid.Row="4"
+                    Wrap="Wrap"
+                    JustifyContent="Center"
+                    AlignItems="Center"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+            <Button Text="A" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="B" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="C" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="D" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="E" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="F" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="G" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="H" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="I" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="J" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="K" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="L" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="M" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="N" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="O" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="P" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="Q" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="R" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="S" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="T" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="U" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="V" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="W" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="X" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="Y" Style="{StaticResource LetterButtonStyle}" />
+            <Button Text="Z" Style="{StaticResource LetterButtonStyle}" />
+        </FlexLayout>
+
+        <!-- Controls: Start, Hint, Score -->
+        <HorizontalStackLayout Grid.Row="5"
+                               Spacing="30"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center">
+            <Button Text="Start" Style="{StaticResource AccentButtonStyle}" />
+            <Button Text="Hint"  Style="{StaticResource AccentButtonStyle}" />
+            <Frame Style="{StaticResource PlaceholderFrameStyle}" WidthRequest="140">
+                <Label Text="Score: 0"
+                       FontFamily="ComicSans"
+                       TextColor="#FF7043"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
+
+
