@@ -151,6 +151,7 @@
     <Style TargetType="Frame" x:Key="PlaceholderFrameStyle">
         <Setter Property="BackgroundColor" Value="#FECD0D" />
         <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Margin" Value="3" />
         <Setter Property="HasShadow" Value="True" />
         <Setter Property="MinimumWidthRequest" Value="60" />
         <Setter Property="MinimumHeightRequest" Value="70" />

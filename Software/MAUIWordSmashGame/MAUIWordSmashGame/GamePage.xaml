@@ -10,7 +10,7 @@
             <GradientStop Color="#FFA726" Offset="1" />
         </LinearGradientBrush>
     </ContentPage.Background>
-
+    <ScrollView>
     <Grid RowDefinitions="Auto,Auto,4*,2*,4*,Auto"
           RowSpacing="0" Padding="20" >
         <!-- Title -->
@@ -32,13 +32,16 @@
         <!-- Image -->
         <Image Grid.Row="2"
                Source="hammer_mascot.png"
-               Aspect="AspectFit" />
-
-        <!-- Word placeholders-->
-        <HorizontalStackLayout Grid.Row="3"
-                               Spacing="14"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center">
+               Aspect="AspectFit"
+               MaximumWidthRequest="300"
+               MaximumHeightRequest="300"/>
+            <!-- Word placeholders-->
+            <FlexLayout
+                Grid.Row="3"
+                Wrap="Wrap"
+                JustifyContent="Center"
+                AlignItems="Center"
+                Margin="0,10">
            <Frame Style="{StaticResource PlaceholderFrameStyle}">
                 <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
            </Frame>
@@ -54,9 +57,9 @@
             <Frame Style="{StaticResource PlaceholderFrameStyle}">
                 <Label Text="_" Style="{StaticResource PlaceholderLabelStyle}" />
             </Frame>
-        </HorizontalStackLayout>
+            </FlexLayout>
 
-        <!-- Alphabet buttons -->
+            <!-- Alphabet buttons -->
         <FlexLayout Grid.Row="4"
                     Wrap="Wrap"
                     JustifyContent="Center"
@@ -92,21 +95,25 @@
         </FlexLayout>
 
         <!-- Controls: Start, Hint, Score -->
-        <HorizontalStackLayout Grid.Row="5"
-                               Spacing="30"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center">
-            <Button Text="Start" Style="{StaticResource AccentButtonStyle}" />
-            <Button Text="Hint"  Style="{StaticResource AccentButtonStyle}" />
-            <Frame Style="{StaticResource PlaceholderFrameStyle}" WidthRequest="140">
+            <FlexLayout
+                Grid.Row="5"
+                Wrap="Wrap"
+                JustifyContent="Center"
+                AlignItems="Center"
+                Margin="0,10">
+             <Button Text="Start" Margin="3" Style="{StaticResource AccentButtonStyle}" />
+                <Button Text="Hint" Margin="3" Style="{StaticResource AccentButtonStyle}" />
+            <Frame Style="{StaticResource PlaceholderFrameStyle}" WidthRequest="110">
                 <Label Text="Score: 0"
+                       Margin="3"
                        FontFamily="ComicSans"
                        TextColor="#FF7043"
                        HorizontalOptions="Center"
                        VerticalOptions="Center" />
             </Frame>
-        </HorizontalStackLayout>
-    </Grid>
+                </FlexLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>
 
 
