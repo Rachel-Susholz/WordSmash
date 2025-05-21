@@ -1,10 +1,24 @@
-## Welcome to CPU Code School Solo Course!
-#### Following are some instructions:
--  This is a GitHub Repository which contains all the information you'll need for the course. 
--  In this repo you'll submit all your classwork and homework for review and marking.
--  Mentors are available for assistance and troubleshooting, all you need to do is reach out to them. 
--  There are two methods for getting direct help. Slack and Stackoverflow. In  addition, you can always pose questions in the HW and a mentor will respond in the HW file.       Please do not hesitate to reach out, as we want you to succeed in your journey to become a proficient software developer.
--  All course work will be done on your computer, and then committed to this repo. Remember to watch the Video on HW Submission because it is a multi-step process and can be confusing in the beginning.
--  Remember to always follow along during the Video and keep up with typing the code, so you'll be able to do the HW smoothly. 
--  Always complete all session work and HW before  proceeding to the next session, as all the work is cumulative and requires understanding concepts taught in earlier sessions.
-#### Good Luck!!!
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/a32772d4-2e67-48da-b52d-ff157316cd8d"
+    alt="BunnyMascot"
+    width="45%"
+    style="height:auto;"
+  />
+</p>
+
+
+# Word Smash
+## Game Overview
+Word Smash is an engaging word game where players guess hidden words by smashing buttons. The game is designed to be quick, fun, and stimulating, perfect for anyone looking for a light challenge. Players will be presented with a series of blank spaces, each representing a hidden word, and must choose the correct letters from a set of buttons to complete the word.
+## Features
+*Hidden Word Puzzle: Each round presents a series of blank spaces representing a hidden word. As players guess the letters, the spaces are filled in.
+
+*Interactive Letter Buttons: Players can click on buttons with letters to guess the word.
+
+*Score and Feedback: The game tracks the score, awarding points for correct guesses and deducting points for incorrect guesses. Players receive real-time feedback such as "Great Choice!" for correct guesses or "Try 
+ Again!" for incorrect ones.
+
+*Game Status: The status label dynamically updates to reflect the current game state, such as "Game Started" or "Game Over."
+
+*Hint System: Players can use a hint button to reveal one letter of the word (to be implemented).
