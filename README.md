@@ -1,4 +1,11 @@
-![Word Smash Readme Photo](https://github.com/user-attachments/assets/d8b8974a-8d84-4f39-965c-3899497724d3)
+<p align="center">
+  <img
+    src="https://github.com/user-attachments/assets/a32772d4-2e67-48da-b52d-ff157316cd8d"
+    alt="BunnyMascot"
+    width="45%"
+    style="height:auto;"
+  />
+</p>
 
 
 # Word Smash
