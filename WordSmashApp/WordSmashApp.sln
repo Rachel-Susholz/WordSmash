@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSmashApp", "WordSmashApp\WordSmashApp.csproj", "{14F497A1-9B05-4F1C-A356-52BF24FB895A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUIWordSmashGame", "..\MAUIWordSmashGame\MAUIWordSmashGame\MAUIWordSmashGame.csproj", "{C2564509-5C1A-4463-8A41-05DC05DDF2D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUIWordSmashGame", "MAUIWordSmashGame\MAUIWordSmashGame.csproj", "{B8F920E8-8A97-4F40-8FA5-5EE294F4613F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{14F497A1-9B05-4F1C-A356-52BF24FB895A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F497A1-9B05-4F1C-A356-52BF24FB895A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F497A1-9B05-4F1C-A356-52BF24FB895A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2564509-5C1A-4463-8A41-05DC05DDF2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2564509-5C1A-4463-8A41-05DC05DDF2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2564509-5C1A-4463-8A41-05DC05DDF2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2564509-5C1A-4463-8A41-05DC05DDF2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8F920E8-8A97-4F40-8FA5-5EE294F4613F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8F920E8-8A97-4F40-8FA5-5EE294F4613F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8F920E8-8A97-4F40-8FA5-5EE294F4613F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8F920E8-8A97-4F40-8FA5-5EE294F4613F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
