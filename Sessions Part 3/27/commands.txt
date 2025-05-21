@@ -1,7 +1,0 @@
---login
-npm login --scope=@username --registry=https://npm.pkg.github.com
-
--.npmrc
-@username:registry=https://npm.pkg.github.com/
-
-

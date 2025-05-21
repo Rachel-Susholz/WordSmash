@@ -1,7 +1,0 @@
-    <VerticalStackLayout x:Name="DashboardLst" HorizontalOptions="Center">
-        <BindableLayout.ItemTemplate>
-            <DataTemplate>
-                <Button  />
-            </DataTemplate>
-        </BindableLayout.ItemTemplate>
-    </VerticalStackLayout>
